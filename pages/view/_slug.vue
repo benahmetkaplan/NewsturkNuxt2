@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex"
+
 export default {
     data() {
         return {
@@ -13,6 +15,15 @@ export default {
     },
     async created() {
         this.source = `https://www.newsturk.com.tr/${this.$route.params.slug}/?app=1`;
+    },
+    methods: {
+        ...mapMutations(["setIsLoading"])
+	},
+    mounted() {
+        this.setIsLoading(true);
+        setTimeout(() => {
+            this.setIsLoading(false)
+        }, 3000);
     }
 }
 </script>

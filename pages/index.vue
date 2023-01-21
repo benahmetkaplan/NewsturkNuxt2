@@ -138,10 +138,6 @@ export default {
 		...mapActions(["getEkonomiPosts"]),
 
 		goToRecord(record) {
-			this.setIsLoading(true);
-			setTimeout(() => {
-                this.setIsLoading(false)
-            }, 3000);
 			return this.$nuxt.$options.router.push(`/post/${record.id}`);
 		},
 
@@ -164,6 +160,12 @@ export default {
 		getEkonomiRecords() {
 			return this.getEkonomi();
 		}
-	}
+	},
+    mounted() {
+        this.setIsLoading(true);
+        setTimeout(() => {
+            this.setIsLoading(false)
+        }, 3000);
+    }
 }
 </script>

@@ -46,15 +46,17 @@ export default {
 			return this.getCategory();
 		},
         goPost(id){
-            this.setIsLoading(true);
-            setTimeout(() => {
-                this.setIsLoading(false)
-            }, 3000);
             return this.$nuxt.$options.router.push(`/post/` + id);
         },
         getCategoryTitle(){
             this.title = this.getCategories().find(x => x.id === parseInt(this.id)).name;
         }
-	}
+	},
+    mounted() {
+        this.setIsLoading(true);
+        setTimeout(() => {
+            this.setIsLoading(false)
+        }, 3000);
+    }
 }
 </script>
