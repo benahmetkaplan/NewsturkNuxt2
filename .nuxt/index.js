@@ -13,7 +13,7 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_axios_90087e0a from 'nuxt_plugin_axios_90087e0a' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_axios_71f82131 from 'nuxt_plugin_axios_71f82131' // Source: .\\axios.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -210,8 +210,8 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_axios_90087e0a === 'function') {
-    await nuxt_plugin_axios_90087e0a(app.context, inject)
+  if (typeof nuxt_plugin_axios_71f82131 === 'function') {
+    await nuxt_plugin_axios_71f82131(app.context, inject)
   }
 
   // Lock enablePreview in context

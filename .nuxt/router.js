@@ -4,9 +4,9 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _beeacada = () => interopDefault(import('..\\pages\\post\\_id.vue' /* webpackChunkName: "pages/post/_id" */))
-const _7c6523a4 = () => interopDefault(import('..\\pages\\view\\_id.vue' /* webpackChunkName: "pages/view/_id" */))
-const _b7b6836a = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _0b218579 = () => interopDefault(import('..\\pages\\post\\_id.vue' /* webpackChunkName: "pages/post/_id" */))
+const _2c645914 = () => interopDefault(import('..\\pages\\view\\_id.vue' /* webpackChunkName: "pages/view/_id" */))
+const _d9fde79e = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -21,15 +21,15 @@ export const routerOptions = {
 
   routes: [{
     path: "/post/:id?",
-    component: _beeacada,
+    component: _0b218579,
     name: "post-id"
   }, {
     path: "/view/:id?",
-    component: _7c6523a4,
+    component: _2c645914,
     name: "view-id"
   }, {
     path: "/",
-    component: _b7b6836a,
+    component: _d9fde79e,
     name: "index"
   }],
 

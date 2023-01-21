@@ -2,22 +2,22 @@
   {
     "name": "post-id",
     "path": "/post/:id?",
-    "component": "C:\\\\Users\\\\Ahmet\\\\Desktop\\\\nuxt\\\\pages\\\\post\\\\_id.vue",
+    "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\post\\\\_id.vue",
     "chunkName": "pages/post/_id",
-    "_name": "_beeacada"
+    "_name": "_0b218579"
   },
   {
     "name": "view-id",
     "path": "/view/:id?",
-    "component": "C:\\\\Users\\\\Ahmet\\\\Desktop\\\\nuxt\\\\pages\\\\view\\\\_id.vue",
+    "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\view\\\\_id.vue",
     "chunkName": "pages/view/_id",
-    "_name": "_7c6523a4"
+    "_name": "_2c645914"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\Ahmet\\\\Desktop\\\\nuxt\\\\pages\\\\index.vue",
+    "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_b7b6836a"
+    "_name": "_d9fde79e"
   }
 ]
