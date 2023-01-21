@@ -43,7 +43,7 @@ module.exports =
 /******/
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("./" + ({"1":"pages/index","2":"pages/post/_id","3":"pages/view/_id"}[chunkId]||chunkId) + ".js");
+/******/ 			var chunk = require("./" + ({"1":"pages/category/_id","2":"pages/index","3":"pages/post/_id","4":"pages/view/_slug"}[chunkId]||chunkId) + ".js");
 /******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
 /******/ 			for(var moduleId in moreModules) {
 /******/ 				modules[moduleId] = moreModules[moduleId];
@@ -128,7 +128,7 @@ module.exports = require("vue");
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = require("ufo");
+module.exports = require("vuex");
 
 /***/ }),
 /* 2 */
@@ -238,7 +238,7 @@ function normalizeComponent(
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("vuex");
+module.exports = require("ufo");
 
 /***/ }),
 /* 4 */
@@ -600,9 +600,10 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuex__WEBPACK_IMPORTED_MODULE_0__);
 
+const apiUrl = "https://www.newsturk.com.tr/wp-json/wp/v2";
 var state = {
   isLoading: false,
   gundemPosts: [],
@@ -610,6 +611,8 @@ var state = {
   sporPosts: [],
   teknolojiPosts: [],
   ekonomiPosts: [],
+  categoryPosts: [],
+  categories: [],
   activePost: null
 };
 var getters = {
@@ -638,6 +641,16 @@ var getters = {
       return state.ekonomiPosts;
     };
   },
+  getCategory: state => {
+    return () => {
+      return state.categoryPosts;
+    };
+  },
+  getCategories: state => {
+    return () => {
+      return state.categories;
+    };
+  },
   getActive: state => {
     return () => {
       return state.activePost;
@@ -663,121 +676,91 @@ var mutations = {
   setEkonomiPosts(state, results) {
     state.ekonomiPosts = results;
   },
+  setCategoryPosts(state, results) {
+    state.categoryPosts = results;
+  },
+  setCategories(state, results) {
+    state.categories = results;
+  },
   setActivePost(state, data) {
     state.activePost = data;
   }
 };
 var actions = {
   async getGundemPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=10&categories=25`;
+    let endpoint = `${apiUrl}/posts?per_page=10&categories=25`;
     try {
-      store.commit("setIsLoading", true);
-      var response = await this.$axios.get(endpoint);
-      setTimeout(() => {
-        var datas = [];
-        response.data.forEach(obj => {
-          datas.push({
-            ...obj,
-            categoryName: 'GÜNDEM',
-            badgeClass: 'badge badge-danger'
-          });
-        });
-        store.commit("setGundemPosts", datas);
-        store.commit("setIsLoading", false);
-      }, 1000);
+      let response = await this.$axios.get(endpoint);
+      store.commit("setGundemPosts", response.data);
     } catch (error) {
-      store.commit("setIsLoading", false);
-      console.error(`Error on retrieving articles: `, error);
+      console.error(`Error: `, error);
     }
   },
   async getDunyaPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=8&categories=2`;
+    let endpoint = `${apiUrl}/posts?per_page=8&categories=2`;
     try {
-      var response = await this.$axios.get(endpoint);
-      setTimeout(() => {
-        var datas = [];
-        response.data.forEach(obj => {
-          datas.push({
-            ...obj,
-            categoryName: 'DÜNYA',
-            badgeClass: 'badge badge-primary'
-          });
-        });
-        store.commit("setDunyaPosts", datas);
-      }, 1000);
+      let response = await this.$axios.get(endpoint);
+      store.commit("setDunyaPosts", response.data);
     } catch (error) {
-      console.error(`Error on retrieving articles: `, error);
+      console.error(`Error: `, error);
     }
   },
   async getSporPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=8&categories=12`;
+    let endpoint = `${apiUrl}/posts?per_page=8&categories=12`;
     try {
-      var response = await this.$axios.get(endpoint);
-      setTimeout(() => {
-        var datas = [];
-        response.data.forEach(obj => {
-          datas.push({
-            ...obj,
-            categoryName: 'SPOR',
-            badgeClass: 'badge badge-success'
-          });
-        });
-        store.commit("setSporPosts", datas);
-      }, 1000);
+      let response = await this.$axios.get(endpoint);
+      store.commit("setSporPosts", response.data);
     } catch (error) {
-      console.error(`Error on retrieving articles: `, error);
+      console.error(`Error: `, error);
     }
   },
   async getTeknolojiPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=6&categories=13`;
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=13`;
     try {
-      var response = await this.$axios.get(endpoint);
-      setTimeout(() => {
-        var datas = [];
-        response.data.forEach(obj => {
-          datas.push({
-            ...obj,
-            categoryName: 'TEKNOLOJİ',
-            badgeClass: 'badge badge-info'
-          });
-        });
-        store.commit("setTeknolojiPosts", datas);
-      }, 1000);
+      let response = await this.$axios.get(endpoint);
+      store.commit("setTeknolojiPosts", response.data);
     } catch (error) {
-      store.commit("setIsLoading", false);
-      console.error(`Error on retrieving articles: `, error);
+      console.error(`Error: `, error);
     }
   },
   async getEkonomiPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=6&categories=3`;
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=3`;
     try {
-      var response = await this.$axios.get(endpoint);
-      setTimeout(() => {
-        var datas = [];
-        response.data.forEach(obj => {
-          datas.push({
-            ...obj,
-            categoryName: 'EKONOMİ',
-            badgeClass: 'badge badge-warning'
-          });
-        });
-        store.commit("setEkonomiPosts", datas);
-      }, 1000);
+      let response = await this.$axios.get(endpoint);
+      store.commit("setEkonomiPosts", response.data);
     } catch (error) {
-      console.error(`Error on retrieving articles: `, error);
+      console.error(`Error: `, error);
+    }
+  },
+  async getCategoryPosts(store, payload) {
+    let endpoint = `${apiUrl}/posts?per_page=20&categories=` + payload;
+    try {
+      let response = await this.$axios.get(endpoint);
+      store.commit("setCategoryPosts", response.data);
+    } catch (error) {
+      console.error(`Error: `, error);
+    }
+  },
+  async getCategoriesList(store) {
+    let endpoint = `${apiUrl}/categories`;
+    try {
+      let response = await this.$axios.get(endpoint);
+      store.commit("setCategories", response.data);
+    } catch (error) {
+      console.error(`Error: `, error);
     }
   },
   async getActivePost(store, payload) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts/` + payload;
+    let endpoint = `${apiUrl}/posts/` + payload;
     try {
-      var response = await this.$axios.get(endpoint);
+      let response = await this.$axios.get(endpoint);
       store.commit("setActivePost", response.data);
     } catch (error) {
-      console.error(`Error on retrieving articles: `, error);
+      console.error(`Error: `, error);
     }
   }
 };
-const createStore = () => {
+var createStore = () => {
   return new vuex__WEBPACK_IMPORTED_MODULE_0___default.a.Store({
     state,
     getters,
@@ -800,7 +783,7 @@ var external_vue_ = __webpack_require__(0);
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
 // EXTERNAL MODULE: external "ufo"
-var external_ufo_ = __webpack_require__(1);
+var external_ufo_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: external "node-fetch"
 var external_node_fetch_ = __webpack_require__(12);
@@ -1423,7 +1406,7 @@ async function serverPrefetch() {
   }
 });
 // EXTERNAL MODULE: external "vuex"
-var external_vuex_ = __webpack_require__(3);
+var external_vuex_ = __webpack_require__(1);
 var external_vuex_default = /*#__PURE__*/__webpack_require__.n(external_vuex_);
 
 // EXTERNAL MODULE: external "vue-meta"
@@ -1511,9 +1494,10 @@ function shouldScrollToTop(route) {
 
 
 
-const _0b218579 = () => interopDefault(__webpack_require__.e(/* import() | pages/post/_id */ 2).then(__webpack_require__.bind(null, 22)));
-const _2c645914 = () => interopDefault(__webpack_require__.e(/* import() | pages/view/_id */ 3).then(__webpack_require__.bind(null, 23)));
-const _d9fde79e = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 1).then(__webpack_require__.bind(null, 24)));
+const _1d56214a = () => interopDefault(__webpack_require__.e(/* import() | pages/category/_id */ 1).then(__webpack_require__.bind(null, 22)));
+const _0b218579 = () => interopDefault(__webpack_require__.e(/* import() | pages/post/_id */ 3).then(__webpack_require__.bind(null, 23)));
+const _5a368b38 = () => interopDefault(__webpack_require__.e(/* import() | pages/view/_slug */ 4).then(__webpack_require__.bind(null, 24)));
+const _d9fde79e = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 2).then(__webpack_require__.bind(null, 25)));
 
 const emptyFn = () => {};
 external_vue_default.a.use(external_vue_router_default.a);
@@ -1524,13 +1508,17 @@ const routerOptions = {
   linkExactActiveClass: 'nuxt-link-exact-active',
   scrollBehavior: router_scrollBehavior,
   routes: [{
+    path: "/category/:id?",
+    component: _1d56214a,
+    name: "category-id"
+  }, {
     path: "/post/:id?",
     component: _0b218579,
     name: "post-id"
   }, {
-    path: "/view/:id?",
-    component: _2c645914,
-    name: "view-id"
+    path: "/view/:slug?",
+    component: _5a368b38,
+    name: "view-slug"
   }, {
     path: "/",
     component: _d9fde79e,
@@ -1974,25 +1962,25 @@ var nuxt_loading_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var nuxt_loading = (nuxt_loading_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=1cd96e75&
-var defaultvue_type_template_id_1cd96e75_render = function render() {
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=9910d5ac&
+var defaultvue_type_template_id_9910d5ac_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_c('Appheader'), _vm._ssrNode(" "), _c('Spinner', {
+  return _c('div', [_c('Header'), _vm._ssrNode(" "), _c('Spinner', {
     directives: [{
       name: "show",
       rawName: "v-show",
       value: _vm.isLoading,
       expression: "isLoading"
     }]
-  }), _vm._ssrNode(" "), _c('nuxt'), _vm._ssrNode(" "), _c('appfooter')], 2);
+  }), _vm._ssrNode(" "), _c('nuxt'), _vm._ssrNode(" "), _c('Sidebar'), _vm._ssrNode(" "), _c('Footer')], 2);
 };
-var defaultvue_type_template_id_1cd96e75_staticRenderFns = [];
+var defaultvue_type_template_id_9910d5ac_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./layouts/default.vue?vue&type=template&id=1cd96e75&
+// CONCATENATED MODULE: ./layouts/default.vue?vue&type=template&id=9910d5ac&
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/partials/header.vue?vue&type=template&id=63fe9f21&
-var headervue_type_template_id_63fe9f21_render = function render() {
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/partials/header.vue?vue&type=template&id=0c7456d6&
+var headervue_type_template_id_0c7456d6_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -2011,11 +1999,11 @@ var headervue_type_template_id_63fe9f21_render = function render() {
     attrs: {
       "src": "https://newsturk.com.tr/icon.png"
     }
-  })])], 1)], 2);
+  })])], 1), _vm._ssrNode(" <div class=\"right\"><a id=\"appSidebarBtn\" href=\"javascript:;\" class=\"icon\"><i class=\"icon ion-ios-menu\"></i></a></div>")], 2);
 };
-var headervue_type_template_id_63fe9f21_staticRenderFns = [];
+var headervue_type_template_id_0c7456d6_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/partials/header.vue?vue&type=template&id=63fe9f21&
+// CONCATENATED MODULE: ./components/partials/header.vue?vue&type=template&id=0c7456d6&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./components/partials/header.vue?vue&type=script&lang=js&
 /* harmony default export */ var headervue_type_script_lang_js_ = ({
@@ -2037,7 +2025,7 @@ var headervue_type_template_id_63fe9f21_staticRenderFns = [];
   watch: {
     $route(to) {
       this.fixStatu = !to.fullPath.includes('/view');
-      this.goBackStatu = to.fullPath.includes('/post') || to.fullPath.includes('/view');
+      this.goBackStatu = to.fullPath.includes('/post') || to.fullPath.includes('/view') || to.fullPath.includes('/category');
     }
   }
 });
@@ -2053,8 +2041,8 @@ var headervue_type_template_id_63fe9f21_staticRenderFns = [];
 
 var header_component = Object(componentNormalizer["a" /* default */])(
   partials_headervue_type_script_lang_js_,
-  headervue_type_template_id_63fe9f21_render,
-  headervue_type_template_id_63fe9f21_staticRenderFns,
+  headervue_type_template_id_0c7456d6_render,
+  headervue_type_template_id_0c7456d6_staticRenderFns,
   false,
   null,
   null,
@@ -2063,17 +2051,17 @@ var header_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var header = (header_component.exports);
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/partials/footer.vue?vue&type=template&id=59e3b033&
-var footervue_type_template_id_59e3b033_render = function render() {
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/partials/footer.vue?vue&type=template&id=0bcea272&
+var footervue_type_template_id_0bcea272_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
     class: _vm.getClass()
   }, [_vm._ssrNode("<div" + _vm._ssrClass(null, _vm.getActiveClass('home')) + "><a><p><i class=\"icon ion-ios-home\"></i> <span>Anasayfa</span></p></a></div> <div" + _vm._ssrClass(null, _vm.getActiveClass('skor')) + "><a><p><i class=\"icon ion-ios-football\"></i> <span>Canlı Skor</span></p></a></div> <div" + _vm._ssrClass(null, _vm.getActiveClass('hisseler')) + "><a><p><i class=\"icon ion-ios-cash\"></i> <span>Canlı Borsa</span></p></a></div> <div" + _vm._ssrClass(null, _vm.getActiveClass('bize-ulasin')) + "><a><p><i class=\"icon ion-ios-mail\"></i> <span>Bize Ulaşın</span></p></a></div>")]);
 };
-var footervue_type_template_id_59e3b033_staticRenderFns = [];
+var footervue_type_template_id_0bcea272_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/partials/footer.vue?vue&type=template&id=59e3b033&
+// CONCATENATED MODULE: ./components/partials/footer.vue?vue&type=template&id=0bcea272&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./components/partials/footer.vue?vue&type=script&lang=js&
 
@@ -2092,7 +2080,7 @@ var footervue_type_template_id_59e3b033_staticRenderFns = [];
       this.activeTab = slug;
       setTimeout(() => {
         this.setIsLoading(false);
-      }, 2000);
+      }, 3000);
       return this.$nuxt.$options.router.push(`/view/` + slug);
     },
     goToHome() {
@@ -2127,8 +2115,8 @@ var footervue_type_template_id_59e3b033_staticRenderFns = [];
 
 var footer_component = Object(componentNormalizer["a" /* default */])(
   partials_footervue_type_script_lang_js_,
-  footervue_type_template_id_59e3b033_render,
-  footervue_type_template_id_59e3b033_staticRenderFns,
+  footervue_type_template_id_0bcea272_render,
+  footervue_type_template_id_0bcea272_staticRenderFns,
   false,
   null,
   null,
@@ -2137,6 +2125,71 @@ var footer_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var footer = (footer_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/partials/sidebar.vue?vue&type=template&id=eafdb9da&
+var sidebarvue_type_template_id_eafdb9da_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "sidebar-menu offcanvas offcanvas-start sidebarWrapper",
+    attrs: {
+      "tabindex": "-1",
+      "id": "appSidebar"
+    }
+  }, [_vm._ssrNode("<div class=\"offcanvas-body\"><nav class=\"sidebar\"><div class=\"sidebarGroup\">" + (_vm.getCategories().length > 0 ? "<ul class=\"sidebarMenu\">" + _vm._ssrList(_vm.getCategoriesList(), function (item) {
+    return "<li><a href=\"javascript:;\">" + _vm._ssrEscape("\n                            " + _vm._s(item.name) + "\n                        ") + "</a></li>";
+  }) + "</ul>" : "<!---->") + "</div></nav></div>")]);
+};
+var sidebarvue_type_template_id_eafdb9da_staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/partials/sidebar.vue?vue&type=template&id=eafdb9da&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./components/partials/sidebar.vue?vue&type=script&lang=js&
+
+/* harmony default export */ var sidebarvue_type_script_lang_js_ = ({
+  name: "Sidebar",
+  computed: {
+    ...Object(external_vuex_["mapGetters"])(["getCategories"])
+  },
+  async created() {
+    await this.$store.dispatch("getCategoriesList");
+  },
+  methods: {
+    ...Object(external_vuex_["mapMutations"])(["setIsLoading"]),
+    ...Object(external_vuex_["mapActions"])(["getCategoriesList"]),
+    getCategoriesList() {
+      return this.getCategories();
+    },
+    goCategory(id) {
+      this.setIsLoading(true);
+      setTimeout(() => {
+        this.setIsLoading(false);
+      }, 3000);
+      return this.$nuxt.$options.router.push(`/category/` + id);
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/partials/sidebar.vue?vue&type=script&lang=js&
+ /* harmony default export */ var partials_sidebarvue_type_script_lang_js_ = (sidebarvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./components/partials/sidebar.vue
+
+
+
+
+
+/* normalize component */
+
+var sidebar_component = Object(componentNormalizer["a" /* default */])(
+  partials_sidebarvue_type_script_lang_js_,
+  sidebarvue_type_template_id_eafdb9da_render,
+  sidebarvue_type_template_id_eafdb9da_staticRenderFns,
+  false,
+  null,
+  null,
+  "400da01a"
+  
+)
+
+/* harmony default export */ var sidebar = (sidebar_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./components/partials/spinner.vue?vue&type=template&id=ddda94e0&
 var spinnervue_type_template_id_ddda94e0_render = function render() {
   var _vm = this,
@@ -2182,10 +2235,12 @@ var spinner_component = Object(componentNormalizer["a" /* default */])(
 
 
 
+
 /* harmony default export */ var defaultvue_type_script_lang_js_ = ({
   components: {
-    Appheader: header,
-    Appfooter: footer,
+    Header: header,
+    Footer: footer,
+    Sidebar: sidebar,
     Spinner: spinner
   },
   computed: {
@@ -2205,8 +2260,8 @@ var spinner_component = Object(componentNormalizer["a" /* default */])(
 
 var default_component = Object(componentNormalizer["a" /* default */])(
   layouts_defaultvue_type_script_lang_js_,
-  defaultvue_type_template_id_1cd96e75_render,
-  defaultvue_type_template_id_1cd96e75_staticRenderFns,
+  defaultvue_type_template_id_9910d5ac_render,
+  defaultvue_type_template_id_9910d5ac_staticRenderFns,
   false,
   null,
   null,
@@ -2700,8 +2755,12 @@ async function createApp(ssrContext, config = {}) {
         "type": "text\u002Fcss",
         "href": "\u002Fassets\u002Fcss\u002Fstyle.css"
       }],
-      "style": [],
-      "script": []
+      "script": [{
+        "src": "\u002Fassets\u002Fjs\u002Fjquery.min.js"
+      }, {
+        "src": "\u002Fassets\u002Fjs\u002Fcustom.js"
+      }],
+      "style": []
     },
     store,
     router,

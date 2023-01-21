@@ -49,14 +49,13 @@ export default {
     },
     methods: {
         ...mapMutations(["setIsLoading"]),
-
         goToView(slug) {
             this.setIsLoading(true);
             this.activeTab = slug;
             setTimeout(() => {
                 this.setIsLoading(false)
-            }, 2000);
-            return this.$nuxt.$options.router.push(`/view/` + slug);            
+            }, 3000);
+            return this.$nuxt.$options.router.push(`/view/` + slug);
         },
         goToHome(){
             this.activeTab = 'home';

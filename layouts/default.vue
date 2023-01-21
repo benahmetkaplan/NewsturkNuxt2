@@ -1,21 +1,24 @@
 <template>
 	<div>
-		<Appheader />
+		<Header />
 		<Spinner v-show="isLoading" />
 		<nuxt />
-		<appfooter />
+		<Sidebar />
+		<Footer />
 	</div>
 </template>
 <script>
 import { mapState } from "vuex"
-import Appheader from '~/components/partials/header.vue'
-import Appfooter from '~/components/partials/footer.vue'
+import Header from '~/components/partials/header.vue'
+import Footer from '~/components/partials/footer.vue'
+import Sidebar from '~/components/partials/sidebar.vue'
 import Spinner from '~/components/partials/spinner.vue'
 
 export default {
 	components: {
-		Appheader,
-		Appfooter,
+		Header,
+		Footer,
+		Sidebar,
 		Spinner
 	},
 	computed: {

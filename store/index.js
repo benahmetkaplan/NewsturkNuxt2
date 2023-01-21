@@ -1,4 +1,6 @@
-import Vuex from 'vuex'
+import Vuex from 'vuex';
+
+const apiUrl = "https://www.newsturk.com.tr/wp-json/wp/v2";
 
 var state = {
   isLoading: false,
@@ -7,6 +9,8 @@ var state = {
   sporPosts: [],
   teknolojiPosts: [],
   ekonomiPosts: [],
+  categoryPosts: [],
+  categories: [],
   activePost: null
 }
 
@@ -36,6 +40,16 @@ var getters = {
       return state.ekonomiPosts
     }
   },
+  getCategory: state => {
+    return () => {
+      return state.categoryPosts
+    }
+  },
+  getCategories: state => {
+    return () => {
+      return state.categories
+    }
+  },
   getActive: state => {
     return () => {
       return state.activePost
@@ -62,6 +76,12 @@ var mutations = {
   setEkonomiPosts(state, results) {
     state.ekonomiPosts = results
   },
+  setCategoryPosts(state, results) {
+    state.categoryPosts = results
+  },
+  setCategories(state, results) {
+    state.categories = results
+  },
   setActivePost(state, data) {
     state.activePost = data
   }
@@ -69,121 +89,85 @@ var mutations = {
 
 var actions = {
   async getGundemPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=10&categories=25`
+    let endpoint = `${apiUrl}/posts?per_page=10&categories=25`
     try {
-      store.commit("setIsLoading", true)
-      var response = await this.$axios.get(endpoint)
-      setTimeout(() => {
-        var datas = []
-        response.data.forEach((obj) => {
-          datas.push({
-            ...obj,
-            categoryName: 'GÜNDEM',
-            badgeClass: 'badge badge-danger'
-          })
-        })
-        store.commit("setGundemPosts", datas)
-        store.commit("setIsLoading", false)
-      }, 1000)
+      let response = await this.$axios.get(endpoint)
+      store.commit("setGundemPosts", response.data)
     } catch (error) {
-      store.commit("setIsLoading", false)
-      console.error(`Error on retrieving articles: `, error)
+      console.error(`Error: `, error)
     }
   },
   async getDunyaPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=8&categories=2`
+    let endpoint = `${apiUrl}/posts?per_page=8&categories=2`
     try {
-      var response = await this.$axios.get(endpoint)
-      setTimeout(() => {
-        var datas = []
-        response.data.forEach((obj) => {
-          datas.push({
-            ...obj,
-            categoryName: 'DÜNYA',
-            badgeClass: 'badge badge-primary'
-          })
-        })
-        store.commit("setDunyaPosts", datas)
-      }, 1000)
+      let response = await this.$axios.get(endpoint)
+      store.commit("setDunyaPosts", response.data)
     } catch (error) {
-      console.error(`Error on retrieving articles: `, error)
+      console.error(`Error: `, error)
     }
   },
   async getSporPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=8&categories=12`
+    let endpoint = `${apiUrl}/posts?per_page=8&categories=12`
     try {
-      var response = await this.$axios.get(endpoint)
-      setTimeout(() => {
-        var datas = []
-        response.data.forEach((obj) => {
-          datas.push({
-            ...obj,
-            categoryName: 'SPOR',
-            badgeClass: 'badge badge-success'
-          })
-        })
-        store.commit("setSporPosts", datas)
-      }, 1000)
+      let response = await this.$axios.get(endpoint)
+      store.commit("setSporPosts", response.data)
     } catch (error) {
-      console.error(`Error on retrieving articles: `, error)
+      console.error(`Error: `, error)
     }
   },
   async getTeknolojiPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=6&categories=13`
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=13`
     try {
-      var response = await this.$axios.get(endpoint)
-      setTimeout(() => {
-        var datas = []
-        response.data.forEach((obj) => {
-          datas.push({
-            ...obj,
-            categoryName: 'TEKNOLOJİ',
-            badgeClass: 'badge badge-info'
-          })
-        })
-        store.commit("setTeknolojiPosts", datas)
-      }, 1000)
+      let response = await this.$axios.get(endpoint)
+      store.commit("setTeknolojiPosts", response.data)
     } catch (error) {
-      store.commit("setIsLoading", false)
-      console.error(`Error on retrieving articles: `, error)
+      console.error(`Error: `, error)
     }
   },
   async getEkonomiPosts(store) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts?per_page=6&categories=3`
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=3`
     try {
-      var response = await this.$axios.get(endpoint)
-      setTimeout(() => {
-        var datas = [];
-        response.data.forEach((obj) => {
-          datas.push({
-            ...obj,
-            categoryName: 'EKONOMİ',
-            badgeClass: 'badge badge-warning'
-          })
-        })
-        store.commit("setEkonomiPosts", datas)
-      }, 1000)
+      let response = await this.$axios.get(endpoint)
+      store.commit("setEkonomiPosts", response.data)
     } catch (error) {
-      console.error(`Error on retrieving articles: `, error)
+      console.error(`Error: `, error)
+    }
+  },
+  async getCategoryPosts(store, payload) {
+    let endpoint = `${apiUrl}/posts?per_page=20&categories=` + payload
+    try {
+      let response = await this.$axios.get(endpoint)
+      store.commit("setCategoryPosts", response.data)
+    } catch (error) {
+      console.error(`Error: `, error)
+    }
+  },
+  async getCategoriesList(store) {
+    let endpoint = `${apiUrl}/categories`
+    try {
+      let response = await this.$axios.get(endpoint)
+      store.commit("setCategories", response.data)
+    } catch (error) {
+      console.error(`Error: `, error)
     }
   },
   async getActivePost(store, payload) {
-    var endpoint = `https://www.newsturk.com.tr/wp-json/wp/v2/posts/` + payload
+    let endpoint = `${apiUrl}/posts/` + payload
     try {
-      var response = await this.$axios.get(endpoint)
+      let response = await this.$axios.get(endpoint)
       store.commit("setActivePost", response.data)
     } catch (error) {
-      console.error(`Error on retrieving articles: `, error)
+      console.error(`Error: `, error)
     }
   }
 }
 
-const createStore = () => {
+var createStore = () => {
   return new Vuex.Store({
     state,
     getters,
     mutations,
-    actions
+    actions    
   });
 };
 

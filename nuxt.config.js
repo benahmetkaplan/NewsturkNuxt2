@@ -7,6 +7,10 @@ module.exports = {
 		],
 		link: [
 			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/style.css' }
+		],
+		script: [
+			{ src: '/assets/js/jquery.min.js' },
+			{ src: '/assets/js/custom.js' }
 		]
 	},
 	loading: { color: '#ffffff' },

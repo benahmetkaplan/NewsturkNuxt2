@@ -1,6 +1,6 @@
 <template>
     <div id="appCapsule" class="web-view">
-        <iframe :src="url" frameborder="0"></iframe>
+        <iframe :src="source" frameborder="0"></iframe>
     </div>    
 </template>
 
@@ -8,12 +8,11 @@
 export default {
     data() {
         return {
-            slug: this.$route.params.id,
-            url: ''
+            source: ''
         }
     },
     async created() {
-        this.url = `https://www.newsturk.com.tr/${this.slug}/?app=1`;
+        this.source = `https://www.newsturk.com.tr/${this.$route.params.slug}/?app=1`;
     }
 }
 </script>

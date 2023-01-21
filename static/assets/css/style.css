@@ -1,7 +1,7 @@
 @import url("inc/bootstrap/bootstrap.min.css");
 @import url("inc/splide/splide.min.css");
 @import url("https://unpkg.com/ionicons@4.5.10-1/dist/css/ionicons.min.css");
-@import url("https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,700,800,900&amp;display=swap");
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap");
 
 body {
   font-family: "Poppins", sans-serif;
@@ -2874,4 +2874,26 @@ figure figcaption {
 
 .content p a[href*='haberglobal'] {
   display: none !important;
+}
+
+.sidebar-menu {
+  min-height: 100vh;
+  visibility: visible !important;
+  z-index: 9999999;
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,.3) !important;
+}
+
+.sidebar-menu ul li a {
+  padding: 15px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.sidebar-menu ul {
+  margin: 0;
+}
+
+.category-title {
+  font-weight: 500;
+  color: #ff003a;
 }

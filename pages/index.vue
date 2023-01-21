@@ -141,7 +141,7 @@ export default {
 			this.setIsLoading(true);
 			setTimeout(() => {
                 this.setIsLoading(false)
-            }, 2000);
+            }, 3000);
 			return this.$nuxt.$options.router.push(`/post/${record.id}`);
 		},
 

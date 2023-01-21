@@ -3,12 +3,17 @@
         <div class="left">
             <a v-on:click="goBack" v-show="goBackStatu" href="javascript:;" class="icon goBack">
                 <i class="icon ion-ios-arrow-back"></i>
-            </a>
+            </a>            
         </div>
         <div class="pageTitle">
             <router-link to="/">
                 <img src="https://newsturk.com.tr/icon.png" class="image">
             </router-link>
+        </div>
+        <div class="right">
+            <a id="appSidebarBtn" href="javascript:;" class="icon">
+                <i class="icon ion-ios-menu"></i>
+            </a>
         </div>
     </div>
 </template>
@@ -33,7 +38,7 @@ export default {
     watch:{
         $route (to){
             this.fixStatu = !to.fullPath.includes('/view');
-            this.goBackStatu = to.fullPath.includes('/post') || to.fullPath.includes('/view');
+            this.goBackStatu = to.fullPath.includes('/post') || to.fullPath.includes('/view') || to.fullPath.includes('/category')
         }
     }
 }

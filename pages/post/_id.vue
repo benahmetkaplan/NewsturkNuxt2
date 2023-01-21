@@ -1,14 +1,15 @@
 <template>
     <div id="appCapsule">
-        <div class="appContent">
-            <h1 v-html="post.title" class="title-lg mt-2 mb-2"></h1>
+        <div v-if="getActive() !== null && getCategories().length > 0" class="appContent">
+            <h1 v-html="getActive().title.rendered" class="title-lg mt-2 mb-2"></h1>
             <div class="postHeader mb-2">
+                <div class="category-title" v-html="categoryTitle(getActive().categories[0])"></div>
                 <div>
-                    {{ formatDate(post.date) }}
+                    {{ formatDate(getActive().date) }}
                 </div>
             </div>
             <div class="postBody">
-                <div class="content" v-html="post.content"></div>
+                <div class="content" v-html="getActive().content.rendered"></div>
             </div>
         </div>
     </div>
@@ -20,20 +21,21 @@ import { mapGetters, mapActions } from "vuex"
 export default {
     data() {
         return {
-            slug: this.$route.params.id,
+            id: this.$route.params.id,
             post: {
                 title: '',
                 date: '',
-                content: ''
+                content: '',
+                categoryTitle: ''
             }
         }
     },
     computed: {
+        ...mapGetters(["getCategories"]),
         ...mapGetters(["getActive"])
     },
-    async created() {
-		await this.$store.dispatch("getActivePost", this.slug);
-        this.getActiveRecord();
+    created() {
+		this.$store.dispatch("getActivePost", this.id);
 	},
     methods:{
         ...mapActions(["getActivePost"]),
@@ -45,14 +47,9 @@ export default {
                 return "";
             }            
         },
-        getActiveRecord() {
-			let rec = this.getActive();
-            this.post = {
-                title: rec.title.rendered,
-                date: rec.date,
-                content: rec.content.rendered
-            };
-		}
+        categoryTitle(id){
+            return this.getCategories().find(x => x.id === id).name;
+        }
     }
 }
 </script>
