@@ -1,0 +1,169 @@
+<template>
+	<div id="appCapsule">
+
+		<div class="appContent">
+
+			<div class="sectionTitle mt-2 mb-2">
+				<div class="title">
+					<h1>Gündem</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6" v-for="record in getGundemRecords()" @click="goToRecord(record)"
+					:key="record.title.rendered">
+					<a class="postItem">
+						<div class="imageWrapper">
+							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
+						</div>
+						<h2 class="title" v-html="record.title.rendered"></h2>
+					</a>
+				</div>
+			</div>
+
+
+			<div class="sectionTitle mt-2 mb-2">
+				<div class="title">
+					<h1>Dünya</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6" v-for="record in getDunyaRecords()" @click="goToRecord(record)"
+					:key="record.title.rendered">
+					<a class="postItem">
+						<div class="imageWrapper">
+							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
+						</div>
+						<h2 class="title" v-html="record.title.rendered"></h2>
+					</a>
+				</div>
+			</div>
+
+			<div class="sectionTitle mt-2 mb-2">
+				<div class="title">
+					<h1>Spor</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6" v-for="record in getSporRecords()" @click="goToRecord(record)"
+					:key="record.title.rendered">
+					<a class="postItem">
+						<div class="imageWrapper">
+							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
+						</div>
+						<h2 class="title" v-html="record.title.rendered"></h2>
+					</a>
+				</div>
+			</div>
+
+			<div class="sectionTitle mt-2 mb-2">
+				<div class="title">
+					<h1>Ekonomi</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6" v-for="record in getEkonomiRecords()" @click="goToRecord(record)"
+					:key="record.title.rendered">
+					<a class="postItem">
+						<div class="imageWrapper">
+							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
+						</div>
+						<h2 class="title" v-html="record.title.rendered"></h2>
+					</a>
+				</div>
+			</div>
+
+			<div class="sectionTitle mt-2 mb-2">
+				<div class="title">
+					<h1>Teknoloji</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6" v-for="record in getTeknolojiRecords()" @click="goToRecord(record)"
+					:key="record.title.rendered">
+					<a class="postItem">
+						<div class="imageWrapper">
+							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
+						</div>
+						<h2 class="title" v-html="record.title.rendered"></h2>
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<footer class="appFooter">
+			<div class="heading">Copyright © {{ new Date().getFullYear() }}. Tüm hakları saklıdır.</div>
+			<br>
+			<a target="_blank" href="https://twitter.com/newsturksocial" class="btn btn-twitter btn-icon me-1">
+				<i class="icon ion-logo-twitter"></i>
+			</a>
+			<a target="_blank" href="https://instagram.com/newsturksocial" class="btn btn-instagram btn-icon me-1">
+				<i class="icon ion-logo-instagram"></i>
+			</a>
+			<a target="_blank" href="https://www.youtube.com/@newsturksocial" class="btn btn-youtube btn-icon me-1">
+				<i class="icon ion-logo-youtube"></i>
+			</a>
+		</footer>
+
+	</div>
+</template>
+
+<script>
+
+import { mapActions, mapGetters, mapMutations } from "vuex"
+
+export default {
+	name: "MainNews",
+	computed: {
+		...mapGetters(["getGundem"]),
+		...mapGetters(["getDunya"]),
+		...mapGetters(["getSpor"]),
+		...mapGetters(["getTeknoloji"]),
+		...mapGetters(["getEkonomi"])
+	},
+	async created() {
+		await this.$store.dispatch("getGundemPosts");
+		await this.$store.dispatch("getDunyaPosts");
+		await this.$store.dispatch("getSporPosts");
+		await this.$store.dispatch("getTeknolojiPosts");
+		await this.$store.dispatch("getEkonomiPosts");
+	},
+	methods: {
+		...mapMutations(["setIsLoading"]),
+
+		...mapActions(["getGundemPosts"]),
+		...mapActions(["getDunyaPosts"]),
+		...mapActions(["getSporPosts"]),
+		...mapActions(["getTeknolojiPosts"]),
+		...mapActions(["getEkonomiPosts"]),
+
+		goToRecord(record) {
+			this.setIsLoading(true);
+			setTimeout(() => {
+                this.setIsLoading(false)
+            }, 2000);
+			return this.$nuxt.$options.router.push(`/post/${record.id}`);
+		},
+
+		getGundemRecords() {
+			return this.getGundem();
+		},
+
+		getDunyaRecords() {
+			return this.getDunya();
+		},
+
+		getSporRecords() {
+			return this.getSpor();
+		},
+
+		getTeknolojiRecords() {
+			return this.getTeknoloji();
+		},
+
+		getEkonomiRecords() {
+			return this.getEkonomi();
+		}
+	}
+}
+</script>

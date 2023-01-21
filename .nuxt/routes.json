@@ -1,0 +1,23 @@
+[
+  {
+    "name": "post-id",
+    "path": "/post/:id?",
+    "component": "C:\\\\Users\\\\Ahmet\\\\Desktop\\\\nuxt\\\\pages\\\\post\\\\_id.vue",
+    "chunkName": "pages/post/_id",
+    "_name": "_beeacada"
+  },
+  {
+    "name": "view-id",
+    "path": "/view/:id?",
+    "component": "C:\\\\Users\\\\Ahmet\\\\Desktop\\\\nuxt\\\\pages\\\\view\\\\_id.vue",
+    "chunkName": "pages/view/_id",
+    "_name": "_7c6523a4"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\Ahmet\\\\Desktop\\\\nuxt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_b7b6836a"
+  }
+]
