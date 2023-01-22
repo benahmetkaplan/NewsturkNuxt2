@@ -10,6 +10,15 @@
                             </a>
                         </li>
                     </ul>
+                    <hr>
+                    <ul class="sidebarMenu sidebar-page-menu" v-if="getPageList().length > 0">
+                        <li v-for="item in getPageList()">
+                            <a href="javascript:;" @click="goToView(item.slug)">
+                                <i :class="getIconClass(item.icon)"></i>
+                                {{ item.title }}
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </div>
@@ -23,7 +32,8 @@ import { mapActions, mapGetters, mapMutations } from "vuex"
 export default {
     name: "Sidebar",
     computed: {
-		...mapGetters(["getCategories"])
+		...mapGetters(["getCategories"]),
+		...mapGetters(["getPages"])
 	},
 	async created() {
 		await this.$store.dispatch("getCategoriesList");
@@ -34,12 +44,21 @@ export default {
 		getCategoriesList() {
 			return this.getCategories();
 		},
+        getPageList(){
+            return this.getPages();
+        },
+        getIconClass(icon){
+            return `icon ion-ios-${icon}`;
+        },
         goCategory(id){
-            this.setIsLoading(true);
-            setTimeout(() => {
-                this.setIsLoading(false)
-            }, 3000);
             return this.$nuxt.$options.router.push(`/category/` + id);
+        },
+        goToView(slug) {
+            if(slug === "home"){
+                return this.$nuxt.$options.router.push(`/`);
+            }else{
+                return this.$nuxt.$options.router.push(`/view/` + slug);
+            }
         }
 	}
 }

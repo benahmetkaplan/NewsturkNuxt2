@@ -3,23 +3,7 @@
 
 		<div class="appContent">
 
-			<div class="sectionTitle mt-2 mb-2">
-				<div class="title">
-					<h1>Gündem</h1>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-6" v-for="record in getGundemRecords()" @click="goToRecord(record)"
-					:key="record.title.rendered">
-					<a class="postItem">
-						<div class="imageWrapper">
-							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
-						</div>
-						<h2 class="title" v-html="record.title.rendered"></h2>
-					</a>
-				</div>
-			</div>
-
+			<HomeSlider />
 
 			<div class="sectionTitle mt-2 mb-2">
 				<div class="title">
@@ -27,7 +11,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-6" v-for="record in getDunyaRecords()" @click="goToRecord(record)"
+				<div class="col-6" v-for="record in getDunyaRecords()" @click="goToPost(record.id)"
 					:key="record.title.rendered">
 					<a class="postItem">
 						<div class="imageWrapper">
@@ -44,7 +28,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-6" v-for="record in getSporRecords()" @click="goToRecord(record)"
+				<div class="col-6" v-for="record in getSporRecords()" @click="goToPost(record.id)"
 					:key="record.title.rendered">
 					<a class="postItem">
 						<div class="imageWrapper">
@@ -61,7 +45,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-6" v-for="record in getEkonomiRecords()" @click="goToRecord(record)"
+				<div class="col-6" v-for="record in getEkonomiRecords()" @click="goToPost(record.id)"
 					:key="record.title.rendered">
 					<a class="postItem">
 						<div class="imageWrapper">
@@ -78,7 +62,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-6" v-for="record in getTeknolojiRecords()" @click="goToRecord(record)"
+				<div class="col-6" v-for="record in getTeknolojiRecords()" @click="goToPost(record.id)"
 					:key="record.title.rendered">
 					<a class="postItem">
 						<div class="imageWrapper">
@@ -110,19 +94,21 @@
 
 <script>
 
-import { mapActions, mapGetters, mapMutations } from "vuex"
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import HomeSlider from '~/components/sections/home-slider.vue';
 
 export default {
 	name: "MainNews",
+	components: {
+		HomeSlider
+	},
 	computed: {
-		...mapGetters(["getGundem"]),
 		...mapGetters(["getDunya"]),
 		...mapGetters(["getSpor"]),
 		...mapGetters(["getTeknoloji"]),
 		...mapGetters(["getEkonomi"])
 	},
 	async created() {
-		await this.$store.dispatch("getGundemPosts");
 		await this.$store.dispatch("getDunyaPosts");
 		await this.$store.dispatch("getSporPosts");
 		await this.$store.dispatch("getTeknolojiPosts");
@@ -131,18 +117,13 @@ export default {
 	methods: {
 		...mapMutations(["setIsLoading"]),
 
-		...mapActions(["getGundemPosts"]),
 		...mapActions(["getDunyaPosts"]),
 		...mapActions(["getSporPosts"]),
 		...mapActions(["getTeknolojiPosts"]),
 		...mapActions(["getEkonomiPosts"]),
 
-		goToRecord(record) {
-			return this.$nuxt.$options.router.push(`/post/${record.id}`);
-		},
-
-		getGundemRecords() {
-			return this.getGundem();
+		goToPost(id) {
+			return this.$nuxt.$options.router.push(`/post/${id}`);
 		},
 
 		getDunyaRecords() {

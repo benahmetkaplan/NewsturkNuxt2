@@ -8,4 +8,12 @@ $(document).ready(function(){
         $("#appSidebar").removeClass("show");
     });
 
+    $(window).on("click", function(){
+        $("#appSidebar").removeClass("show");
+    });
+
+    $(document).on("click", ".sidebar-menu, #appSidebarBtn", function(event){
+        event.stopPropagation();
+    });
+
 });

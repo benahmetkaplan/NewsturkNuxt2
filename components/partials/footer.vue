@@ -1,43 +1,21 @@
 <template>
     <div v-bind:class="getClass()">
-        <div v-bind:class="getActiveClass('home')">
-            <a @click="goToHome">
+
+        <div v-for="item in getPageList()" :key="item.slug" v-bind:class="getActiveClass(item.slug)">
+            <a @click="goToView(item.slug)">
                 <p>
-                    <i class="icon ion-ios-home"></i>
-                    <span>Anasayfa</span>
+                    <i :class="getIconClass(item.icon)"></i>
+                    <span>{{item.title}}</span>
                 </p>
             </a>
         </div>
-        <div v-bind:class="getActiveClass('skor')">
-            <a @click="goToView('skor')">
-                <p>
-                    <i class="icon ion-ios-football"></i>
-                    <span>Canlı Skor</span>
-                </p>
-            </a>
-        </div>
-        <div v-bind:class="getActiveClass('hisseler')">
-            <a @click="goToView('hisseler')">
-                <p>
-                    <i class="icon ion-ios-cash"></i>
-                    <span>Canlı Borsa</span>
-                </p>
-            </a>
-        </div>
-        <div v-bind:class="getActiveClass('bize-ulasin')">
-            <a @click="goToView('bize-ulasin')">
-                <p>
-                    <i class="icon ion-ios-mail"></i>
-                    <span>Bize Ulaşın</span>
-                </p>
-            </a>
-        </div>
+        
     </div>
 </template>
 
 <script>
 
-import { mapMutations } from "vuex"
+import { mapGetters } from "vuex"
 
 export default {
     name: "Footer",
@@ -47,32 +25,39 @@ export default {
             activeTab: 'home'
         }
     },
+    computed: {
+		...mapGetters(["getPages"])
+	},
     methods: {
-        ...mapMutations(["setIsLoading"]),
         goToView(slug) {
-            this.setIsLoading(true);
             this.activeTab = slug;
-            setTimeout(() => {
-                this.setIsLoading(false)
-            }, 3000);
-            return this.$nuxt.$options.router.push(`/view/` + slug);
-        },
-        goToHome(){
-            this.activeTab = 'home';
-            return this.$nuxt.$options.router.push(`/`);
+            if(slug === "home"){
+                return this.$nuxt.$options.router.push(`/`);
+            }else{
+                return this.$nuxt.$options.router.push(`/view/` + slug);
+            }
         },
         getClass(){
             return this.fixStatu ? 'appBottomMenu fixed' : 'appBottomMenu'
         },
-        getActiveClass (prefix) {
-            return prefix === this.activeTab ? 'item active' : 'item'
+        getIconClass(icon){
+            return `icon ion-ios-${icon}`;
+        },
+        getActiveClass (slug) {
+            return slug === this.activeTab ? 'item active' : 'item'
+        },
+        getPageList(){
+            return this.getPages();
         }
     },
     watch:{
         $route (to){
-            this.fixStatu = !to.fullPath.includes('/view');
-            if(!to.fullPath.includes('/view')){
+            this.fixStatu = !to.fullPath.includes('/view/');
+            if(!to.fullPath.includes('/view/')){
                 this.activeTab = 'home'
+            }else{
+                this.activeTab = to.fullPath.replaceAll("/view/", "");
+                this.fixStatu = false;
             }
         }
     }

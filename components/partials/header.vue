@@ -6,9 +6,9 @@
             </a>            
         </div>
         <div class="pageTitle">
-            <router-link to="/">
+            <a href="javascript:;" @click="goToHome">
                 <img src="https://newsturk.com.tr/icon.png" class="image">
-            </router-link>
+            </a>
         </div>
         <div class="right">
             <a id="appSidebarBtn" href="javascript:;" class="icon">
@@ -31,13 +31,16 @@ export default {
         goBack(){
             window.history.back();
         },
+        goToHome(){
+            return this.$nuxt.$options.router.push(`/`);
+        },
         getClass(){
             return this.fixStatu ? 'appHeader fixed' : 'appHeader';
         }
     },
     watch:{
         $route (to){
-            this.fixStatu = !to.fullPath.includes('/view');
+            this.fixStatu = !to.fullPath.includes('/view/');
             this.goBackStatu = to.fullPath.includes('/post') || to.fullPath.includes('/view') || to.fullPath.includes('/category')
         }
     }

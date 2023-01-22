@@ -11,7 +11,34 @@ var state = {
   ekonomiPosts: [],
   categoryPosts: [],
   categories: [],
-  activePost: null
+  activePost: null,
+  pages: [
+    {
+      slug: 'home',
+      title: 'Ana Sayfa',
+      icon: 'home'
+    },
+    {
+      slug: 'gazeteler',
+      title: 'Gazeteler',
+      icon: 'paper'
+    },
+    {
+      slug: 'skor',
+      title: 'Canlı Skor',
+      icon: 'football'
+    },
+    {
+      slug: 'hisseler',
+      title: 'Canlı Borsa',
+      icon: 'cash'
+    },
+    {
+      slug: 'bize-ulasin',
+      title: 'Bize Ulaşın',
+      icon: 'mail'
+    }
+  ]
 }
 
 var getters = {
@@ -48,6 +75,11 @@ var getters = {
   getCategories: state => {
     return () => {
       return state.categories
+    }
+  },
+  getPages: state => {
+    return () => {
+      return state.pages
     }
   },
   getActive: state => {
@@ -98,7 +130,7 @@ var actions = {
     }
   },
   async getDunyaPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=8&categories=2`
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=2`
     try {
       let response = await this.$axios.get(endpoint)
       store.commit("setDunyaPosts", response.data)
@@ -107,7 +139,7 @@ var actions = {
     }
   },
   async getSporPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=8&categories=12`
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=12`
     try {
       let response = await this.$axios.get(endpoint)
       store.commit("setSporPosts", response.data)
@@ -134,7 +166,7 @@ var actions = {
     }
   },
   async getCategoryPosts(store, payload) {
-    let endpoint = `${apiUrl}/posts?per_page=20&categories=` + payload
+    let endpoint = `${apiUrl}/posts?per_page=26&categories=` + payload
     try {
       let response = await this.$axios.get(endpoint)
       store.commit("setCategoryPosts", response.data)
