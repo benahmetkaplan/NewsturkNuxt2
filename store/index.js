@@ -38,6 +38,20 @@ var state = {
       title: 'Bize Ulaşın',
       icon: 'mail'
     }
+  ],
+  papers: [
+    { slug: 'turkiye', title: 'Türkiye'},
+    { slug: 'aksam', title: 'Akşam'},
+    { slug: 'milat', title: 'Milat'},
+    { slug: 'sabah', title: 'Sabah'},
+    { slug: 'milliyet', title: 'Milliyet'},
+    { slug: 'hurriyet', title: 'Hürriyet'},
+    { slug: 'turkgun', title: 'Türkgün'},
+    { slug: 'yeni-birlik', title: 'Yeni Birlik'},
+    { slug: 'milli-gazete', title: 'Milli Gazete'},
+    { slug: 'yenicag', title: 'Yeniçağ'},
+    { slug: 'yenisoz', title: 'Yeni Söz'},
+    { slug: 'fotomac', title: 'Fotomaç'}
   ]
 }
 
@@ -80,6 +94,11 @@ var getters = {
   getPages: state => {
     return () => {
       return state.pages
+    }
+  },
+  getPapers: state => {
+    return () => {
+      return state.papers
     }
   },
   getActive: state => {

@@ -34,7 +34,7 @@ export default {
             if(slug === "home"){
                 return this.$nuxt.$options.router.push(`/`);
             }else{
-                return this.$nuxt.$options.router.push(`/view/` + slug);
+                return this.$nuxt.$options.router.push(`/page/` + slug);
             }
         },
         getClass(){
@@ -52,11 +52,11 @@ export default {
     },
     watch:{
         $route (to){
-            this.fixStatu = !to.fullPath.includes('/view/');
-            if(!to.fullPath.includes('/view/')){
+            this.fixStatu = !to.fullPath.includes('/page/');
+            if(!to.fullPath.includes('/page/')){
                 this.activeTab = 'home'
             }else{
-                this.activeTab = to.fullPath.replaceAll("/view/", "");
+                this.activeTab = to.fullPath.replaceAll("/page/", "");
                 this.fixStatu = false;
             }
         }

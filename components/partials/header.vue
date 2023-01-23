@@ -40,7 +40,7 @@ export default {
     },
     watch:{
         $route (to){
-            this.fixStatu = !to.fullPath.includes('/view/');
+            this.fixStatu = !to.fullPath.includes('/page/');
             this.goBackStatu = to.fullPath.includes('/post') || to.fullPath.includes('/view') || to.fullPath.includes('/category')
         }
     }

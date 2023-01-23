@@ -8,7 +8,7 @@
 	</div>
 </template>
 <script>
-import { mapState } from "vuex"
+import { mapState, mapMutations } from "vuex"
 import Header from '~/components/partials/header.vue'
 import Footer from '~/components/partials/footer.vue'
 import Sidebar from '~/components/partials/sidebar.vue'
@@ -24,6 +24,23 @@ export default {
 	computed: {
 		...mapState(["isLoading"]),
 		...mapState(["activeView"])
-	}
+	},
+	methods: {
+		...mapMutations(["setIsLoading"])
+	},
+    mounted() {
+        this.setIsLoading(true);
+        setTimeout(() => {
+            this.setIsLoading(false)
+        }, 3000);
+    },
+    watch:{
+        $route (to){
+            this.setIsLoading(true);
+			setTimeout(() => {
+				this.setIsLoading(false)
+			}, 3000);
+        }
+    }
 }
 </script>

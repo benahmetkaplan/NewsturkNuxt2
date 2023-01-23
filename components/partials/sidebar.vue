@@ -10,7 +10,6 @@
                             </a>
                         </li>
                     </ul>
-                    <hr>
                     <ul class="sidebarMenu sidebar-page-menu" v-if="getPageList().length > 0">
                         <li v-for="item in getPageList()">
                             <a href="javascript:;" @click="goToView(item.slug)">
@@ -57,7 +56,7 @@ export default {
             if(slug === "home"){
                 return this.$nuxt.$options.router.push(`/`);
             }else{
-                return this.$nuxt.$options.router.push(`/view/` + slug);
+                return this.$nuxt.$options.router.push(`/page/` + slug);
             }
         }
 	}

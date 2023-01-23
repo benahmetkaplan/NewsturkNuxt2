@@ -94,11 +94,10 @@
 
 <script>
 
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import HomeSlider from '~/components/sections/home-slider.vue';
 
 export default {
-	name: "MainNews",
 	components: {
 		HomeSlider
 	},
@@ -115,8 +114,6 @@ export default {
 		await this.$store.dispatch("getEkonomiPosts");
 	},
 	methods: {
-		...mapMutations(["setIsLoading"]),
-
 		...mapActions(["getDunyaPosts"]),
 		...mapActions(["getSporPosts"]),
 		...mapActions(["getTeknolojiPosts"]),
@@ -141,12 +138,6 @@ export default {
 		getEkonomiRecords() {
 			return this.getEkonomi();
 		}
-	},
-    mounted() {
-        this.setIsLoading(true);
-        setTimeout(() => {
-            this.setIsLoading(false)
-        }, 3000);
-    }
+	}
 }
 </script>

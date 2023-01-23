@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 
 export default {
     data() {
@@ -39,7 +39,6 @@ export default {
 	},
     methods:{
         ...mapActions(["getActivePost"]),
-        ...mapMutations(["setIsLoading"]),
         formatDate(dateString) {
             if(dateString !== ""){
                 const date = new Date(dateString);
@@ -51,12 +50,6 @@ export default {
         categoryTitle(id){
             return this.getCategories().find(x => x.id === id).name;
         }
-    },
-    mounted() {
-        this.setIsLoading(true);
-        setTimeout(() => {
-            this.setIsLoading(false)
-        }, 3000);
     }
 }
 </script>

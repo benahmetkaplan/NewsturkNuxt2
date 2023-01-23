@@ -22,7 +22,7 @@
 
 <script>
 
-import { mapActions, mapGetters, mapMutations } from "vuex"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
     data() {
@@ -41,7 +41,6 @@ export default {
 	},
 	methods: {
 		...mapActions(["getCategoryPosts"]),
-        ...mapMutations(["setIsLoading"]),
 		getCategoryRecords() {
 			return this.getCategory();
 		},
@@ -51,12 +50,6 @@ export default {
         getCategoryTitle(){
             this.title = this.getCategories().find(x => x.id === parseInt(this.id)).name;
         }
-	},
-    mounted() {
-        this.setIsLoading(true);
-        setTimeout(() => {
-            this.setIsLoading(false)
-        }, 3000);
-    }
+	}
 }
 </script>

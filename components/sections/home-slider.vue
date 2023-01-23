@@ -6,7 +6,7 @@
                 <img :src="record.jetpack_featured_media_url" alt="image" class="card-img img-fluid">
                 <div class="card-img-overlay">
                     <div class="header row">
-                        <div class="col-8">GÜNDEM</div>
+                        <!-- <div class="col-8">GÜNDEM</div> -->
                     </div>
                     <div class="content">
                         <h1 v-html="record.title.rendered"></h1>
