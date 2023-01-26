@@ -7,12 +7,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6" v-for="record in getCategoryRecords()" :key="record.title.rendered">
+                <div class="col-6" v-for="record in getCategoryRecords()" :key="record.title">
                     <a v-on:click="goPost(record.id)" class="postItem">
                         <div class="imageWrapper">
-                            <img :src="record.jetpack_featured_media_url" alt="image" class="image">
+                            <img :src="record.image" alt="image" class="image">
                         </div>
-                        <h2 class="title" v-html="record.title.rendered"></h2>
+                        <h2 class="title" v-html="record.title"></h2>
                     </a>
                 </div>
             </div>

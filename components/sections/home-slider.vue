@@ -1,15 +1,15 @@
 <template>
     <div class="splide__list">
 
-        <div class="splide__slide item" v-for="record in getGundemRecords()" :key="record.title.rendered">
+        <div class="splide__slide item" v-for="record in getGundemRecords()" :key="record.id">
             <a href="javascript:;" @click="goToPost(record.id)" class="card card-overlay text-white">
-                <img :src="record.jetpack_featured_media_url" alt="image" class="card-img img-fluid">
+                <img :src="record.image" alt="image" class="card-img img-fluid">
                 <div class="card-img-overlay">
                     <div class="header row">
                         <!-- <div class="col-8">GÜNDEM</div> -->
                     </div>
                     <div class="content">
-                        <h1 v-html="record.title.rendered"></h1>
+                        <h1 v-html="record.title"></h1>
                         <footer>
                             <div class="date">
                                 {{ formatDate(record.date) }}

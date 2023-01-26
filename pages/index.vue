@@ -12,12 +12,12 @@
 			</div>
 			<div class="row">
 				<div class="col-6" v-for="record in getDunyaRecords()" @click="goToPost(record.id)"
-					:key="record.title.rendered">
+					:key="record.title">
 					<a class="postItem">
 						<div class="imageWrapper">
-							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
+							<img :src="record.image" alt="image" class="image">
 						</div>
-						<h2 class="title" v-html="record.title.rendered"></h2>
+						<h2 class="title" v-html="record.title"></h2>
 					</a>
 				</div>
 			</div>
@@ -29,12 +29,12 @@
 			</div>
 			<div class="row">
 				<div class="col-6" v-for="record in getSporRecords()" @click="goToPost(record.id)"
-					:key="record.title.rendered">
+					:key="record.title">
 					<a class="postItem">
 						<div class="imageWrapper">
-							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
+							<img :src="record.image" alt="image" class="image">
 						</div>
-						<h2 class="title" v-html="record.title.rendered"></h2>
+						<h2 class="title" v-html="record.title"></h2>
 					</a>
 				</div>
 			</div>
@@ -46,12 +46,12 @@
 			</div>
 			<div class="row">
 				<div class="col-6" v-for="record in getEkonomiRecords()" @click="goToPost(record.id)"
-					:key="record.title.rendered">
+					:key="record.title">
 					<a class="postItem">
 						<div class="imageWrapper">
-							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
+							<img :src="record.image" alt="image" class="image">
 						</div>
-						<h2 class="title" v-html="record.title.rendered"></h2>
+						<h2 class="title" v-html="record.title"></h2>
 					</a>
 				</div>
 			</div>
@@ -63,12 +63,12 @@
 			</div>
 			<div class="row">
 				<div class="col-6" v-for="record in getTeknolojiRecords()" @click="goToPost(record.id)"
-					:key="record.title.rendered">
+					:key="record.title">
 					<a class="postItem">
 						<div class="imageWrapper">
-							<img :src="record.jetpack_featured_media_url" alt="image" class="image">
+							<img :src="record.image" alt="image" class="image">
 						</div>
-						<h2 class="title" v-html="record.title.rendered"></h2>
+						<h2 class="title" v-html="record.title"></h2>
 					</a>
 				</div>
 			</div>

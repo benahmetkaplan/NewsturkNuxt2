@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 
-const apiUrl = "https://www.newsturk.com.tr/wp-json/wp/v2";
+const siteUrl = "https://www.newsturk.com.tr";
+const apiUrl = siteUrl + "/wp-json/wp/v2";
 
 var state = {
   isLoading: false,
@@ -140,75 +141,155 @@ var mutations = {
 
 var actions = {
   async getGundemPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=10&categories=25`
+    let endpoint = `${apiUrl}/posts?per_page=10&categories=25`;
     try {
-      let response = await this.$axios.get(endpoint)
-      store.commit("setGundemPosts", response.data)
+      let response = await this.$axios.get(endpoint);
+      let newRes = [];
+      response.data.forEach(rec => {
+        let post = {
+          id: rec.id,
+          title: rec.title.rendered,
+          date: rec.date,
+          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+        };
+        if(post.image !== ''){
+          newRes.push(post);
+        }
+      });
+      store.commit("setGundemPosts", newRes);
     } catch (error) {
-      console.error(`Error: `, error)
+      console.error(`Error: `, error);
     }
   },
   async getDunyaPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=6&categories=2`
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=2`;
     try {
-      let response = await this.$axios.get(endpoint)
-      store.commit("setDunyaPosts", response.data)
+      let response = await this.$axios.get(endpoint);
+      let newRes = [];
+      response.data.forEach(rec => {
+        let post = {
+          id: rec.id,
+          title: rec.title.rendered,
+          date: rec.date,
+          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+        };
+        if(post.image !== ''){
+          newRes.push(post);
+        }
+      });
+      store.commit("setDunyaPosts", newRes);
     } catch (error) {
-      console.error(`Error: `, error)
+      console.error(`Error: `, error);
     }
   },
   async getSporPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=6&categories=12`
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=12`;
     try {
-      let response = await this.$axios.get(endpoint)
-      store.commit("setSporPosts", response.data)
+      let response = await this.$axios.get(endpoint);
+      let newRes = [];
+      response.data.forEach(rec => {
+        let post = {
+          id: rec.id,
+          title: rec.title.rendered,
+          date: rec.date,
+          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+        };
+        if(post.image !== ''){
+          newRes.push(post);
+        }
+      });
+      store.commit("setSporPosts", newRes);
     } catch (error) {
-      console.error(`Error: `, error)
+      console.error(`Error: `, error);
     }
   },
   async getTeknolojiPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=6&categories=13`
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=13`;
     try {
-      let response = await this.$axios.get(endpoint)
-      store.commit("setTeknolojiPosts", response.data)
+      let response = await this.$axios.get(endpoint);
+      let newRes = [];
+      response.data.forEach(rec => {
+        let post = {
+          id: rec.id,
+          title: rec.title.rendered,
+          date: rec.date,
+          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+        };
+        if(post.image !== ''){
+          newRes.push(post);
+        }
+      });
+      store.commit("setTeknolojiPosts", newRes);
     } catch (error) {
-      console.error(`Error: `, error)
+      console.error(`Error: `, error);
     }
   },
   async getEkonomiPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=6&categories=3`
+    let endpoint = `${apiUrl}/posts?per_page=6&categories=3`;
     try {
-      let response = await this.$axios.get(endpoint)
-      store.commit("setEkonomiPosts", response.data)
+      let response = await this.$axios.get(endpoint);
+      let newRes = [];
+      response.data.forEach(rec => {
+        let post = {
+          id: rec.id,
+          title: rec.title.rendered,
+          date: rec.date,
+          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+        };
+        if(post.image !== ''){
+          newRes.push(post);
+        }
+      });
+      store.commit("setEkonomiPosts", newRes);
     } catch (error) {
-      console.error(`Error: `, error)
+      console.error(`Error: `, error);
     }
   },
   async getCategoryPosts(store, payload) {
-    let endpoint = `${apiUrl}/posts?per_page=26&categories=` + payload
+    let endpoint = `${apiUrl}/posts?per_page=26&categories=` + payload;
     try {
-      let response = await this.$axios.get(endpoint)
-      store.commit("setCategoryPosts", response.data)
+      let response = await this.$axios.get(endpoint);
+      let newRes = [];
+      response.data.forEach(rec => {
+        let post = {
+          id: rec.id,
+          title: rec.title.rendered,
+          date: rec.date,
+          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+        };
+        if(post.image !== ''){
+          newRes.push(post);
+        }
+      });
+      store.commit("setCategoryPosts", newRes);
     } catch (error) {
-      console.error(`Error: `, error)
+      console.error(`Error: `, error);
     }
   },
   async getCategoriesList(store) {
-    let endpoint = `${apiUrl}/categories`
+    let endpoint = `${apiUrl}/categories`;
     try {
-      let response = await this.$axios.get(endpoint)
-      store.commit("setCategories", response.data)
+      let response = await this.$axios.get(endpoint);
+      store.commit("setCategories", response.data);
     } catch (error) {
-      console.error(`Error: `, error)
+      console.error(`Error: `, error);
     }
   },
   async getActivePost(store, payload) {
-    let endpoint = `${apiUrl}/posts/` + payload
+    let endpoint = `${apiUrl}/posts/` + payload;
     try {
-      let response = await this.$axios.get(endpoint)
-      store.commit("setActivePost", response.data)
+      let response = await this.$axios.get(endpoint);
+      let post = {
+        id: response.data.id,
+        title: response.data.title.rendered,
+        content: response.data.content.rendered,
+        date: response.data.date,
+        categoryId: response.data.categories[0],
+        image: `${siteUrl}/media/${response.data.date.split('-')[0]}/${response.data.date.split('-')[1]}/${response.data.slug}.jpg`
+      };
+      store.commit("setActivePost", post);
     } catch (error) {
-      console.error(`Error: `, error)
+      console.error(`Error: `, error);
     }
   }
 }

@@ -1,15 +1,15 @@
 <template>
     <div id="appCapsule">
         <div v-if="getActive() !== null && getCategories().length > 0" class="appContent">
-            <h1 v-html="getActive().title.rendered" class="title-lg mt-2 mb-2"></h1>
+            <h1 v-html="getActive().title" class="title-lg mt-2 mb-2"></h1>
             <div class="postHeader mb-2">
-                <div class="category-title" v-html="categoryTitle(getActive().categories[0])"></div>
+                <div class="category-title" v-html="categoryTitle(getActive().categoryId)"></div>
                 <div>
                     {{ formatDate(getActive().date) }}
                 </div>
             </div>
             <div class="postBody">
-                <div class="content" v-html="getActive().content.rendered"></div>
+                <div class="content" v-html="getActive().content"></div>
             </div>
         </div>
     </div>
