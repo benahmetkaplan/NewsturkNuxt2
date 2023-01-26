@@ -7,7 +7,7 @@
         </div>
         <div class="pageTitle">
             <a href="javascript:;" @click="goToHome">
-                <img src="https://newsturk.com.tr/icon.png" class="image">
+                <img :src="`${this.$config.SITE_URL}/icon.png`" class="image">
             </a>
         </div>
         <div class="right">

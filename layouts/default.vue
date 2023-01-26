@@ -32,14 +32,14 @@ export default {
         this.setIsLoading(true);
         setTimeout(() => {
             this.setIsLoading(false)
-        }, 3000);
+        }, 4000);
     },
     watch:{
-        $route (to){
+        $route (){
             this.setIsLoading(true);
 			setTimeout(() => {
 				this.setIsLoading(false)
-			}, 3000);
+			}, 4000);
         }
     }
 }

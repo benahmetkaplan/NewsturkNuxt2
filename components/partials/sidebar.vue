@@ -26,7 +26,7 @@
 
 <script>
 
-import { mapActions, mapGetters, mapMutations } from "vuex"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
     name: "Sidebar",
@@ -38,7 +38,6 @@ export default {
 		await this.$store.dispatch("getCategoriesList");
 	},
 	methods: {
-        ...mapMutations(["setIsLoading"]),
 		...mapActions(["getCategoriesList"]),
 		getCategoriesList() {
 			return this.getCategories();

@@ -24,7 +24,7 @@ export default {
         }
     },
     async created() {
-        this.source = `https://www.newsturk.com.tr/${this.slug}/?app=1`;
+        this.source = `${this.$config.SITE_URL}/${this.slug}/?app=1`;
     }
 }
 </script>

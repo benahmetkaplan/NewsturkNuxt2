@@ -1,8 +1,5 @@
 import Vuex from 'vuex';
 
-const siteUrl = "https://www.newsturk.com.tr";
-const apiUrl = siteUrl + "/wp-json/wp/v2";
-
 var state = {
   isLoading: false,
   gundemPosts: [],
@@ -141,7 +138,7 @@ var mutations = {
 
 var actions = {
   async getGundemPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=10&categories=25`;
+    let endpoint = `${this.$config.API_URL}/posts?per_page=10&categories=25`;
     try {
       let response = await this.$axios.get(endpoint);
       let newRes = [];
@@ -150,11 +147,9 @@ var actions = {
           id: rec.id,
           title: rec.title.rendered,
           date: rec.date,
-          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+          image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
         };
-        if(post.image !== ''){
-          newRes.push(post);
-        }
+        newRes.push(post);
       });
       store.commit("setGundemPosts", newRes);
     } catch (error) {
@@ -162,7 +157,7 @@ var actions = {
     }
   },
   async getDunyaPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=6&categories=2`;
+    let endpoint = `${this.$config.API_URL}/posts?per_page=6&categories=2`;
     try {
       let response = await this.$axios.get(endpoint);
       let newRes = [];
@@ -171,11 +166,9 @@ var actions = {
           id: rec.id,
           title: rec.title.rendered,
           date: rec.date,
-          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+          image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
         };
-        if(post.image !== ''){
-          newRes.push(post);
-        }
+        newRes.push(post);
       });
       store.commit("setDunyaPosts", newRes);
     } catch (error) {
@@ -183,7 +176,7 @@ var actions = {
     }
   },
   async getSporPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=6&categories=12`;
+    let endpoint = `${this.$config.API_URL}/posts?per_page=6&categories=12`;
     try {
       let response = await this.$axios.get(endpoint);
       let newRes = [];
@@ -192,11 +185,9 @@ var actions = {
           id: rec.id,
           title: rec.title.rendered,
           date: rec.date,
-          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+          image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
         };
-        if(post.image !== ''){
-          newRes.push(post);
-        }
+        newRes.push(post);
       });
       store.commit("setSporPosts", newRes);
     } catch (error) {
@@ -204,7 +195,7 @@ var actions = {
     }
   },
   async getTeknolojiPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=6&categories=13`;
+    let endpoint = `${this.$config.API_URL}/posts?per_page=6&categories=13`;
     try {
       let response = await this.$axios.get(endpoint);
       let newRes = [];
@@ -213,11 +204,9 @@ var actions = {
           id: rec.id,
           title: rec.title.rendered,
           date: rec.date,
-          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+          image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
         };
-        if(post.image !== ''){
-          newRes.push(post);
-        }
+        newRes.push(post);
       });
       store.commit("setTeknolojiPosts", newRes);
     } catch (error) {
@@ -225,7 +214,7 @@ var actions = {
     }
   },
   async getEkonomiPosts(store) {
-    let endpoint = `${apiUrl}/posts?per_page=6&categories=3`;
+    let endpoint = `${this.$config.API_URL}/posts?per_page=6&categories=3`;
     try {
       let response = await this.$axios.get(endpoint);
       let newRes = [];
@@ -234,11 +223,9 @@ var actions = {
           id: rec.id,
           title: rec.title.rendered,
           date: rec.date,
-          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+          image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
         };
-        if(post.image !== ''){
-          newRes.push(post);
-        }
+        newRes.push(post);
       });
       store.commit("setEkonomiPosts", newRes);
     } catch (error) {
@@ -246,7 +233,7 @@ var actions = {
     }
   },
   async getCategoryPosts(store, payload) {
-    let endpoint = `${apiUrl}/posts?per_page=26&categories=` + payload;
+    let endpoint = `${this.$config.API_URL}/posts?per_page=26&categories=` + payload;
     try {
       let response = await this.$axios.get(endpoint);
       let newRes = [];
@@ -255,11 +242,9 @@ var actions = {
           id: rec.id,
           title: rec.title.rendered,
           date: rec.date,
-          image: `${siteUrl}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+          image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
         };
-        if(post.image !== ''){
-          newRes.push(post);
-        }
+        newRes.push(post);
       });
       store.commit("setCategoryPosts", newRes);
     } catch (error) {
@@ -267,7 +252,7 @@ var actions = {
     }
   },
   async getCategoriesList(store) {
-    let endpoint = `${apiUrl}/categories`;
+    let endpoint = `${this.$config.API_URL}/categories`;
     try {
       let response = await this.$axios.get(endpoint);
       store.commit("setCategories", response.data);
@@ -276,7 +261,7 @@ var actions = {
     }
   },
   async getActivePost(store, payload) {
-    let endpoint = `${apiUrl}/posts/` + payload;
+    let endpoint = `${this.$config.API_URL}/posts/` + payload;
     try {
       let response = await this.$axios.get(endpoint);
       let post = {
@@ -285,7 +270,7 @@ var actions = {
         content: response.data.content.rendered,
         date: response.data.date,
         categoryId: response.data.categories[0],
-        image: `${siteUrl}/media/${response.data.date.split('-')[0]}/${response.data.date.split('-')[1]}/${response.data.slug}.jpg`
+        image: `${this.$config.SITE_URL}/media/${response.data.date.split('-')[0]}/${response.data.date.split('-')[1]}/${response.data.slug}.jpg`
       };
       store.commit("setActivePost", post);
     } catch (error) {
