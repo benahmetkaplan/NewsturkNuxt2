@@ -73,8 +73,10 @@ export default {
         $route (){
             this.setIsLoading(true);
 			setTimeout(() => {
-				this.setIsLoading(false);
 				$("#appSidebar").removeClass("show");
+			}, 1000);
+			setTimeout(() => {
+				this.setIsLoading(false);
 			}, 2500);
         },
 		redirect: {

@@ -1598,6 +1598,7 @@ textarea.form-control {
   align-items: center;
   padding: 12px 56px 12px 20px;
   position: relative;
+  clear: both;
 }
 
 .listView .listItem:last-child:after {
@@ -1629,18 +1630,18 @@ textarea.form-control {
 .listView .listItem .image .iconBox {
   width: 36px;
   height: 36px;
-  border-radius: 200px;
-  background: #ff003a;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #FFF;
   font-size: 20px;
+  padding: 0 !important;
 }
 
 .listView .listItem .image .iconBox i {
   margin: 0 !important;
-  line-height: 1em;
+  line-height: 0;
 }
 
 .listView .listItem .text {

@@ -2,6 +2,9 @@
     <div v-if="slug === 'gazeteler'">
         <PaperSlider />
     </div>
+    <div v-else-if="slug === 'bize-ulasin'">
+        <ContactForm />
+    </div>
     <div v-else>
         <div id="appCapsule" class="web-view">
             <iframe :src="source" frameborder="0"></iframe>
@@ -12,10 +15,12 @@
 <script>
 
 import PaperSlider from '~/components/sections/paper-slider.vue';
+import ContactForm from '~/components/views/contact-form.vue';
 
 export default {
     components: {
-		PaperSlider
+		PaperSlider,
+        ContactForm
 	},
     data() {
         return {
