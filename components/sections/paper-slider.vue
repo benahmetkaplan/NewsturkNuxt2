@@ -1,24 +1,36 @@
 <template>
     <div class="paper-slider-slick">
-
-        <div class="item" v-for="item in getPaperList()" :key="item.slug">
-            <img :src="getPaperImage(item.slug)">
-        </div>
-        
+        <VueSlickCarousel v-bind="carouselOption" v-if="getPaperList().length > 0">
+            <div class="item" v-for="item in getPaperList()" :key="item.slug">
+                <img :src="getPaperImage(item.slug)">
+            </div>
+        </VueSlickCarousel>
     </div>
 </template>
 
 <script>
 
-import { mapGetters } from "vuex"
+import { mapGetters } from "vuex";
+import VueSlickCarousel from 'vue-slick-carousel';
+import 'vue-slick-carousel/dist/vue-slick-carousel.css';
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
 
 export default {
     name: "PaperSlider",
+    components: { VueSlickCarousel },
+    data() {
+        return {
+            carouselOption: {
+                slidesToShow: 1,
+                dots: false,
+                autoplay: false,
+                arrows: false,
+                infinite: false
+            }
+        }
+    },
     computed: {
 		...mapGetters(["getPapers"])
-	},
-	async created() {
-        this.initPaperSlider();
 	},
 	methods: {
 		getPaperList() {
@@ -30,21 +42,6 @@ export default {
             let month = date[1];
             let day = date[2];
             return `https://i2.haber7.net/haber7/gazete/${slug}/big_${day+month+year}_0800.jpg`;
-        },
-        initPaperSlider(){
-            if(this.getPaperList().length > 0){
-                setTimeout(() => {
-                    if(typeof $ !== "undefined"){
-                        $('.paper-slider-slick').slick({
-                            slidesToShow: 1,
-                            dots: false,
-                            autoplay: false,
-                            arrows: false,
-                            infinite: false
-                        });
-                    }
-                }, 500);
-            }
         }
 	}
 }

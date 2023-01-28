@@ -13,7 +13,8 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_axios_c833afbe from 'nuxt_plugin_axios_c833afbe' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_axios_71f82131 from 'nuxt_plugin_axios_71f82131' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_vuesweetalert_31840604 from 'nuxt_plugin_vuesweetalert_31840604' // Source: ..\\plugins\\vue-sweetalert.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -81,7 +82,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"newsturk.com.tr","meta":[{"charset":"utf-8"},{"name":"viewport","content":"minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no"}],"link":[{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Funpkg.com\u002Fionicons@4.5.10-1\u002Fdist\u002Fcss\u002Fionicons.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Fslick-carousel\u002F1.5.9\u002Fslick.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Fslick-carousel\u002F1.5.9\u002Fslick-theme.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fbootstrap\u002Fbootstrap.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fsplide\u002Fsplide.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Fstyle.css?v=1.0.6"}],"script":[{"src":"\u002Fassets\u002Fjs\u002Fjquery.min.js"},{"src":"\u002Fassets\u002Fjs\u002Fjquery-migrate.min.js"},{"src":"\u002Fassets\u002Fjs\u002Fslick.min.js"},{"src":"\u002Fassets\u002Fjs\u002Fcustom.js?v=1.0.6"}],"style":[]},
+    head: {"title":"newsturk.com.tr","meta":[{"charset":"utf-8"},{"name":"viewport","content":"minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no"}],"link":[{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Funpkg.com\u002Fionicons@4.5.10-1\u002Fdist\u002Fcss\u002Fionicons.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fbootstrap\u002Fbootstrap.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fsplide\u002Fsplide.min.css?v=1.0.7"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Fstyle.css?v=1.0.7"}],"style":[],"script":[]},
 
     store,
     router,
@@ -210,8 +211,12 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_axios_c833afbe === 'function') {
-    await nuxt_plugin_axios_c833afbe(app.context, inject)
+  if (typeof nuxt_plugin_axios_71f82131 === 'function') {
+    await nuxt_plugin_axios_71f82131(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_vuesweetalert_31840604 === 'function') {
+    await nuxt_plugin_vuesweetalert_31840604(app.context, inject)
   }
 
   // Lock enablePreview in context

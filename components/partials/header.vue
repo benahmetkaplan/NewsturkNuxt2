@@ -1,7 +1,7 @@
 <template>
     <div v-bind:class="getClass()" data-test="header">
         <div class="left">
-            <a v-on:click="goBack" v-show="goBackStatu" href="javascript:;" class="icon goBack">
+            <a @click="goBack" v-show="goBackStatu" href="javascript:;" class="icon goBack">
                 <i class="icon ion-ios-arrow-back"></i>
             </a>            
         </div>
@@ -11,7 +11,7 @@
             </a>
         </div>
         <div class="right">
-            <a id="appSidebarBtn" href="javascript:;" class="icon">
+            <a  @click="sidebarToggle" id="appSidebarBtn" href="javascript:;" class="icon">
                 <i class="icon ion-ios-menu"></i>
             </a>
         </div>
@@ -36,12 +36,15 @@ export default {
         },
         getClass(){
             return this.fixStatu ? 'appHeader fixed' : 'appHeader';
+        },
+        sidebarToggle(){
+            $("#appSidebar").toggleClass("show");
         }
     },
     watch:{
         $route (to){
             this.fixStatu = !to.fullPath.includes('/page/');
-            this.goBackStatu = to.fullPath.includes('/post') || to.fullPath.includes('/view') || to.fullPath.includes('/category')
+            this.goBackStatu = to.fullPath.includes('/post/') || to.fullPath.includes('/view/') || to.fullPath.includes('/category/')
         }
     }
 }

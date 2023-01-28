@@ -37,7 +37,7 @@ a:focus {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9999999;
+  z-index: 10000015;
   background: #FFF;
   display: flex;
   align-items: center;
@@ -3074,21 +3074,21 @@ figure figcaption {
 }
 
 .paper-slider-slick {
-  display: flex;
+  display: inline-block;
   width: 100%;
   max-width: 100%;
   margin: 0 auto !important;
   min-height: calc(100vh - 112px);
   overflow: hidden;
-  align-items: center;
-  justify-content: center;
   background: #f1f1f1;
+  margin-bottom: -8px !important;
 }
 
 .paper-slider-slick .item {
   width: 100%;
   display: inline-block;
   padding: 15px;
+  margin-top: 30px;
 }
 
 .paper-slider-slick .item img {

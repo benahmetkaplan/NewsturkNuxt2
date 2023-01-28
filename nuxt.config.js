@@ -1,4 +1,5 @@
 require('dotenv').config();
+import webpack from 'webpack';
 
 module.exports = {
 	head: {
@@ -10,21 +11,35 @@ module.exports = {
 		link: [
 			{ rel: 'stylesheet', type: 'text/css', href: 'https://unpkg.com/ionicons@4.5.10-1/dist/css/ionicons.min.css' },
 			{ rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap' },
-			{ rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css' },
-			{ rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css' },
 			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/bootstrap/bootstrap.min.css' },
-			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/splide/splide.min.css' },
+			{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/inc/splide/splide.min.css?v=${process.env.APP_VERSION}` },
 			{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/style.css?v=${process.env.APP_VERSION}` }
-		],
-		script: [
-			{ src: '/assets/js/jquery.min.js' },
-			{ src: '/assets/js/jquery-migrate.min.js' },
-			{ src: '/assets/js/slick.min.js' },
-			{ src: `/assets/js/custom.js?v=${process.env.APP_VERSION}` }
 		]
 	},
 	loading: { color: '#ffffff' },
-	modules: ['@nuxtjs/axios'],
+	modules: [
+		'@nuxtjs/axios'
+	],
+	plugins: [
+		'./plugins/vue-sweetalert.js'
+	],
+	build: {
+		vendor: ["jquery"],
+		plugins: [
+			new webpack.ProvidePlugin({
+				$: 'jquery'
+			})
+		],
+		extend(config, ctx) {
+			config.module.rules.push({
+					test: /\.(ogg|mp3|wav|mpe?g)$/i,
+					loader: 'file-loader',
+					options: {
+					name: '[path][name].[ext]'
+				}
+			})
+		}
+	},
 	buildModules: [
 		['@nuxtjs/dotenv', { filename: '.env' }]
 	],
