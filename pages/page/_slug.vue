@@ -1,5 +1,5 @@
 <template>
-    <div v-if="slug === 'gazeteler'">
+    <div class="paper-slider-slick" v-if="slug === 'gazeteler'">
         <PaperSlider />
     </div>
     <div v-else-if="slug === 'bize-ulasin'">

@@ -52,7 +52,7 @@ export default {
     },
     watch:{
         $route (to){
-            this.fixStatu = !to.fullPath.includes('/page/');
+            this.fixStatu = (!to.fullPath.includes('/page/skor')) && !to.fullPath.includes('/page/hisseler');
             if(!to.fullPath.includes('/page/')){
                 this.activeTab = 'home'
             }else{

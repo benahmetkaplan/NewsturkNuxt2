@@ -1663,7 +1663,6 @@ textarea.form-control {
 }
 
 .listView a.listItem {
-  background-image: url("../img/icon/arrow.svg");
   background-repeat: no-repeat;
   background-position: right 20px center;
 }
@@ -3079,17 +3078,19 @@ figure figcaption {
   width: 100%;
   max-width: 100%;
   margin: 0 auto !important;
-  min-height: calc(100vh - 112px);
+  min-height: 100vh;
   overflow: hidden;
-  background: #f1f1f1;
-  margin-bottom: -8px !important;
+  padding: 30px;
+  padding-top: 56px;
 }
 
 .paper-slider-slick .item {
   width: 100%;
   display: inline-block;
-  padding: 15px;
+  padding: 5px;
   margin-top: 30px;
+  background: #e5e9f2;
+  border-radius: 15px;
 }
 
 .paper-slider-slick .item img {
@@ -3101,4 +3102,10 @@ figure figcaption {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+span.validation-error-message {
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
 }

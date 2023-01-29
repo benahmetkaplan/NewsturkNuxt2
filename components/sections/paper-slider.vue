@@ -1,11 +1,9 @@
 <template>
-    <div class="paper-slider-slick">
-        <VueSlickCarousel v-bind="carouselOption" v-if="getPaperList().length > 0">
-            <div class="item" v-for="item in getPaperList()" :key="item.slug">
-                <img :src="getPaperImage(item.slug)">
-            </div>
-        </VueSlickCarousel>
-    </div>
+    <VueSlickCarousel v-bind="carouselOption" v-if="getPaperList().length > 0">
+        <div class="item" v-for="item in getPaperList()" :key="item.slug">
+            <img :src="getPaperImage(item.slug)">
+        </div>
+    </VueSlickCarousel>
 </template>
 
 <script>

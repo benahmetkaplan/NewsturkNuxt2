@@ -21,9 +21,11 @@ module.exports = {
 		'@nuxtjs/axios'
 	],
 	plugins: [
-		'./plugins/vue-sweetalert.js'
+		'./plugins/vue-sweetalert.js',
+		'./plugins/vee-validate.js'
 	],
 	build: {
+		transpile: ["vee-validate/dist/rules"],
 		vendor: ["jquery"],
 		plugins: [
 			new webpack.ProvidePlugin({
@@ -41,7 +43,9 @@ module.exports = {
 		}
 	},
 	buildModules: [
-		['@nuxtjs/dotenv', { filename: '.env' }]
+		[
+			'@nuxtjs/dotenv', { filename: '.env' }, '@nuxt/typescript-build'
+		]
 	],
 	publicRuntimeConfig: {
 		APP_VERSION: process.env.APP_VERSION,
