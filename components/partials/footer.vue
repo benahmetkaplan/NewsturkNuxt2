@@ -1,10 +1,10 @@
 <template>
-    <div v-bind:class="getClass()">
+    <div :class="`appBottomMenu ${ fixStatu ? 'fixed' : '' }`">
 
-        <div v-for="item in getPageList()" :key="item.slug" v-bind:class="getActiveClass(item.slug)">
+        <div v-for="item in getPageList()" :key="item.slug" :class="`item ${item.slug === activeTab ? 'active' : ''}`">
             <a @click="goToView(item.slug)">
                 <p>
-                    <i :class="getIconClass(item.icon)"></i>
+                    <i :class="`icon ion-ios-${item.icon}`"></i>
                     <span>{{item.title}}</span>
                 </p>
             </a>
@@ -36,15 +36,6 @@ export default {
             }else{
                 return this.$nuxt.$options.router.push(`/page/` + slug);
             }
-        },
-        getClass(){
-            return this.fixStatu ? 'appBottomMenu fixed' : 'appBottomMenu'
-        },
-        getIconClass(icon){
-            return `icon ion-ios-${icon}`;
-        },
-        getActiveClass (slug) {
-            return slug === this.activeTab ? 'item active' : 'item'
         },
         getPageList(){
             return this.getPages();

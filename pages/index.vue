@@ -78,14 +78,8 @@
 		<footer class="appFooter">
 			<div class="heading">Copyright © {{ new Date().getFullYear() }}. Tüm hakları saklıdır.</div>
 			<br>
-			<a target="_blank" href="https://twitter.com/newsturksocial" class="btn btn-twitter btn-icon me-1">
-				<i class="icon ion-logo-twitter"></i>
-			</a>
-			<a target="_blank" href="https://instagram.com/newsturksocial" class="btn btn-instagram btn-icon me-1">
-				<i class="icon ion-logo-instagram"></i>
-			</a>
-			<a target="_blank" href="https://www.youtube.com/@newsturksocial" class="btn btn-youtube btn-icon me-1">
-				<i class="icon ion-logo-youtube"></i>
+			<a v-if="getAccountList().length > 0" v-for="item in getAccountList()" :key="item.slug" :href="item.link" target="_blank" :class="`btn btn-${item.slug} btn-icon me-1`">
+				<i :class="`icon ion-logo-${item.slug}`"></i>
 			</a>
 		</footer>
 
@@ -105,7 +99,8 @@ export default {
 		...mapGetters(["getDunya"]),
 		...mapGetters(["getSpor"]),
 		...mapGetters(["getTeknoloji"]),
-		...mapGetters(["getEkonomi"])
+		...mapGetters(["getEkonomi"]),
+		...mapGetters(["getAccounts"])
 	},
 	async created() {
 		await this.$store.dispatch("getDunyaPosts");
@@ -137,7 +132,11 @@ export default {
 
 		getEkonomiRecords() {
 			return this.getEkonomi();
-		}
+		},
+
+		getAccountList() {
+			return this.getAccounts();
+		},
 	}
 }
 </script>

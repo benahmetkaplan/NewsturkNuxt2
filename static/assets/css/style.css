@@ -3105,7 +3105,79 @@ figure figcaption {
 }
 
 span.validation-error-message {
-  color: red;
+  color: #eb2f06;
   font-size: 12px;
   font-weight: 500;
+}
+
+.swal2-title {
+  font-size: 26px  !important;
+  padding: 0 !important;
+  color: black;
+  margin: 5px 0 !important;
+  font-weight: 800;
+}
+
+.swal2-html-container {
+  margin: 0 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: black;
+}
+
+.swal2-icon {
+  width: auto !important;
+  height: auto !important;
+  border: 0 !important;
+  line-height: inherit !important;
+  margin: 0 !important;
+  border-radius: initial !important;
+  color: initial !important;
+  opacity: 1 !important;
+}
+
+.swal2-icon > * {
+  display: none !important;
+}
+
+.swal2-icon.swal2-error:before {
+  content: "";
+  font-family: "Ionicons";
+  font-size: 50px;
+  color: #eb2f06;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swal2-icon.swal2-success:before {
+  content: "";
+  font-family: "Ionicons";
+  font-size: 50px;
+  color: #4cd137;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swal2-icon.swal2-warning:before {
+  content: "";
+  font-family: "Ionicons";
+  font-size: 50px;
+  color: #fbc531;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swal2-popup {
+  max-width: 320px !important;
+  padding: 15px !important;
+  box-sizing: border-box;
 }

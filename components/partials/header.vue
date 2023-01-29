@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:class="getClass()" data-test="header">
+    <div :class="`appHeader ${ fixStatu ? 'fixed' : '' }`" data-test="header">
         <div class="left">
             <a @click="goBack" v-show="goBackStatu" href="javascript:;" class="icon goBack">
                 <i class="icon ion-ios-arrow-back"></i>
@@ -11,7 +11,7 @@
             </a>
         </div>
         <div class="right">
-            <a  @click="sidebarToggle" id="appSidebarBtn" href="javascript:;" class="icon">
+            <a @click="sidebarToggle" id="appSidebarBtn" href="javascript:;" class="icon">
                 <i class="icon ion-ios-menu"></i>
             </a>
         </div>
@@ -33,9 +33,6 @@ export default {
         },
         goToHome(){
             return this.$nuxt.$options.router.push(`/`);
-        },
-        getClass(){
-            return this.fixStatu ? 'appHeader fixed' : 'appHeader';
         },
         sidebarToggle(){
             $("#appSidebar").toggleClass("show");

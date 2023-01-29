@@ -70,6 +70,7 @@
             <div class="card listviewCard">
                 <div class="card-body pt-1 pb-1">
                     <div class="listView">
+
                         <a href="mailto:info@newsturk.com.tr" class="listItem">
                             <div class="image">
                                 <div class="iconBox bg-primary">
@@ -82,42 +83,20 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="https://twitter.com/newsturksocial" target="_blank" class="listItem">
+
+                        <a v-if="getAccountList().length > 0" v-for="item in getAccountList()" :key="item.slug" :href="item.link" target="_blank" class="listItem">
                             <div class="image">
-                                <div class="iconBox btn btn-twitter">
-                                    <i class="icon ion-logo-twitter"></i>
+                                <div :class="`iconBox btn btn-${item.slug}`">
+                                    <i :class="`icon ion-logo-${item.slug}`"></i>
                                 </div>
                             </div>
                             <div class="text">
                                 <div>
-                                    <strong>Twitter</strong>
+                                    <strong v-html="item.title"></strong>
                                 </div>
                             </div>
                         </a>
-                        <a href="https://instagram.com/newsturksocial" target="_blank" class="listItem">
-                            <div class="image">
-                                <div class="iconBox btn btn-instagram">
-                                    <i class="icon ion-logo-instagram"></i>
-                                </div>
-                            </div>
-                            <div class="text">
-                                <div>
-                                    <strong>Instagram</strong>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="https://youtube.com/@newsturksocial" target="_blank" class="listItem">
-                            <div class="image">
-                                <div class="iconBox btn btn-youtube">
-                                    <i class="icon ion-logo-youtube"></i>
-                                </div>
-                            </div>
-                            <div class="text">
-                                <div>
-                                    <strong>YouTube</strong>
-                                </div>
-                            </div>
-                        </a>
+                        
                     </div>
                 </div>
             </div>
@@ -130,7 +109,7 @@
 <script>
 
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
     name: "ContactForm",
@@ -151,9 +130,15 @@ export default {
             }
         }
     },
+    computed: {
+        ...mapGetters(["getAccounts"])
+    },
 	methods: {
         ...mapMutations(["setIsLoading"]),
 
+        getAccountList() {
+			return this.getAccounts();
+		},
         onFormSubmit () {
             this.setIsLoading(true);
             this.$refs.form.validate().then(success => {
@@ -163,7 +148,8 @@ export default {
                         icon: 'error',
                         title: 'Dikkat!',
                         text: 'Lütfen formu kontrol ederek tekrar doldurun!',
-                        confirmButtonText: 'Tamam'
+                        confirmButtonText: 'Tamam',
+                        showConfirmButton: false
                     });
                     this.setIsLoading(false);
                     return;
@@ -177,7 +163,7 @@ export default {
                             icon: 'success',
                             title: 'Oley!',
                             text: 'Mesajınız iletildi.',
-                            confirmButtonText: 'Tamam'
+                            showConfirmButton: false
                         });
                         this.formData.name = '';
                         this.formData.last_name = '';
@@ -190,7 +176,7 @@ export default {
                             icon: 'error',
                             title: 'Dikkat!',
                             text: 'Bir sorun oluştu.',
-                            confirmButtonText: 'Tamam'
+                            showConfirmButton: false
                         });
                     }
                 });

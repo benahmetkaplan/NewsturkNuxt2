@@ -10,32 +10,12 @@ var state = {
   categoryPosts: [],
   categories: [],
   activePost: null,
-  pages: [
-    {
-      slug: 'home',
-      title: 'Ana Sayfa',
-      icon: 'home'
-    },
-    {
-      slug: 'gazeteler',
-      title: 'Gazeteler',
-      icon: 'paper'
-    },
-    {
-      slug: 'skor',
-      title: 'Canlı Skor',
-      icon: 'football'
-    },
-    {
-      slug: 'hisseler',
-      title: 'Canlı Borsa',
-      icon: 'cash'
-    },
-    {
-      slug: 'bize-ulasin',
-      title: 'Bize Ulaşın',
-      icon: 'mail'
-    }
+  pages: [ 
+    { slug: 'home', title: 'Ana Sayfa', icon: 'home' },
+    { slug: 'gazeteler', title: 'Gazeteler', icon: 'paper' },
+    { slug: 'skor', title: 'Canlı Skor', icon: 'football' },
+    { slug: 'hisseler', title: 'Canlı Borsa', icon: 'cash' },
+    { slug: 'bize-ulasin', title: 'Bize Ulaşın', icon: 'mail' }
   ],
   papers: [
     { slug: 'turkiye', title: 'Türkiye'},
@@ -50,6 +30,11 @@ var state = {
     { slug: 'yenicag', title: 'Yeniçağ'},
     { slug: 'yenisoz', title: 'Yeni Söz'},
     { slug: 'fotomac', title: 'Fotomaç'}
+  ],
+  accounts: [
+    { slug: 'twitter', title: 'Twitter', link: 'https://twitter.com/newsturksocial' },
+    { slug: 'instagram', title: 'Instagram', link: 'https://instagram.com/newsturksocial' },
+    { slug: 'youtube', title: 'YouTube', link: 'https://youtube.com/@newsturksocial' }
   ]
 }
 
@@ -97,6 +82,11 @@ var getters = {
   getPapers: state => {
     return () => {
       return state.papers
+    }
+  },
+  getAccounts: state => {
+    return () => {
+      return state.accounts
     }
   },
   getActive: state => {

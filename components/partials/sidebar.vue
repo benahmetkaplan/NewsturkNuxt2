@@ -13,7 +13,7 @@
                     <ul class="sidebarMenu sidebar-page-menu" v-if="getPageList().length > 0">
                         <li v-for="item in getPageList()">
                             <a href="javascript:;" @click="goToView(item.slug)">
-                                <i :class="getIconClass(item.icon)"></i>
+                                <i :class="`icon ion-ios-${item.icon}`"></i>
                                 {{ item.title }}
                             </a>
                         </li>
@@ -44,9 +44,6 @@ export default {
 		},
         getPageList(){
             return this.getPages();
-        },
-        getIconClass(icon){
-            return `icon ion-ios-${icon}`;
         },
         goCategory(id){
             return this.$nuxt.$options.router.push(`/category/` + id);
