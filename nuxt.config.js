@@ -14,15 +14,22 @@ module.exports = {
 			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/bootstrap/bootstrap.min.css' },
 			{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/inc/splide/splide.min.css?v=${process.env.APP_VERSION}` },
 			{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/style.css?v=${process.env.APP_VERSION}` }
+		],
+		script: [
+			{
+				src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0211958192707263',
+				async: true,
+				crossorigin: 'anonymous'
+			}
 		]
 	},
 	loading: { color: '#ffffff' },
 	modules: [
-		'@nuxtjs/axios'
+		['@nuxtjs/axios']
 	],
 	plugins: [
-		'./plugins/vue-sweetalert.js',
-		'./plugins/vee-validate.js'
+		{ src: './plugins/vue-sweetalert.js' },
+		{ src: './plugins/vee-validate.js' }
 	],
 	build: {
 		transpile: ["vee-validate/dist/rules"],
