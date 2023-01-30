@@ -10,6 +10,8 @@ var state = {
   categoryPosts: [],
   categories: [],
   activePost: null,
+  categoryTotalPage: null,
+  categoryTotal: null,
   pages: [ 
     { slug: 'home', title: 'Ana Sayfa', icon: 'home' },
     { slug: 'gazeteler', title: 'Gazeteler', icon: 'paper' },
@@ -69,6 +71,14 @@ var getters = {
       return state.categoryPosts
     }
   },
+  getCategoryTotals: state => {
+    return () => {
+      return {
+        total: state.categoryTotal,
+        totalPage: state.categoryTotalPage
+      }
+    }
+  },
   getCategories: state => {
     return () => {
       return state.categories
@@ -116,7 +126,11 @@ var mutations = {
     state.ekonomiPosts = results
   },
   setCategoryPosts(state, results) {
-    state.categoryPosts = results
+    state.categoryPosts = state.categoryPosts.concat(results)
+  },
+  setCategoryTotals(state, res) {
+    state.categoryTotal = res.total;
+    state.categoryTotalPage = res.totalPage;
   },
   setCategories(state, results) {
     state.categories = results
@@ -223,9 +237,13 @@ var actions = {
     }
   },
   async getCategoryPosts(store, payload) {
-    let endpoint = `${this.$config.API_URL}/posts?per_page=26&categories=` + payload;
+    let endpoint = `${this.$config.API_URL}/posts?page=${payload.page}&per_page=${payload.perPage}&categories=${payload.id}`;
     try {
       let response = await this.$axios.get(endpoint);
+      store.commit("setCategoryTotals", {
+        total: parseInt(response.headers["x-wp-total"]),
+        totalPage: parseInt(response.headers["x-wp-totalpages"])
+      });
       let newRes = [];
       response.data.forEach(rec => {
         let post = {
