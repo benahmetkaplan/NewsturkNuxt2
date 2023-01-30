@@ -64,14 +64,14 @@ export default {
         },
         addMore(){
             let totalPages = this.getTotals().totalPage;
-            if(this.activePage <= totalPages){
-                this.activePage = this.activePage + 1;
+            if (this.activePage <= totalPages) {
+                this.activePage++;
                 this.$store.dispatch("getCategoryPosts", {
                     id: this.id,
                     perPage: this.perPage,
                     page: this.activePage
                 });
-            }else{
+            } else {
                 this.addMoreStatu = false;
             }
         }

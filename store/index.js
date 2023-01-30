@@ -66,7 +66,7 @@ var getters = {
       return state.ekonomiPosts
     }
   },
-  getCategory: state => {
+  getCategory: (state) => {
     return () => {
       return state.categoryPosts
     }
@@ -125,8 +125,12 @@ var mutations = {
   setEkonomiPosts(state, results) {
     state.ekonomiPosts = results
   },
-  setCategoryPosts(state, results) {
-    state.categoryPosts = state.categoryPosts.concat(results)
+  setCategoryPosts(state, res) {
+    if(res.page === 1){
+      state.categoryPosts = res.results;
+    }else{
+      state.categoryPosts = state.categoryPosts.concat(res.results);
+    }
   },
   setCategoryTotals(state, res) {
     state.categoryTotal = res.total;
@@ -254,7 +258,11 @@ var actions = {
         };
         newRes.push(post);
       });
-      store.commit("setCategoryPosts", newRes);
+      store.commit("setCategoryPosts", {
+        results: newRes,
+        id: payload.id,
+        page: payload.page
+      });
     } catch (error) {
       console.error(`Error: `, error);
     }
