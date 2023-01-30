@@ -14,13 +14,6 @@ module.exports = {
 			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/bootstrap/bootstrap.min.css' },
 			{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/inc/splide/splide.min.css?v=${process.env.APP_VERSION}` },
 			{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/style.css?v=${process.env.APP_VERSION}` }
-		],
-		script: [
-			{
-				src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0211958192707263',
-				async: true,
-				crossorigin: 'anonymous'
-			}
 		]
 	},
 	loading: { color: '#ffffff' },
