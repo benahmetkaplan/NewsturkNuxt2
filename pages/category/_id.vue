@@ -26,12 +26,12 @@
 
 <script>
 
-import { mapActions, mapGetters } from "vuex"
+import { mapActions, mapGetters } from "vuex";
 
 export default {
     data() {
         return {
-            id: this.$route.params.id,
+            id: parseInt(this.$route.params.id),
             title: '',
             activePage: 1,
             perPage: 24,
@@ -41,7 +41,7 @@ export default {
     computed: {
         ...mapGetters(["getCategories"]),
 		...mapGetters(["getCategory"]),
-        ...mapGetters(["getCategoryTotals"])
+        ...mapGetters(["getCategoryDatas"])
 	},
 	async created() {
 		await this.$store.dispatch("getCategoryPosts", {
@@ -57,14 +57,14 @@ export default {
 			return this.getCategory();
 		},
         getTotals(){
-            return this.getCategoryTotals();
+            return this.getCategoryDatas();
         },
         getCategoryTitle(){
             this.title = this.getCategories().find(x => x.id === parseInt(this.id)).name;
         },
         addMore(){
-            let totalPages = this.getTotals().totalPage;
-            if (this.activePage <= totalPages) {
+            let totalpages = this.getTotals().totalpages;
+            if (this.activePage <= totalpages) {
                 this.activePage++;
                 this.$store.dispatch("getCategoryPosts", {
                     id: this.id,

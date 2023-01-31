@@ -29,6 +29,11 @@ export default {
       return state.categoryPosts
     }
   },
+  getCategoryDatas: state => {
+    return () => {
+      return state.categoryDatas
+    }
+  },
   getCategories: state => {
     return () => {
       return state.categories

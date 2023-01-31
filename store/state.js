@@ -7,6 +7,7 @@ export default {
     ekonomiPosts: [],
     categoryPosts: [],
     categories: [],
+    categoryDatas: {},
     activePost: null,
     fixedStatu: true,
     bottomMenuActiveTab: '',

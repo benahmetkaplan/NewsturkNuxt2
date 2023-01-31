@@ -24,6 +24,9 @@ export default {
             state.categoryPosts = state.categoryPosts.concat(res.results);
         }
     },
+    setCategoryDatas(state, res) {
+        state.categoryDatas = res;
+    },
     setCategories(state, results) {
         state.categories = results
     },

@@ -97,7 +97,7 @@ export default {
     async getCategoryPosts(store, payload) {
         let endpoint = `${this.$config.API_URL}/posts?page=${payload.page}&per_page=${payload.perPage}&categories=${payload.id}`;
         try {
-            let response = await this.$axios.get(endpoint);
+            let response = await this.$axios.get(endpoint);            
             let newRes = [];
             response.data.forEach(rec => {
                 let post = {
@@ -112,6 +112,12 @@ export default {
                 results: newRes,
                 id: payload.id,
                 page: payload.page
+            });
+            let total = parseInt(response.headers["x-wp-total"]);
+            let totalpages = parseInt(response.headers["x-wp-totalpages"]);
+            store.commit("setCategoryDatas", {
+                total: total,
+                totalpages: totalpages
             });
         } catch (error) {
             console.error(`Error: `, error);
