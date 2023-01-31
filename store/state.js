@@ -8,6 +8,8 @@ export default {
     categoryPosts: [],
     categories: [],
     activePost: null,
+    fixedStatu: true,
+    bottomMenuActiveTab: '',
     pages: [
         { slug: 'home', title: 'Ana Sayfa', icon: 'home' },
         { slug: 'gazeteler', title: 'Gazeteler', icon: 'paper' },

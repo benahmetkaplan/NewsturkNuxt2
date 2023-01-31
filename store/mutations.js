@@ -17,13 +17,23 @@ export default {
     setEkonomiPosts(state, results) {
         state.ekonomiPosts = results
     },
-    setCategoryPosts(state, results) {
-        state.categoryPosts = results
+    setCategoryPosts(state, res) {
+        if (res.page === 1) {
+            state.categoryPosts = res.results;
+        } else {
+            state.categoryPosts = state.categoryPosts.concat(res.results);
+        }
     },
     setCategories(state, results) {
         state.categories = results
     },
     setActivePost(state, data) {
         state.activePost = data
+    },
+    setFixedStatu(state, data) {
+        state.fixedStatu = data
+    },
+    setBottomMenuActiveTab(state, data) {
+        state.bottomMenuActiveTab = data
     }
 };

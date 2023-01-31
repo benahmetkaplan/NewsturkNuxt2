@@ -1,5 +1,5 @@
 <template>
-    <div :class="`appHeader ${ fixStatu ? 'fixed' : '' }`" data-test="header">
+    <div :class="`appHeader ${ fixedStatu() ? 'fixed' : '' }`" data-test="header">
         <div class="left">
             <a @click="goBack" v-show="goBackStatu" href="javascript:;" class="icon goBack">
                 <i class="icon ion-ios-arrow-back"></i>
@@ -19,14 +19,20 @@
 </template>
 
 <script>
+
+import { mapGetters } from "vuex";
+
 export default {
     name: "Header", 
     data() {
         return {
-            fixStatu: true,
             goBackStatu: false
         }
     },
+    computed: {
+		...mapGetters(["getPages"]),
+		...mapGetters(["getFixedStatu"])
+	},
     methods: {
         goBack(){
             window.history.back();
@@ -36,11 +42,13 @@ export default {
         },
         sidebarToggle(){
             $("#appSidebar").toggleClass("show");
+        },
+        fixedStatu(){
+            return this.getFixedStatu();
         }
     },
     watch:{
         $route (to){
-            this.fixStatu = (!to.fullPath.includes('/page/skor')) && !to.fullPath.includes('/page/hisseler');
             this.goBackStatu = to.fullPath.includes('/post/') || to.fullPath.includes('/view/') || to.fullPath.includes('/category/')
         }
     }

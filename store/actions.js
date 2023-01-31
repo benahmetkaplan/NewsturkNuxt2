@@ -95,7 +95,7 @@ export default {
         }
     },
     async getCategoryPosts(store, payload) {
-        let endpoint = `${this.$config.API_URL}/posts?per_page=26&categories=` + payload;
+        let endpoint = `${this.$config.API_URL}/posts?page=${payload.page}&per_page=${payload.perPage}&categories=${payload.id}`;
         try {
             let response = await this.$axios.get(endpoint);
             let newRes = [];
@@ -108,7 +108,11 @@ export default {
                 };
                 newRes.push(post);
             });
-            store.commit("setCategoryPosts", newRes);
+            store.commit("setCategoryPosts", {
+                results: newRes,
+                id: payload.id,
+                page: payload.page
+            });
         } catch (error) {
             console.error(`Error: `, error);
         }

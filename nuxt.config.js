@@ -22,7 +22,8 @@ module.exports = {
 	],
 	plugins: [
 		{ src: './plugins/vue-sweetalert.js' },
-		{ src: './plugins/vee-validate.js' }
+		{ src: './plugins/vee-validate.js' },
+		{ src: './plugins/vue-tel-input.js' }
 	],
 	build: {
 		transpile: ["vee-validate/dist/rules"],

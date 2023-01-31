@@ -34,6 +34,9 @@ export default {
 	},
 	methods: {
 		...mapMutations(["setIsLoading"]),
+		...mapMutations(["setFixedStatu"]),
+		...mapMutations(["setBottomMenuActiveTab"]),
+
 		getParameterByName(name) {
 			if(process.browser){
 				let url = window.location.href;
@@ -59,6 +62,13 @@ export default {
 					this.$swal.close();
 				}
 			}, 15000);
+		},
+		setActiveTab(url){
+			if(!url.includes('/page/')){
+                this.setBottomMenuActiveTab('home');
+            }else{
+                this.setBottomMenuActiveTab(url.replaceAll("/page/", ""));
+            }
 		}
 	},
     mounted() {
@@ -68,9 +78,11 @@ export default {
         }, 2500);
 		this.redirect = this.getParameterByName('redirect');
 		this.checkNetwork();
+		this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')) && !this.$route.fullPath.includes('/page/hisseler'));
+		this.setActiveTab(this.$route.fullPath);
     },
     watch:{
-        $route (){
+        $route (to){
             this.setIsLoading(true);
 			setTimeout(() => {
 				$("#appSidebar").removeClass("show");
@@ -78,6 +90,8 @@ export default {
 			setTimeout(() => {
 				this.setIsLoading(false);
 			}, 2500);
+			this.setFixedStatu((!to.fullPath.includes('/page/skor')) && !to.fullPath.includes('/page/hisseler'));
+			this.setActiveTab(to.fullPath);
         },
 		redirect: {
 			handler(redirect) {

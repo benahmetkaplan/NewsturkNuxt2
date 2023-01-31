@@ -53,5 +53,15 @@ export default {
     return () => {
       return state.activePost
     }
+  },
+  getFixedStatu: state => {
+    return () => {
+      return state.fixedStatu
+    }
+  },
+  getBottomMenuActiveTab: state => {
+    return () => {
+      return state.bottomMenuActiveTab
+    }
   }
 };

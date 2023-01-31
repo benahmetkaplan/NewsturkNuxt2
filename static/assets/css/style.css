@@ -973,7 +973,7 @@ i.icon.me-1 {
   color: #1c1f22 !important;
   background: #E5E9F2;
   height: 50px;
-  font-size: 18px;
+  font-size: 14px;
   padding: 10px 16px;
   border-radius: 6px;
   border: 0;
@@ -1213,7 +1213,7 @@ textarea.form-control {
   color: #FFF !important;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:focus {
   background: #ff003a !important;
   border-color: #ff003a !important;
 }
@@ -1654,6 +1654,7 @@ textarea.form-control {
   color: #1c1f22;
   font-weight: 500;
   display: block;
+  font-size: 16px;
 }
 
 .listView .listItem .text .text-muted {
@@ -3111,7 +3112,7 @@ span.validation-error-message {
 }
 
 .swal2-title {
-  font-size: 26px  !important;
+  font-size: 26px !important;
   padding: 0 !important;
   color: black;
   margin: 5px 0 !important;
@@ -3136,7 +3137,7 @@ span.validation-error-message {
   opacity: 1 !important;
 }
 
-.swal2-icon > * {
+.swal2-icon>* {
   display: none !important;
 }
 
@@ -3180,4 +3181,21 @@ span.validation-error-message {
   max-width: 320px !important;
   padding: 15px !important;
   box-sizing: border-box;
+}
+
+.vue-tel-input.form-control {
+  padding: 0;
+  border: 0;
+  border-radius: 6px !important;
+  overflow: hidden;
+}
+
+.vue-tel-input.form-control .vti__input {
+  background: #E5E9F2;
+  padding-left: 0;
+  font-size: 14px;
+}
+
+textarea.form-control {
+  resize: none;
 }

@@ -47,7 +47,7 @@
                     
                     <div class="form-group">
                         <ValidationProvider name="Telefon Numarası" rules="phone" v-slot="{ errors }">
-                            <input v-model="formData.phone" type="text" class="form-control" placeholder="Telefon Numarası">
+                            <vue-tel-input v-model="formData.phone"></vue-tel-input>
                             <span class="validation-error-message" v-html="errors[0]"></span>
                         </ValidationProvider>
                     </div>
