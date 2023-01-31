@@ -1,20 +1,24 @@
-<template>
+<template>    
     <div id="appCapsule">
-        <div class="appContent" v-if="getCategoryRecords().length > 0">
-            <div class="sectionTitle mt-2 mb-2">
-                <div class="title">
-                    <h1>{{ title }}</h1>
+        <div class="appContent">
+            <div class="row mt-2">
+                
+                <div class="col-12">
+                    <h2 class="title mb-3">{{ title }}</h2>  
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-6" v-for="record in getCategoryRecords()" :key="record.title">
-                    <a v-on:click="goPost(record.id)" class="postItem">
+
+                <div class="col-6" v-for="item in getCategoryRecords()" :key="item.title">
+                    <a :href="`/post/${item.id}`" class="postItem">
                         <div class="imageWrapper">
-                            <img :src="record.image" alt="image" class="image">
+                            <img :src="item.image" alt="image" class="image">
                         </div>
-                        <h2 class="title" v-html="record.title"></h2>
+                        <h2 class="title" v-html="item.title"></h2>
                     </a>
                 </div>
+
+            </div>
+            <div v-if="addMoreStatu" class="mt-2 mb-2">
+                <a href="javascript:;" @click="addMore" class="btn btn-primary btn-lg btn-block">Devamını Yükle</a>
             </div>
         </div>
     </div>
@@ -28,15 +32,23 @@ export default {
     data() {
         return {
             id: this.$route.params.id,
-            title: ''
+            title: '',
+            activePage: 1,
+            perPage: 24,
+            addMoreStatu: true
         }
     },
     computed: {
         ...mapGetters(["getCategories"]),
-		...mapGetters(["getCategory"])
+		...mapGetters(["getCategory"]),
+        ...mapGetters(["getCategoryTotals"])
 	},
 	async created() {
-		await this.$store.dispatch("getCategoryPosts", this.id);
+		await this.$store.dispatch("getCategoryPosts", {
+            id: this.id,
+            perPage: this.perPage,
+            page: this.activePage
+        });
         this.getCategoryTitle();
 	},
 	methods: {
@@ -44,11 +56,24 @@ export default {
 		getCategoryRecords() {
 			return this.getCategory();
 		},
-        goPost(id){
-            return this.$nuxt.$options.router.push(`/post/` + id);
+        getTotals(){
+            return this.getCategoryTotals();
         },
         getCategoryTitle(){
             this.title = this.getCategories().find(x => x.id === parseInt(this.id)).name;
+        },
+        addMore(){
+            let totalPages = this.getTotals().totalPage;
+            if (this.activePage <= totalPages) {
+                this.activePage++;
+                this.$store.dispatch("getCategoryPosts", {
+                    id: this.id,
+                    perPage: this.perPage,
+                    page: this.activePage
+                });
+            } else {
+                this.addMoreStatu = false;
+            }
         }
 	}
 }

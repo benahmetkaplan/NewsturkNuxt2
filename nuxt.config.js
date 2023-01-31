@@ -18,11 +18,11 @@ module.exports = {
 	},
 	loading: { color: '#ffffff' },
 	modules: [
-		'@nuxtjs/axios'
+		['@nuxtjs/axios']
 	],
 	plugins: [
-		'./plugins/vue-sweetalert.js',
-		'./plugins/vee-validate.js'
+		{ src: './plugins/vue-sweetalert.js' },
+		{ src: './plugins/vee-validate.js' }
 	],
 	build: {
 		transpile: ["vee-validate/dist/rules"],
