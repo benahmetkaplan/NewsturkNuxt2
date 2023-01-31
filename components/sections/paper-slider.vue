@@ -28,7 +28,7 @@ export default {
         }
     },
     computed: {
-		...mapGetters(["getPapers"])
+		...mapGetters('util', ["getPapers"])
 	},
 	methods: {
 		getPaperList() {

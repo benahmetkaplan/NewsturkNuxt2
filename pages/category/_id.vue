@@ -26,7 +26,7 @@
 
 <script>
 
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
     data() {
@@ -39,12 +39,12 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getCategories"]),
-		...mapGetters(["getCategory"]),
-        ...mapGetters(["getCategoryDatas"])
+        ...mapGetters('category', ["getCategories"]),
+		...mapGetters('post', ["getActiveCategoryPosts"]),
+        ...mapGetters('post', ["getCategoryDatas"])
 	},
 	async created() {
-		await this.$store.dispatch("getCategoryPosts", {
+		await this.$store.dispatch("post/getCategoryPosts", {
             id: this.id,
             perPage: this.perPage,
             page: this.activePage
@@ -52,9 +52,12 @@ export default {
         this.getCategoryTitle();
 	},
 	methods: {
-		...mapActions(["getCategoryPosts"]),
+		...mapActions({getCategoryPosts: 'post/getCategoryPosts'}),
+        
+        ...mapMutations('util', ["setIsLoading"]),
+
 		getCategoryRecords() {
-			return this.getCategory();
+			return this.getActiveCategoryPosts();
 		},
         getTotals(){
             return this.getCategoryDatas();
@@ -64,9 +67,10 @@ export default {
         },
         addMore(){
             let totalpages = this.getTotals().totalpages;
+            this.setIsLoading(true);
             if (this.activePage <= totalpages) {
                 this.activePage++;
-                this.$store.dispatch("getCategoryPosts", {
+                this.$store.dispatch("post/getCategoryPosts", {
                     id: this.id,
                     perPage: this.perPage,
                     page: this.activePage
@@ -74,6 +78,9 @@ export default {
             } else {
                 this.addMoreStatu = false;
             }
+            setTimeout(() => {
+                this.setIsLoading(false);
+            }, 2000);
         }
 	}
 }

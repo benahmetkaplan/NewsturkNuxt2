@@ -24,7 +24,7 @@ export default {
       return state.ekonomiPosts
     }
   },
-  getCategory: state => {
+  getActiveCategoryPosts: state => {
     return () => {
       return state.categoryPosts
     }
@@ -34,39 +34,9 @@ export default {
       return state.categoryDatas
     }
   },
-  getCategories: state => {
-    return () => {
-      return state.categories
-    }
-  },
-  getPages: state => {
-    return () => {
-      return state.pages
-    }
-  },
-  getPapers: state => {
-    return () => {
-      return state.papers
-    }
-  },
-  getAccounts: state => {
-    return () => {
-      return state.accounts
-    }
-  },
   getActive: state => {
     return () => {
       return state.activePost
-    }
-  },
-  getFixedStatu: state => {
-    return () => {
-      return state.fixedStatu
-    }
-  },
-  getBottomMenuActiveTab: state => {
-    return () => {
-      return state.bottomMenuActiveTab
     }
   }
 };

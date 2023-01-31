@@ -79,7 +79,7 @@
 			<div class="heading">Copyright © {{ new Date().getFullYear() }}. Tüm hakları saklıdır.</div>
 			<br>
 			<a v-if="getAccountList().length > 0" v-for="item in getAccountList()" :key="item.slug" :href="item.link" target="_blank" :class="`btn btn-${item.slug} btn-icon me-1`">
-				<i :class="`icon ion-logo-${item.slug}`"></i>
+				<i :class="item.icon"></i>
 			</a>
 		</footer>
 
@@ -96,23 +96,23 @@ export default {
 		HomeSlider
 	},
 	computed: {
-		...mapGetters(["getDunya"]),
-		...mapGetters(["getSpor"]),
-		...mapGetters(["getTeknoloji"]),
-		...mapGetters(["getEkonomi"]),
-		...mapGetters(["getAccounts"])
+		...mapGetters('post', ["getDunya"]),
+		...mapGetters('post', ["getSpor"]),
+		...mapGetters('post', ["getTeknoloji"]),
+		...mapGetters('post', ["getEkonomi"]),
+		...mapGetters('util', ["getAccounts"])
 	},
 	async created() {
-		await this.$store.dispatch("getDunyaPosts");
-		await this.$store.dispatch("getSporPosts");
-		await this.$store.dispatch("getTeknolojiPosts");
-		await this.$store.dispatch("getEkonomiPosts");
+		await this.$store.dispatch("post/getDunyaPosts");
+		await this.$store.dispatch("post/getSporPosts");
+		await this.$store.dispatch("post/getTeknolojiPosts");
+		await this.$store.dispatch("post/getEkonomiPosts");
 	},
 	methods: {
-		...mapActions(["getDunyaPosts"]),
-		...mapActions(["getSporPosts"]),
-		...mapActions(["getTeknolojiPosts"]),
-		...mapActions(["getEkonomiPosts"]),
+		...mapActions({getEkonomiPosts: 'post/getDunyaPosts'}),
+		...mapActions({getSporPosts: 'post/getSporPosts'}),
+		...mapActions({getTeknolojiPosts: 'post/getTeknolojiPosts'}),
+		...mapActions({getEkonomiPosts: 'post/getEkonomiPosts'}),
 
 		goToPost(id) {
 			return this.$nuxt.$options.router.push(`/post/${id}`);

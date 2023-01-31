@@ -2985,6 +2985,7 @@ figure figcaption {
   padding: 6px 15px;
   font-weight: 500;
   font-size: 18px;
+  padding-left: 0;
 }
 
 .sidebar-menu ul {
@@ -3037,6 +3038,7 @@ figure figcaption {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  padding-left: 0;
 }
 
 .sidebar-menu ul.sidebar-page-menu li a i {
@@ -3045,6 +3047,8 @@ figure figcaption {
   top: initial;
   font-size: 20px;
   margin-right: 8px;
+  min-width: 40px;
+  text-align: center;
 }
 
 .sidebarGroup {
@@ -3126,6 +3130,7 @@ span.validation-error-message {
   border-radius: initial !important;
   color: initial !important;
   opacity: 1 !important;
+  margin-bottom: 6px !important;
 }
 
 .swal2-icon>* {
@@ -3133,8 +3138,8 @@ span.validation-error-message {
 }
 
 .swal2-icon.swal2-error:before {
-  content: "";
-  font-family: "Ionicons";
+  content: "\f06a";
+  font-family: "Font Awesome 6 Pro";
   font-size: 50px;
   color: #eb2f06;
   width: 50px;
@@ -3145,8 +3150,8 @@ span.validation-error-message {
 }
 
 .swal2-icon.swal2-success:before {
-  content: "";
-  font-family: "Ionicons";
+  content: "\f058";
+  font-family: "Font Awesome 6 Pro";
   font-size: 50px;
   color: #4cd137;
   width: 50px;
@@ -3157,8 +3162,8 @@ span.validation-error-message {
 }
 
 .swal2-icon.swal2-warning:before {
-  content: "";
-  font-family: "Ionicons";
+  content: "\e405";
+  font-family: "Font Awesome 6 Pro";
   font-size: 50px;
   color: #fbc531;
   width: 50px;
@@ -3188,5 +3193,9 @@ span.validation-error-message {
 }
 
 textarea.form-control {
-  resize: none;
+  resize: none !important;
+}
+
+.slick-slide.slick-active {
+  z-index: 999;
 }

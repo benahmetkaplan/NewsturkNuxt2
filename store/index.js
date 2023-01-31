@@ -1,17 +1,16 @@
 import Vuex from 'vuex';
+import Vue from 'vue';
 
-import state from './state';
-import getters from './getters';
-import mutations from './mutations';
-import actions from './actions';
+import category from './category';
+import post from './post';
+import util from './util';
 
-var createStore = () => {
-  return new Vuex.Store({
-    state,
-    getters,
-    mutations,
-    actions
-  });
-};
+Vue.use(Vuex);
 
-export default createStore;
+export default () => new Vuex.Store({
+  modules: {
+    category,
+    post,
+    util
+  }
+});

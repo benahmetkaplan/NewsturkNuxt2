@@ -60,7 +60,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
-                        <i class="icon ion-ios-send"></i> Formu Gönder
+                        <i class="fa-solid fa-paper-plane-top"></i>&emsp;Formu Gönder
                     </button>
                 </form>
             </ValidationObserver>            
@@ -74,7 +74,7 @@
                         <a href="mailto:info@newsturk.com.tr" class="listItem">
                             <div class="image">
                                 <div class="iconBox bg-primary">
-                                    <i class="icon ion-ios-mail"></i>
+                                    <i class="fa-solid fa-envelope"></i>
                                 </div>
                             </div>
                             <div class="text">
@@ -87,7 +87,7 @@
                         <a v-if="getAccountList().length > 0" v-for="item in getAccountList()" :key="item.slug" :href="item.link" target="_blank" class="listItem">
                             <div class="image">
                                 <div :class="`iconBox btn btn-${item.slug}`">
-                                    <i :class="`icon ion-logo-${item.slug}`"></i>
+                                    <i :class="item.icon"></i>
                                 </div>
                             </div>
                             <div class="text">
@@ -131,10 +131,10 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getAccounts"])
+        ...mapGetters('util', ["getAccounts"])
     },
 	methods: {
-        ...mapMutations(["setIsLoading"]),
+        ...mapMutations('util', ["setIsLoading"]),
 
         getAccountList() {
 			return this.getAccounts();

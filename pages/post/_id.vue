@@ -31,14 +31,15 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getCategories"]),
-        ...mapGetters(["getActive"])
+        ...mapGetters('category', ["getCategories"]),
+        ...mapGetters('post', ["getActive"])
     },
     created() {
-		this.$store.dispatch("getActivePost", this.id);
+		this.$store.dispatch("post/getActivePost", this.id);
 	},
     methods:{
-        ...mapActions(["getActivePost"]),
+        ...mapActions({getActivePost: 'post/getActivePost'}),
+        
         formatDate(dateString) {
             if(dateString !== ""){
                 const date = new Date(dateString);

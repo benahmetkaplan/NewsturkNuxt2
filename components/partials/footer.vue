@@ -4,7 +4,7 @@
         <div v-for="item in getPageList()" :key="item.slug" :class="`item ${item.slug === activeTab() ? 'active' : ''}`">
             <a @click="goToView(item.slug)">
                 <p>
-                    <i :class="`icon ion-ios-${item.icon}`"></i>
+                    <i :class="item.icon"></i>
                     <span>{{item.title}}</span>
                 </p>
             </a>
@@ -25,12 +25,12 @@ export default {
         }
     },
     computed: {
-		...mapGetters(["getPages"]),
-		...mapGetters(["getFixedStatu"]),
-		...mapGetters(["getBottomMenuActiveTab"])
+		...mapGetters('util', ["getPages"]),
+		...mapGetters('util', ["getFixedStatu"]),
+		...mapGetters('util', ["getBottomMenuActiveTab"])
 	},
     methods: {
-        ...mapMutations(["setFixedStatu"]),
+        ...mapMutations('util', ["setFixedStatu"]),
 
         goToView(slug) {
             if(slug === "home"){

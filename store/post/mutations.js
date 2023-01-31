@@ -1,7 +1,4 @@
 export default {
-    setIsLoading(state, value) {
-        state.isLoading = value
-    },
     setGundemPosts(state, results) {
         state.gundemPosts = results
     },
@@ -27,16 +24,7 @@ export default {
     setCategoryDatas(state, res) {
         state.categoryDatas = res;
     },
-    setCategories(state, results) {
-        state.categories = results
-    },
     setActivePost(state, data) {
         state.activePost = data
-    },
-    setFixedStatu(state, data) {
-        state.fixedStatu = data
-    },
-    setBottomMenuActiveTab(state, data) {
-        state.bottomMenuActiveTab = data
     }
 };

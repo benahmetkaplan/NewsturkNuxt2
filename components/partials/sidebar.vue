@@ -13,7 +13,7 @@
                     <ul class="sidebarMenu sidebar-page-menu" v-if="getPageList().length > 0">
                         <li v-for="item in getPageList()">
                             <a href="javascript:;" @click="goToView(item.slug)">
-                                <i :class="`icon ion-ios-${item.icon}`"></i>
+                                <i :class="item.icon"></i>
                                 {{ item.title }}
                             </a>
                         </li>
@@ -31,14 +31,15 @@ import { mapActions, mapGetters } from "vuex";
 export default {
     name: "Sidebar",
     computed: {
-		...mapGetters(["getCategories"]),
-		...mapGetters(["getPages"])
+		...mapGetters('category', ["getCategories"]),
+		...mapGetters('util', ["getPages"])
 	},
 	async created() {
-		await this.$store.dispatch("getCategoriesList");
+		await this.$store.dispatch("category/getCategoriesList");
 	},
 	methods: {
-		...mapActions(["getCategoriesList"]),
+		...mapActions({getCategoriesList: 'category/getCategoriesList'}),
+        
 		getCategoriesList() {
 			return this.getCategories();
 		},

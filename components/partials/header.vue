@@ -2,7 +2,7 @@
     <div :class="`appHeader ${ fixClassStatu ? 'fixed' : '' }`" data-test="header">
         <div class="left">
             <a @click="goBack" v-show="goBackStatu" href="javascript:;" class="icon goBack">
-                <i class="icon ion-ios-arrow-back"></i>
+                <i class="fa-solid fa-angle-left"></i>
             </a>            
         </div>
         <div class="pageTitle">
@@ -12,7 +12,7 @@
         </div>
         <div class="right">
             <a @click="sidebarToggle" id="appSidebarBtn" href="javascript:;" class="icon">
-                <i class="icon ion-ios-menu"></i>
+                <i class="fa-solid fa-bars"></i>
             </a>
         </div>
     </div>
@@ -31,11 +31,11 @@ export default {
         }
     },
     computed: {
-		...mapGetters(["getPages"]),
-		...mapGetters(["getFixedStatu"])
+		...mapGetters('util', ["getPages"]),
+		...mapGetters('util', ["getFixedStatu"])
 	},
     methods: {
-        ...mapMutations(["setFixedStatu"]),
+        ...mapMutations('util', ["setFixedStatu"]),
 
         goBack(){
             window.history.back();

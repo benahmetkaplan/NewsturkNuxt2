@@ -31,13 +31,13 @@ export default {
 		Spinner
 	},
 	computed: {
-		...mapState(["isLoading"]),
-		...mapState(["activeView"])
+		...mapState('util', ["isLoading"]),
+		...mapState('util', ["activeView"])
 	},
 	methods: {
-		...mapMutations(["setIsLoading"]),
-		...mapMutations(["setFixedStatu"]),
-		...mapMutations(["setBottomMenuActiveTab"]),
+		...mapMutations('util', ["setIsLoading"]),
+		...mapMutations('util', ["setFixedStatu"]),
+		...mapMutations('util', ["setBottomMenuActiveTab"]),
 
 		getParameterByName(name) {
 			if(process.browser){

@@ -46,13 +46,14 @@ export default {
         }
     },
     computed: {
-		...mapGetters(["getGundem"])
+		...mapGetters('post', ["getGundem"])
 	},
 	async created() {
-		await this.$store.dispatch("getGundemPosts");
+		await this.$store.dispatch("post/getGundemPosts");
 	},
 	methods: {
-		...mapActions(["getGundemPosts"]),
+		...mapActions({getGundemPosts: 'post/getGundemPosts'}),
+        
 		getGundemRecords() {
 			return this.getGundem();
 		},

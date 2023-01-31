@@ -123,15 +123,6 @@ export default {
             console.error(`Error: `, error);
         }
     },
-    async getCategoriesList(store) {
-        let endpoint = `${this.$config.API_URL}/categories`;
-        try {
-            let response = await this.$axios.get(endpoint);
-            store.commit("setCategories", response.data);
-        } catch (error) {
-            console.error(`Error: `, error);
-        }
-    },
     async getActivePost(store, payload) {
         let endpoint = `${this.$config.API_URL}/posts/` + payload;
         try {
