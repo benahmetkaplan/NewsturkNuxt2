@@ -1,10 +1,12 @@
 <template>
 	<div>
-		<Header />
-		<Spinner v-show="isLoading" />
-		<nuxt />
-		<Sidebar />
-		<Footer />
+		<client-only>
+			<Header />
+			<Spinner v-show="isLoading" />
+			<nuxt />
+			<Sidebar />
+			<Footer />
+		</client-only>		
 	</div>
 </template>
 <script>

@@ -1213,21 +1213,12 @@ textarea.form-control {
   color: #FFF !important;
 }
 
-.btn-primary:hover, .btn-primary:focus {
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:disabled,
+.btn-primary:active {
   background: #ff003a !important;
   border-color: #ff003a !important;
-}
-
-.btn-primary:active,
-.btn-primary.active {
-  background: #424bff !important;
-  border-color: #424bff !important;
-}
-
-.btn-primary.disabled,
-.btn-primary:disabled {
-  background: #ff003a;
-  border-color: #ff003a;
 }
 
 .btn-secondary {

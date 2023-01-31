@@ -1,5 +1,5 @@
 <template>
-    <div :class="`appHeader ${ fixedStatu() ? 'fixed' : '' }`" data-test="header">
+    <div :class="`appHeader ${ fixClassStatu ? 'fixed' : '' }`" data-test="header">
         <div class="left">
             <a @click="goBack" v-show="goBackStatu" href="javascript:;" class="icon goBack">
                 <i class="icon ion-ios-arrow-back"></i>
@@ -20,13 +20,14 @@
 
 <script>
 
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
     name: "Header", 
     data() {
         return {
-            goBackStatu: false
+            goBackStatu: false,
+            fixClassStatu: true
         }
     },
     computed: {
@@ -34,6 +35,8 @@ export default {
 		...mapGetters(["getFixedStatu"])
 	},
     methods: {
+        ...mapMutations(["setFixedStatu"]),
+
         goBack(){
             window.history.back();
         },
@@ -42,14 +45,19 @@ export default {
         },
         sidebarToggle(){
             $("#appSidebar").toggleClass("show");
-        },
-        fixedStatu(){
-            return this.getFixedStatu();
         }
+    },
+    mounted() {
+        if (this.$route.fullPath) {
+            this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')) && !this.$route.fullPath.includes('/page/hisseler'));
+            this.goBackStatu = this.$route.fullPath.includes('/post/') || this.$route.fullPath.includes('/page/') || this.$route.fullPath.includes('/category/');
+        }
+        this.fixClassStatu = this.getFixedStatu();        
     },
     watch:{
         $route (to){
-            this.goBackStatu = to.fullPath.includes('/post/') || to.fullPath.includes('/view/') || to.fullPath.includes('/category/')
+            this.fixClassStatu = this.getFixedStatu();
+            this.goBackStatu = to.fullPath.includes('/post/') || to.fullPath.includes('/page/') || to.fullPath.includes('/category/');
         }
     }
 }
