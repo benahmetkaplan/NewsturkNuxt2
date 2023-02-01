@@ -1,99 +1,45 @@
 export default {
+
     async getGundemPosts(store) {
-        let endpoint = `${this.$config.API_URL}/posts?per_page=10&categories=25`;
-        try {
-            let response = await this.$axios.get(endpoint);
-            let newRes = [];
-            response.data.forEach(rec => {
-                let post = {
-                    id: rec.id,
-                    title: rec.title.rendered,
-                    date: rec.date,
-                    image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
-                };
-                newRes.push(post);
-            });
-            store.commit("setGundemPosts", newRes);
-        } catch (error) {
-            console.error(`Error: `, error);
-        }
+        await store.dispatch('getPosts', {
+            perPage: 10,
+            categoryId: 25,
+            setter: 'setGundemPosts'
+        });
     },
+
     async getDunyaPosts(store) {
-        let endpoint = `${this.$config.API_URL}/posts?per_page=6&categories=2`;
-        try {
-            let response = await this.$axios.get(endpoint);
-            let newRes = [];
-            response.data.forEach(rec => {
-                let post = {
-                    id: rec.id,
-                    title: rec.title.rendered,
-                    date: rec.date,
-                    image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
-                };
-                newRes.push(post);
-            });
-            store.commit("setDunyaPosts", newRes);
-        } catch (error) {
-            console.error(`Error: `, error);
-        }
+        await store.dispatch('getPosts', {
+            perPage: 6,
+            categoryId: 2,
+            setter: 'setDunyaPosts'
+        });
     },
+
     async getSporPosts(store) {
-        let endpoint = `${this.$config.API_URL}/posts?per_page=6&categories=12`;
-        try {
-            let response = await this.$axios.get(endpoint);
-            let newRes = [];
-            response.data.forEach(rec => {
-                let post = {
-                    id: rec.id,
-                    title: rec.title.rendered,
-                    date: rec.date,
-                    image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
-                };
-                newRes.push(post);
-            });
-            store.commit("setSporPosts", newRes);
-        } catch (error) {
-            console.error(`Error: `, error);
-        }
+        await store.dispatch('getPosts', {
+            perPage: 6,
+            categoryId: 12,
+            setter: 'setSporPosts'
+        });
     },
+
     async getTeknolojiPosts(store) {
-        let endpoint = `${this.$config.API_URL}/posts?per_page=6&categories=13`;
-        try {
-            let response = await this.$axios.get(endpoint);
-            let newRes = [];
-            response.data.forEach(rec => {
-                let post = {
-                    id: rec.id,
-                    title: rec.title.rendered,
-                    date: rec.date,
-                    image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
-                };
-                newRes.push(post);
-            });
-            store.commit("setTeknolojiPosts", newRes);
-        } catch (error) {
-            console.error(`Error: `, error);
-        }
+        await store.dispatch('getPosts', {
+            perPage: 6,
+            categoryId: 13,
+            setter: 'setTeknolojiPosts'
+        });
     },
+
     async getEkonomiPosts(store) {
-        let endpoint = `${this.$config.API_URL}/posts?per_page=6&categories=3`;
-        try {
-            let response = await this.$axios.get(endpoint);
-            let newRes = [];
-            response.data.forEach(rec => {
-                let post = {
-                    id: rec.id,
-                    title: rec.title.rendered,
-                    date: rec.date,
-                    image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
-                };
-                newRes.push(post);
-            });
-            store.commit("setEkonomiPosts", newRes);
-        } catch (error) {
-            console.error(`Error: `, error);
-        }
+        await store.dispatch('getPosts', {
+            perPage: 6,
+            categoryId: 3,
+            setter: 'setEkonomiPosts'
+        });
     },
+
     async getCategoryPosts(store, payload) {
         let endpoint = `${this.$config.API_URL}/posts?page=${payload.page}&per_page=${payload.perPage}&categories=${payload.id}`;
         try {
@@ -104,7 +50,7 @@ export default {
                     id: rec.id,
                     title: rec.title.rendered,
                     date: rec.date,
-                    image: `${this.$config.SITE_URL}/media/${rec.date.split('-')[0]}/${rec.date.split('-')[1]}/${rec.slug}.jpg`
+                    image: getPostImage(this.$config.SITE_URL, rec.date, rec.slug)
                 };
                 newRes.push(post);
             });
@@ -123,6 +69,7 @@ export default {
             console.error(`Error: `, error);
         }
     },
+
     async getActivePost(store, payload) {
         let endpoint = `${this.$config.API_URL}/posts/` + payload;
         try {
@@ -133,11 +80,44 @@ export default {
                 content: response.data.content.rendered,
                 date: response.data.date,
                 categoryId: response.data.categories[0],
-                image: `${this.$config.SITE_URL}/media/${response.data.date.split('-')[0]}/${response.data.date.split('-')[1]}/${response.data.slug}.jpg`
+                image: getPostImage(this.$config.SITE_URL, response.data.date, response.data.slug)
             };
             store.commit("setActivePost", post);
         } catch (error) {
             console.error(`Error: `, error);
         }
+    },
+
+    async getPosts(store, payload) {
+        let endpoint = `${this.$config.API_URL}/posts?per_page=${payload.perPage}&categories=${payload.categoryId}`;
+        try {
+            let response = await this.$axios.get(endpoint);
+            let newRes = [];
+            response.data.forEach(rec => {
+                let post = {
+                    id: rec.id,
+                    title: rec.title.rendered,
+                    date: rec.date,
+                    image: getPostImage(this.$config.SITE_URL, rec.date, rec.slug)
+                };
+                newRes.push(post);
+            });
+            store.commit(payload.setter, newRes);
+        } catch (error) {
+            console.error(`Error: `, error);
+        }
     }
+
+};
+
+function getPostImage(url, date, slug) {
+    let year, month;
+    if (new Date(date).getHours() >= 21) {
+        month = ('0' + (parseInt(date.split('-')[1]) + 1)).slice(-2);
+        year = date.split('-')[0];
+    }else{
+        month = date.split('-')[1];
+        year = date.split('-')[0];
+    }
+    return `${url}/media/${year}/${month}/${slug}.jpg`;
 };

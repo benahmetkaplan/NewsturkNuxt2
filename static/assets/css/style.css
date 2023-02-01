@@ -3090,7 +3090,7 @@ figure figcaption {
 }
 
 .paper-slider-slick .item img {
-  max-width: 100%;
+  width: 100%;
   border-radius: 15px;
 }
 
@@ -3183,13 +3183,14 @@ span.validation-error-message {
   padding: 0;
   border: 0;
   border-radius: 6px !important;
-  overflow: hidden;
 }
 
 .vue-tel-input.form-control .vti__input {
   background: #E5E9F2;
   padding-left: 0;
   font-size: 14px;
+  border-radius: 6px;
+  padding-left: 10px;
 }
 
 textarea.form-control {
@@ -3198,4 +3199,47 @@ textarea.form-control {
 
 .slick-slide.slick-active {
   z-index: 999;
+}
+
+.vue-tel-input.form-control .vti__dropdown:hover, .vue-tel-input.form-control .vti__dropdown.open {
+  border-radius: 6px;
+  background: #d9dce3;
+}
+
+.vue-tel-input.form-control .vti__dropdown-list.below {
+  top: calc(100% + 10px);
+  border: 0;
+  background: #e5e9f2;
+  border-radius: 6px;
+  left: 0;
+  max-width: 360px;
+  padding-top: 10px;
+}
+
+.vue-tel-input.form-control .vti__dropdown-list.below .vti__dropdown-item {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.vue-tel-input.form-control .vti__dropdown-list.below .vti__dropdown-item.highlighted {
+  background: #d9dce3;
+}
+
+.vue-tel-input.form-control .vti__dropdown-list.below .vti__dropdown-item strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vue-tel-input.form-control .vti__dropdown-list.below .vti__dropdown-item .vti__flag-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin-right: 7px;
+}
+
+.vue-tel-input.form-control .vti__dropdown-list.below .vti__dropdown-item .vti__flag-wrapper .vti__flag {
+  margin: 0 !important;
 }

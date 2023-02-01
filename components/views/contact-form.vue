@@ -27,35 +27,35 @@
                     <div class="form-group">
                         <ValidationProvider name="Ad" rules="required" v-slot="{ errors }">
                             <input v-model="formData.name" type="text" class="form-control" placeholder="Ad">
-                            <span class="validation-error-message" v-html="errors[0]"></span>
+                            <span class="validation-error-message" v-if="errors[0]" v-html="errors[0]"></span>
                         </ValidationProvider>
                     </div>
 
                     <div class="form-group">
                         <ValidationProvider name="Soyad" rules="required" v-slot="{ errors }">
                             <input v-model="formData.last_name" type="text" class="form-control" placeholder="Soyad">
-                            <span class="validation-error-message" v-html="errors[0]"></span>
+                            <span class="validation-error-message" v-if="errors[0]" v-html="errors[0]"></span>
                         </ValidationProvider>
                     </div>
 
                     <div class="form-group">
                         <ValidationProvider name="E-Posta Adresi" rules="required|email" v-slot="{ errors }">
                             <input v-model="formData.email" type="email" class="form-control" placeholder="E-Posta Adresi">
-                            <span class="validation-error-message" v-html="errors[0]"></span>
+                            <span class="validation-error-message" v-if="errors[0]" v-html="errors[0]"></span>
                         </ValidationProvider>
                     </div>
                     
                     <div class="form-group">
-                        <ValidationProvider name="Telefon Numarası" rules="phone" v-slot="{ errors }">
+                        <ValidationProvider name="Telefon Numarası" rules="required|phone" v-slot="{ errors }">
                             <vue-tel-input v-model="formData.phone"></vue-tel-input>
-                            <span class="validation-error-message" v-html="errors[0]"></span>
+                            <span class="validation-error-message" v-if="errors[0]" v-html="errors[0]"></span>
                         </ValidationProvider>
                     </div>
 
                     <div class="form-group">
                         <ValidationProvider name="Mesaj" rules="required" v-slot="{ errors }">
                             <textarea class="form-control" rows="3" v-model="formData.message" placeholder="Mesaj"></textarea>
-                            <span class="validation-error-message" v-html="errors[0]"></span>
+                            <span class="validation-error-message" v-if="errors[0]" v-html="errors[0]"></span>
                         </ValidationProvider>
                     </div>
 
