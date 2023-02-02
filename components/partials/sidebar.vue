@@ -17,6 +17,13 @@
                                 {{ item.title }}
                             </a>
                         </li>
+                        <li v-if="notificationStatu !== null">
+                            <div class="checkbox-switch">
+                                <input type="checkbox" @change="notificationStatuChange" id="notificationStatu" v-model="notificationStatu" />
+                                <label for="notificationStatu"></label>
+                                <span>Bildirim almak ister misiniz?</span>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -26,16 +33,23 @@
 
 <script>
 
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
     name: "Sidebar",
+    data() {
+        return {
+            notificationStatu: null
+        }
+    },
     computed: {
 		...mapGetters('category', ["getCategories"]),
-		...mapGetters('util', ["getPages"])
+		...mapGetters('util', ["getPages"]),
+        ...mapState('util', ["fcmToken"])
 	},
 	async created() {
 		await this.$store.dispatch("category/getCategoriesList");
+        await this.getTokenStatu();
 	},
 	methods: {
 		...mapActions({getCategoriesList: 'category/getCategoriesList'}),
@@ -55,6 +69,29 @@ export default {
             }else{
                 return this.$nuxt.$options.router.push(`/page/` + slug);
             }
+        },
+        getTokenStatu(){
+            if (this.fcmToken !== null) {
+                this.$axios.get(`${this.$config.SITE_URL}/gcm-notification/get-statu.php?basic_token=YWhtdGtwbG45NkBnbWFpbC5jb206MjI1NTg4KipLYXBsYW4&token=${this.fcmToken}`)
+                .then((response) => {
+                    this.notificationStatu = response.data.statu === "1";
+                });
+            }
+        },
+        async notificationStatuChange(){
+            const formData = new FormData();
+            formData.append("token", this.fcmToken);
+            await this.$axios.post(`${this.$config.SITE_URL}/gcm-notification/change-statu.php?basic_token=YWhtdGtwbG45NkBnbWFpbC5jb206MjI1NTg4KipLYXBsYW4`, formData)
+            .then((response) => {
+                if (response.data.success) {
+                    this.$swal({
+                        icon: 'success',
+                        title: 'Oley!',
+                        text: response.data.message,
+                        showConfirmButton: false
+                    });
+                }
+            });
         }
 	}
 }

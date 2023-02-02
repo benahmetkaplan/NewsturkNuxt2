@@ -12,6 +12,7 @@ module.exports = {
 			{ rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap' },
 			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/fontawesome/fontawesome.min.css' },
 			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/bootstrap/bootstrap.min.css' },
+			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/checkbox-switch/checkbox-switch.css' },
 			{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/inc/splide/splide.min.css?v=${process.env.APP_VERSION}` },
 			{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/style.css?v=${process.env.APP_VERSION}` }
 		]

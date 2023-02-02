@@ -3047,8 +3047,7 @@ figure figcaption {
   top: initial;
   font-size: 20px;
   margin-right: 8px;
-  min-width: 40px;
-  text-align: center;
+  min-width: 28px;
 }
 
 .sidebarGroup {
@@ -3242,4 +3241,8 @@ textarea.form-control {
 
 .vue-tel-input.form-control .vti__dropdown-list.below .vti__dropdown-item .vti__flag-wrapper .vti__flag {
   margin: 0 !important;
+}
+
+.swal2-container {
+  z-index: 9999999999 !important;
 }
