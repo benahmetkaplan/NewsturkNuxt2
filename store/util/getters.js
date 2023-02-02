@@ -23,5 +23,10 @@ export default {
     return () => {
       return state.bottomMenuActiveTab
     }
+  },
+  getFcmToken: state => {
+    return () => {
+      return state.fcmToken
+    }
   }
 };

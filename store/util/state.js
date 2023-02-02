@@ -1,4 +1,5 @@
 export default {
+    fcmToken: null,
     isLoading: false,
     fixedStatu: true,
     bottomMenuActiveTab: '',

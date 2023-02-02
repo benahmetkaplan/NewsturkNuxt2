@@ -32,12 +32,14 @@ export default {
 	},
 	computed: {
 		...mapState('util', ["isLoading"]),
-		...mapState('util', ["activeView"])
+		...mapState('util', ["activeView"]),
+		...mapState('util', ["fcmToken"])
 	},
 	methods: {
 		...mapMutations('util', ["setIsLoading"]),
 		...mapMutations('util', ["setFixedStatu"]),
 		...mapMutations('util', ["setBottomMenuActiveTab"]),
+		...mapMutations('util', ["setFcmToken"]),
 
 		getParameterByName(name) {
 			if(process.browser){
@@ -71,7 +73,12 @@ export default {
             }else{
                 this.setBottomMenuActiveTab(url.replaceAll("/page/", ""));
             }
-		}
+		},
+        getFcmToken(){
+            if (localStorage.getItem("fcm_token") !== null) {
+                this.setFcmToken(localStorage.getItem("fcm_token"));
+            }
+        }
 	},
     mounted() {
         this.setIsLoading(true);
@@ -82,6 +89,7 @@ export default {
 		this.checkNetwork();
 		this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')) && !this.$route.fullPath.includes('/page/hisseler'));
 		this.setActiveTab(this.$route.fullPath);
+		this.getFcmToken();
     },
     watch:{
         $route (to){
