@@ -50,7 +50,7 @@ export default {
                     id: rec.id,
                     title: rec.title.rendered,
                     date: rec.date,
-                    image: getPostImage(this.$config.SITE_URL, rec.date, rec.slug)
+                    image: `${this.$config.SITE_URL}/get-image.php?id=${rec.id}`
                 };
                 newRes.push(post);
             });
@@ -80,7 +80,7 @@ export default {
                 content: response.data.content.rendered,
                 date: response.data.date,
                 categoryId: response.data.categories[0],
-                image: getPostImage(this.$config.SITE_URL, response.data.date, response.data.slug)
+                image: `${this.$config.SITE_URL}/get-image.php?id=${response.data.id}`
             };
             store.commit("setActivePost", post);
         } catch (error) {
@@ -98,7 +98,7 @@ export default {
                     id: rec.id,
                     title: rec.title.rendered,
                     date: rec.date,
-                    image: getPostImage(this.$config.SITE_URL, rec.date, rec.slug)
+                    image: `${this.$config.SITE_URL}/get-image.php?id=${rec.id}`
                 };
                 newRes.push(post);
             });
@@ -108,16 +108,4 @@ export default {
         }
     }
 
-};
-
-function getPostImage(url, date, slug) {
-    let year, month;
-    if (new Date(date).getHours() >= 21) {
-        month = ('0' + (parseInt(date.split('-')[1]) + 1)).slice(-2);
-        year = date.split('-')[0];
-    }else{
-        month = date.split('-')[1];
-        year = date.split('-')[0];
-    }
-    return `${url}/media/${year}/${month}/${slug}.jpg`;
 };
