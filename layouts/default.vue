@@ -19,11 +19,6 @@ import Sidebar from '~/components/partials/sidebar.vue';
 import Spinner from '~/components/partials/spinner.vue';
 
 export default {
-	data() {
-        return {
-            redirect: null
-        }
-    },
 	components: {
 		Header,
 		Footer,
@@ -41,16 +36,6 @@ export default {
 		...mapMutations('util', ["setBottomMenuActiveTab"]),
 		...mapMutations('util', ["setFcmToken"]),
 
-		getParameterByName(name) {
-			if(process.browser){
-				let url = window.location.href;
-				name = name.replace(/[\[\]]/g, '\\$&');
-				var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url);
-				if (!results) return null;
-				if (!results[2]) return '';
-				return decodeURIComponent(results[2].replace(/\+/g, ' '));
-			}
-		},
 		checkNetwork(){
 			setInterval(() => {
 				if (!window.navigator.onLine) {
@@ -85,7 +70,6 @@ export default {
         setTimeout(() => {
             this.setIsLoading(false)
         }, 2500);
-		this.redirect = this.getParameterByName('redirect');
 		this.checkNetwork();
 		this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')) && !this.$route.fullPath.includes('/page/hisseler'));
 		this.setActiveTab(this.$route.fullPath);
@@ -102,15 +86,7 @@ export default {
 			}, 2500);
 			this.setFixedStatu((!to.fullPath.includes('/page/skor')) && !to.fullPath.includes('/page/hisseler'));
 			this.setActiveTab(to.fullPath);
-        },
-		redirect: {
-			handler(redirect) {
-				if(redirect !== null){
-					return this.$nuxt.$options.router.push(redirect);
-				}
-			},
-			deep: true
-		}
+        }
     }
 }
 </script>
