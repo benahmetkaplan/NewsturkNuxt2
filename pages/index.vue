@@ -11,14 +11,17 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-6" v-for="record in getDunyaRecords()" @click="goToPost(record.id)"
-					:key="record.title">
-					<a class="postItem">
+				<div class="col-6" v-for="item in getDunyaRecords()" :key="item.title">
+					<a :href="`/post/${item.id}`" v-if="item" class="postItem">
 						<div class="imageWrapper">
-							<img :src="record.image" alt="image" class="image">
+							<img :src="item.image" alt="image" class="image">
 						</div>
-						<h2 class="title" v-html="record.title"></h2>
+						<h2 class="title" v-html="item.title"></h2>
 					</a>
+					<content-placeholders v-if="!item" rounded="true">
+						<content-placeholders-img />
+						<content-placeholders-text lines="1" />
+					</content-placeholders>
 				</div>
 			</div>
 
@@ -28,14 +31,17 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-6" v-for="record in getSporRecords()" @click="goToPost(record.id)"
-					:key="record.title">
-					<a class="postItem">
+				<div class="col-6" v-for="item in getSporRecords()" :key="item.title">
+					<a :href="`/post/${item.id}`" v-if="item" class="postItem">
 						<div class="imageWrapper">
-							<img :src="record.image" alt="image" class="image">
+							<img :src="item.image" alt="image" class="image">
 						</div>
-						<h2 class="title" v-html="record.title"></h2>
+						<h2 class="title" v-html="item.title"></h2>
 					</a>
+					<content-placeholders v-if="!item" rounded="true">
+						<content-placeholders-img />
+						<content-placeholders-text lines="1" />
+					</content-placeholders>
 				</div>
 			</div>
 
@@ -45,14 +51,17 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-6" v-for="record in getEkonomiRecords()" @click="goToPost(record.id)"
-					:key="record.title">
-					<a class="postItem">
+				<div class="col-6" v-for="item in getEkonomiRecords()" :key="item.title">
+					<a :href="`/post/${item.id}`" v-if="item" class="postItem">
 						<div class="imageWrapper">
-							<img :src="record.image" alt="image" class="image">
+							<img :src="item.image" alt="image" class="image">
 						</div>
-						<h2 class="title" v-html="record.title"></h2>
+						<h2 class="title" v-html="item.title"></h2>
 					</a>
+					<content-placeholders v-if="!item" rounded="true">
+						<content-placeholders-img />
+						<content-placeholders-text lines="1" />
+					</content-placeholders>
 				</div>
 			</div>
 
@@ -62,14 +71,17 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-6" v-for="record in getTeknolojiRecords()" @click="goToPost(record.id)"
-					:key="record.title">
-					<a class="postItem">
+				<div class="col-6" v-for="item in getTeknolojiRecords()" :key="item.title">
+					<a :href="`/post/${item.id}`" v-if="item" class="postItem">
 						<div class="imageWrapper">
-							<img :src="record.image" alt="image" class="image">
+							<img :src="item.image" alt="image" class="image">
 						</div>
-						<h2 class="title" v-html="record.title"></h2>
+						<h2 class="title" v-html="item.title"></h2>
 					</a>
+					<content-placeholders v-if="!item" rounded="true">
+						<content-placeholders-img />
+						<content-placeholders-text lines="1" />
+					</content-placeholders>
 				</div>
 			</div>
 
@@ -113,11 +125,7 @@ export default {
 		...mapActions({getSporPosts: 'post/getSporPosts'}),
 		...mapActions({getTeknolojiPosts: 'post/getTeknolojiPosts'}),
 		...mapActions({getEkonomiPosts: 'post/getEkonomiPosts'}),
-
-		goToPost(id) {
-			return this.$nuxt.$options.router.push(`/post/${id}`);
-		},
-
+		
 		getDunyaRecords() {
 			return this.getDunya();
 		},

@@ -17,6 +17,7 @@ import nuxt_plugin_axios_71f82131 from 'nuxt_plugin_axios_71f82131' // Source: .
 import nuxt_plugin_vuesweetalert_31840604 from 'nuxt_plugin_vuesweetalert_31840604' // Source: ..\\plugins\\vue-sweetalert.js (mode: 'all')
 import nuxt_plugin_veevalidate_b83c3a38 from 'nuxt_plugin_veevalidate_b83c3a38' // Source: ..\\plugins\\vee-validate.js (mode: 'all')
 import nuxt_plugin_vuetelinput_a90afbe8 from 'nuxt_plugin_vuetelinput_a90afbe8' // Source: ..\\plugins\\vue-tel-input.js (mode: 'all')
+import nuxt_plugin_vuecontentplaceholders_00a13e76 from 'nuxt_plugin_vuecontentplaceholders_00a13e76' // Source: ..\\plugins\\vue-content-placeholders.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -84,7 +85,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"newsturk.com.tr","meta":[{"charset":"utf-8"},{"name":"viewport","content":"minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no"}],"link":[{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Ffontawesome\u002Ffontawesome.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fbootstrap\u002Fbootstrap.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fcheckbox-switch\u002Fcheckbox-switch.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fsplide\u002Fsplide.min.css?v=1.0.18"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Fstyle.css?v=1.0.18"}],"style":[],"script":[]},
+    head: {"title":"newsturk.com.tr","meta":[{"charset":"utf-8"},{"name":"viewport","content":"minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no"}],"link":[{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Ffontawesome\u002Ffontawesome.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fbootstrap\u002Fbootstrap.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fcheckbox-switch\u002Fcheckbox-switch.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Finc\u002Fsplide\u002Fsplide.min.css?v=1.1.0"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Fassets\u002Fcss\u002Fstyle.css?v=1.1.0"}],"style":[],"script":[]},
 
     store,
     router,
@@ -227,6 +228,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_vuetelinput_a90afbe8 === 'function') {
     await nuxt_plugin_vuetelinput_a90afbe8(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_vuecontentplaceholders_00a13e76 === 'function') {
+    await nuxt_plugin_vuecontentplaceholders_00a13e76(app.context, inject)
   }
 
   // Lock enablePreview in context

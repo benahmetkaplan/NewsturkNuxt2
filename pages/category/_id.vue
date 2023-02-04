@@ -8,12 +8,16 @@
                 </div>
 
                 <div class="col-6" v-for="item in getCategoryRecords()" :key="item.title">
-                    <a :href="`/post/${item.id}`" class="postItem">
-                        <div class="imageWrapper">
-                            <img :src="item.image" alt="image" class="image">
-                        </div>
-                        <h2 class="title" v-html="item.title"></h2>
-                    </a>
+                    <a :href="`/post/${item.id}`" v-if="item" class="postItem">
+						<div class="imageWrapper">
+							<img :src="item.image" alt="image" class="image">
+						</div>
+						<h2 class="title" v-html="item.title"></h2>
+					</a>
+					<content-placeholders v-if="!item" rounded="true">
+						<content-placeholders-img />
+						<content-placeholders-text lines="1" />
+					</content-placeholders>
                 </div>
 
             </div>

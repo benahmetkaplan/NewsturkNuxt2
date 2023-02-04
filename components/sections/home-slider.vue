@@ -1,15 +1,18 @@
 <template>
     <div class="splide__list">
         <VueSlickCarousel v-bind="carouselOption" v-if="getGundemRecords().length > 0">
-            <div class="splide__slide item" v-for="record in getGundemRecords()" :key="record.id">
-                <a href="javascript:;" @click="goToPost(record.id)" class="card card-overlay text-white">
-                    <img :src="record.image" alt="image" class="card-img img-fluid">
+            <div class="splide__slide item" v-for="item in getGundemRecords()" :key="item.id">
+                <a href="javascript:;" @click="goToPost(item.id)" class="card card-overlay text-white">
+                    <img v-if="item.image" :src="item.image" alt="image" class="card-img img-fluid">
+                    <content-placeholders v-if="!item.image" rounded="true">
+						<content-placeholders-img />
+					</content-placeholders>
                     <div class="card-img-overlay">
                         <div class="content">
-                            <h1 v-html="record.title"></h1>
+                            <h1 v-html="item.title"></h1>
                             <footer>
                                 <div class="date">
-                                    {{ formatDate(record.date) }}
+                                    {{ formatDate(item.date) }}
                                 </div>
                             </footer>
                         </div>

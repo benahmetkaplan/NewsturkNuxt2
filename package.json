@@ -23,6 +23,7 @@
     "sweetalert2": "^11.7.1",
     "uninstall": "^0.0.0",
     "vee-validate": "^3.0.0",
+    "vue-content-placeholders": "^0.2.1",
     "vue-slick-carousel": "^1.0.6",
     "vue-sweetalert2": "^5.0.5",
     "vue-tel-input": "^5.12.0",

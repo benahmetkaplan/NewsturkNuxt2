@@ -1,7 +1,10 @@
 <template>
     <VueSlickCarousel v-bind="carouselOption" v-if="getPaperList().length > 0">
         <div class="item" v-for="item in getPaperList()" :key="item.slug">
-            <img :src="getPaperImage(item.slug)">
+            <img v-if="getPaperImage(item.slug)" :src="getPaperImage(item.slug)">
+            <content-placeholders v-if="!getPaperImage(item.slug)" rounded="true">
+                <content-placeholders-img />
+            </content-placeholders>
         </div>
     </VueSlickCarousel>
 </template>
