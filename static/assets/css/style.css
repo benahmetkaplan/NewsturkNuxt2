@@ -3246,3 +3246,29 @@ textarea.form-control {
 .swal2-container {
   z-index: 9999999999 !important;
 }
+
+.table-live-stock-market {
+  border: 1px solid #E5E9F2;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.table-live-stock-market tbody tr:nth-child(2n+2) {
+  background: #f7f7f7;
+}
+
+.table-live-stock-market strong {
+  color: #ff003a;
+}
+
+.table-live-stock-market em {
+  color: black;
+}
+
+.table-live-stock-market td {
+  font-size: 14px;
+}
+
+.table-live-stock-market .table {
+  margin-bottom: -1px;
+}

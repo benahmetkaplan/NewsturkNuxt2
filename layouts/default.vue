@@ -71,7 +71,7 @@ export default {
             this.setIsLoading(false)
         }, 2500);
 		this.checkNetwork();
-		this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')) && !this.$route.fullPath.includes('/page/hisseler'));
+		this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')) && !this.$route.fullPath.includes('/page/canli-borsa'));
 		this.setActiveTab(this.$route.fullPath);
 		this.getFcmToken();
     },
@@ -84,7 +84,7 @@ export default {
 			setTimeout(() => {
 				this.setIsLoading(false);
 			}, 2500);
-			this.setFixedStatu((!to.fullPath.includes('/page/skor')) && !to.fullPath.includes('/page/hisseler'));
+			this.setFixedStatu((!to.fullPath.includes('/page/skor')) && !to.fullPath.includes('/page/canli-borsa'));
 			this.setActiveTab(to.fullPath);
         }
     }

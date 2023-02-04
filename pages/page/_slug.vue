@@ -5,6 +5,9 @@
     <div v-else-if="slug === 'bize-ulasin'">
         <ContactForm />
     </div>
+    <div v-else-if="slug === 'canli-borsa'">
+        <LiveStockMarket />
+    </div>
     <div v-else>
         <div id="appCapsule" class="web-view">
             <iframe :src="source" frameborder="0"></iframe>
@@ -16,11 +19,13 @@
 
 import PaperSlider from '~/components/sections/paper-slider.vue';
 import ContactForm from '~/components/views/contact-form.vue';
+import LiveStockMarket from '~/components/views/live-stock-market.vue';
 
 export default {
     components: {
 		PaperSlider,
-        ContactForm
+        ContactForm,
+        LiveStockMarket
 	},
     data() {
         return {

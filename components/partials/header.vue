@@ -49,7 +49,7 @@ export default {
     },
     mounted() {
         if (this.$route.fullPath) {
-            this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')) && !this.$route.fullPath.includes('/page/hisseler'));
+            this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')));
             this.goBackStatu = this.$route.fullPath.includes('/post/') || this.$route.fullPath.includes('/page/') || this.$route.fullPath.includes('/category/');
         }
         this.fixClassStatu = this.getFixedStatu();        

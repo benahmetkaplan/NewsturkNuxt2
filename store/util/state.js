@@ -7,7 +7,7 @@ export default {
         { slug: 'home', title: 'Ana Sayfa', icon: 'fa-solid fa-house' },
         { slug: 'gazeteler', title: 'Gazeteler', icon: 'fa-solid fa-newspaper' },
         { slug: 'skor', title: 'Canlı Skor', icon: 'fa-solid fa-futbol' },
-        { slug: 'hisseler', title: 'Canlı Borsa', icon: 'fa-solid fa-money-bills' },
+        { slug: 'canli-borsa', title: 'Canlı Borsa', icon: 'fa-solid fa-money-bills' },
         { slug: 'bize-ulasin', title: 'Bize Ulaşın', icon: 'fa-solid fa-envelope' }
     ],
     papers: [

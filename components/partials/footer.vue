@@ -48,7 +48,7 @@ export default {
     },
     created() {
         if (this.$route.fullPath) {
-            this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')) && !this.$route.fullPath.includes('/page/hisseler'));
+            this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')));
         }
         this.fixClassStatu = this.getFixedStatu();
     },
