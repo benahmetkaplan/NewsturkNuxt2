@@ -60,8 +60,8 @@ export default {
             }
 		},
         getFcmToken(){
-            if (getCookie("fcm_token") !== null) {
-                this.setFcmToken(getCookie("fcm_token"));
+            if (getParameterByName("fcm_token") !== null && getParameterByName("fcm_token") !== undefined) {
+                this.setFcmToken(getParameterByName("fcm_token"));
             }
         }
 	},
@@ -90,20 +90,13 @@ export default {
     }
 }
 
-function getCookie(name) {
-    let c_name = name + "=";
-    let cookie_decoded = decodeURIComponent(document.cookie);
-    let cookie_parts = cookie_decoded.split(';');
-    
-    for(let i = 0; i <cookie_parts.length; i++) {
-        let c = cookie_parts[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(c_name) == 0) {
-            return c.substring(c_name.length, c.length);
-        }
-    }
-    return null;
+function getParameterByName(name) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+	let url = window.location.href;
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 </script>
