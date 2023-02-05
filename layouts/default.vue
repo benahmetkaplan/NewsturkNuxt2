@@ -60,8 +60,8 @@ export default {
             }
 		},
         getFcmToken(){
-            if (localStorage.getItem("fcm_token") !== null) {
-                this.setFcmToken(localStorage.getItem("fcm_token"));
+            if (getCookie("fcm_token") !== null) {
+                this.setFcmToken(getCookie("fcm_token"));
             }
         }
 	},
@@ -88,5 +88,22 @@ export default {
 			this.setActiveTab(to.fullPath);
         }
     }
+}
+
+function getCookie(name) {
+    let c_name = name + "=";
+    let cookie_decoded = decodeURIComponent(document.cookie);
+    let cookie_parts = cookie_decoded.split(';');
+    
+    for(let i = 0; i <cookie_parts.length; i++) {
+        let c = cookie_parts[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(c_name) == 0) {
+            return c.substring(c_name.length, c.length);
+        }
+    }
+    return null;
 }
 </script>
