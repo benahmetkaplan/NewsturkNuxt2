@@ -8,30 +8,61 @@ const VUEX_PROPERTIES = ['state', 'getters', 'actions', 'mutations']
 let store = {};
 
 (function updateModules () {
-  store = normalizeRoot(require('..\\store\\index.js'), 'store/index.js')
+  store = normalizeRoot(require('../store/index.js'), 'store/index.js')
 
   // If store is an exported method = classic mode (deprecated)
+
+  if (typeof store === 'function') {
+    return console.warn('Classic mode for store/ is deprecated and will be removed in Nuxt 3.')
+  }
 
   // Enforce store modules
   store.modules = store.modules || {}
 
-  resolveStoreModules(require('..\\store\\util\\index.js'), 'util/index.js')
-  resolveStoreModules(require('..\\store\\post\\index.js'), 'post/index.js')
-  resolveStoreModules(require('..\\store\\category\\index.js'), 'category/index.js')
-  resolveStoreModules(require('..\\store\\category\\actions.js'), 'category/actions.js')
-  resolveStoreModules(require('..\\store\\category\\getters.js'), 'category/getters.js')
-  resolveStoreModules(require('..\\store\\category\\mutations.js'), 'category/mutations.js')
-  resolveStoreModules(require('..\\store\\category\\state.js'), 'category/state.js')
-  resolveStoreModules(require('..\\store\\post\\actions.js'), 'post/actions.js')
-  resolveStoreModules(require('..\\store\\post\\getters.js'), 'post/getters.js')
-  resolveStoreModules(require('..\\store\\post\\mutations.js'), 'post/mutations.js')
-  resolveStoreModules(require('..\\store\\post\\state.js'), 'post/state.js')
-  resolveStoreModules(require('..\\store\\util\\actions.js'), 'util/actions.js')
-  resolveStoreModules(require('..\\store\\util\\getters.js'), 'util/getters.js')
-  resolveStoreModules(require('..\\store\\util\\mutations.js'), 'util/mutations.js')
-  resolveStoreModules(require('..\\store\\util\\state.js'), 'util/state.js')
+  resolveStoreModules(require('../store/util/index.js'), 'util/index.js')
+  resolveStoreModules(require('../store/post/index.js'), 'post/index.js')
+  resolveStoreModules(require('../store/category/index.js'), 'category/index.js')
+  resolveStoreModules(require('../store/category/actions.js'), 'category/actions.js')
+  resolveStoreModules(require('../store/category/getters.js'), 'category/getters.js')
+  resolveStoreModules(require('../store/category/mutations.js'), 'category/mutations.js')
+  resolveStoreModules(require('../store/category/state.js'), 'category/state.js')
+  resolveStoreModules(require('../store/post/actions.js'), 'post/actions.js')
+  resolveStoreModules(require('../store/post/getters.js'), 'post/getters.js')
+  resolveStoreModules(require('../store/post/mutations.js'), 'post/mutations.js')
+  resolveStoreModules(require('../store/post/state.js'), 'post/state.js')
+  resolveStoreModules(require('../store/util/actions.js'), 'util/actions.js')
+  resolveStoreModules(require('../store/util/getters.js'), 'util/getters.js')
+  resolveStoreModules(require('../store/util/mutations.js'), 'util/mutations.js')
+  resolveStoreModules(require('../store/util/state.js'), 'util/state.js')
 
   // If the environment supports hot reloading...
+
+  if (process.client && module.hot) {
+    // Whenever any Vuex module is updated...
+    module.hot.accept([
+      '../store/index.js',
+      '../store/util/index.js',
+      '../store/post/index.js',
+      '../store/category/index.js',
+      '../store/category/actions.js',
+      '../store/category/getters.js',
+      '../store/category/mutations.js',
+      '../store/category/state.js',
+      '../store/post/actions.js',
+      '../store/post/getters.js',
+      '../store/post/mutations.js',
+      '../store/post/state.js',
+      '../store/util/actions.js',
+      '../store/util/getters.js',
+      '../store/util/mutations.js',
+      '../store/util/state.js',
+    ], () => {
+      // Update `root.modules` with the latest definitions.
+      updateModules()
+      // Trigger a hot update in the store.
+      window.$nuxt.$store.hotUpdate(store)
+    })
+  }
 })()
 
 // createStore

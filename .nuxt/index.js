@@ -13,11 +13,11 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_axios_71f82131 from 'nuxt_plugin_axios_71f82131' // Source: .\\axios.js (mode: 'all')
-import nuxt_plugin_vuesweetalert_31840604 from 'nuxt_plugin_vuesweetalert_31840604' // Source: ..\\plugins\\vue-sweetalert.js (mode: 'all')
-import nuxt_plugin_veevalidate_b83c3a38 from 'nuxt_plugin_veevalidate_b83c3a38' // Source: ..\\plugins\\vee-validate.js (mode: 'all')
-import nuxt_plugin_vuetelinput_a90afbe8 from 'nuxt_plugin_vuetelinput_a90afbe8' // Source: ..\\plugins\\vue-tel-input.js (mode: 'all')
-import nuxt_plugin_vuecontentplaceholders_00a13e76 from 'nuxt_plugin_vuecontentplaceholders_00a13e76' // Source: ..\\plugins\\vue-content-placeholders.js (mode: 'all')
+import nuxt_plugin_axios_588de811 from 'nuxt_plugin_axios_588de811' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_vuesweetalert_31840604 from 'nuxt_plugin_vuesweetalert_31840604' // Source: ../plugins/vue-sweetalert.js (mode: 'all')
+import nuxt_plugin_veevalidate_b83c3a38 from 'nuxt_plugin_veevalidate_b83c3a38' // Source: ../plugins/vee-validate.js (mode: 'all')
+import nuxt_plugin_vuetelinput_a90afbe8 from 'nuxt_plugin_vuetelinput_a90afbe8' // Source: ../plugins/vue-tel-input.js (mode: 'all')
+import nuxt_plugin_vuecontentplaceholders_00a13e76 from 'nuxt_plugin_vuecontentplaceholders_00a13e76' // Source: ../plugins/vue-content-placeholders.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -46,7 +46,7 @@ Vue.component(Nuxt.name, Nuxt)
 
 Object.defineProperty(Vue.prototype, '$nuxt', {
   get() {
-    const globalNuxt = this.$root.$options.$nuxt
+    const globalNuxt = this.$root ? this.$root.$options.$nuxt : null
     if (process.client && !globalNuxt && typeof window !== 'undefined') {
       return window.$nuxt
     }
@@ -71,9 +71,9 @@ function registerModule (path, rawModule, options = {}) {
 }
 
 async function createApp(ssrContext, config = {}) {
-  const router = await createRouter(ssrContext, config)
-
   const store = createStore(ssrContext)
+  const router = await createRouter(ssrContext, config, { store })
+
   // Add this.$router into store actions/mutations
   store.$router = router
 
@@ -155,6 +155,7 @@ async function createApp(ssrContext, config = {}) {
     req: ssrContext ? ssrContext.req : undefined,
     res: ssrContext ? ssrContext.res : undefined,
     beforeRenderFns: ssrContext ? ssrContext.beforeRenderFns : undefined,
+    beforeSerializeFns: ssrContext ? ssrContext.beforeSerializeFns : undefined,
     ssrContext
   })
 
@@ -214,8 +215,8 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_axios_71f82131 === 'function') {
-    await nuxt_plugin_axios_71f82131(app.context, inject)
+  if (typeof nuxt_plugin_axios_588de811 === 'function') {
+    await nuxt_plugin_axios_588de811(app.context, inject)
   }
 
   if (typeof nuxt_plugin_vuesweetalert_31840604 === 'function') {
