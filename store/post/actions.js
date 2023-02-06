@@ -2,7 +2,7 @@ export default {
 
     async getGundemPosts(store) {
         await store.dispatch('getPosts', {
-            perPage: 10,
+            perPage: 6,
             categoryId: 25,
             setter: 'setGundemPosts'
         });

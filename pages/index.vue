@@ -2,89 +2,11 @@
 	<div id="appCapsule">
 
 		<div class="appContent">
-
 			<HomeSlider />
-
-			<div class="sectionTitle mt-2 mb-2">
-				<div class="title">
-					<h1>Dünya</h1>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-6" v-for="item in getDunyaRecords()" :key="item.title">
-					<a :href="`/post/${item.id}`" v-if="item" class="postItem">
-						<div class="imageWrapper">
-							<img :src="item.image" alt="image" class="image">
-						</div>
-						<h2 class="title" v-html="item.title"></h2>
-					</a>
-					<content-placeholders v-if="!item" rounded="true">
-						<content-placeholders-img />
-						<content-placeholders-text lines="1" />
-					</content-placeholders>
-				</div>
-			</div>
-
-			<div class="sectionTitle mt-2 mb-2">
-				<div class="title">
-					<h1>Spor</h1>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-6" v-for="item in getSporRecords()" :key="item.title">
-					<a :href="`/post/${item.id}`" v-if="item" class="postItem">
-						<div class="imageWrapper">
-							<img :src="item.image" alt="image" class="image">
-						</div>
-						<h2 class="title" v-html="item.title"></h2>
-					</a>
-					<content-placeholders v-if="!item" rounded="true">
-						<content-placeholders-img />
-						<content-placeholders-text lines="1" />
-					</content-placeholders>
-				</div>
-			</div>
-
-			<div class="sectionTitle mt-2 mb-2">
-				<div class="title">
-					<h1>Ekonomi</h1>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-6" v-for="item in getEkonomiRecords()" :key="item.title">
-					<a :href="`/post/${item.id}`" v-if="item" class="postItem">
-						<div class="imageWrapper">
-							<img :src="item.image" alt="image" class="image">
-						</div>
-						<h2 class="title" v-html="item.title"></h2>
-					</a>
-					<content-placeholders v-if="!item" rounded="true">
-						<content-placeholders-img />
-						<content-placeholders-text lines="1" />
-					</content-placeholders>
-				</div>
-			</div>
-
-			<div class="sectionTitle mt-2 mb-2">
-				<div class="title">
-					<h1>Teknoloji</h1>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-6" v-for="item in getTeknolojiRecords()" :key="item.title">
-					<a :href="`/post/${item.id}`" v-if="item" class="postItem">
-						<div class="imageWrapper">
-							<img :src="item.image" alt="image" class="image">
-						</div>
-						<h2 class="title" v-html="item.title"></h2>
-					</a>
-					<content-placeholders v-if="!item" rounded="true">
-						<content-placeholders-img />
-						<content-placeholders-text lines="1" />
-					</content-placeholders>
-				</div>
-			</div>
-
+			<IndexPostList v-bind:items="getDunyaRecords()" title="Dünya" />
+			<IndexPostList v-bind:items="getSporRecords()" title="Spor" />
+			<IndexPostList v-bind:items="getEkonomiRecords()" title="Ekonomi" />
+			<IndexPostList v-bind:items="getTeknolojiRecords()" title="Teknoloji" />
 		</div>
 
 		<footer class="appFooter">
@@ -102,10 +24,12 @@
 
 import { mapActions, mapGetters } from "vuex";
 import HomeSlider from '~/components/sections/home-slider.vue';
+import IndexPostList from '~/components/sections/index-post-list.vue';
 
 export default {
 	components: {
-		HomeSlider
+		HomeSlider,
+		IndexPostList
 	},
 	computed: {
 		...mapGetters('post', ["getDunya"]),

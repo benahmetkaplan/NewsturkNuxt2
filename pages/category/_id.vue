@@ -14,10 +14,6 @@
 						</div>
 						<h2 class="title" v-html="item.title"></h2>
 					</a>
-					<content-placeholders v-if="!item" rounded="true">
-						<content-placeholders-img />
-						<content-placeholders-text lines="1" />
-					</content-placeholders>
                 </div>
 
             </div>

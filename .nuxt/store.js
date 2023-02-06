@@ -8,28 +8,28 @@ const VUEX_PROPERTIES = ['state', 'getters', 'actions', 'mutations']
 let store = {};
 
 (function updateModules () {
-  store = normalizeRoot(require('../store/index.js'), 'store/index.js')
+  store = normalizeRoot(require('..\\store\\index.js'), 'store/index.js')
 
   // If store is an exported method = classic mode (deprecated)
 
   // Enforce store modules
   store.modules = store.modules || {}
 
-  resolveStoreModules(require('../store/util/index.js'), 'util/index.js')
-  resolveStoreModules(require('../store/post/index.js'), 'post/index.js')
-  resolveStoreModules(require('../store/category/index.js'), 'category/index.js')
-  resolveStoreModules(require('../store/category/actions.js'), 'category/actions.js')
-  resolveStoreModules(require('../store/category/getters.js'), 'category/getters.js')
-  resolveStoreModules(require('../store/category/mutations.js'), 'category/mutations.js')
-  resolveStoreModules(require('../store/category/state.js'), 'category/state.js')
-  resolveStoreModules(require('../store/post/actions.js'), 'post/actions.js')
-  resolveStoreModules(require('../store/post/getters.js'), 'post/getters.js')
-  resolveStoreModules(require('../store/post/mutations.js'), 'post/mutations.js')
-  resolveStoreModules(require('../store/post/state.js'), 'post/state.js')
-  resolveStoreModules(require('../store/util/actions.js'), 'util/actions.js')
-  resolveStoreModules(require('../store/util/getters.js'), 'util/getters.js')
-  resolveStoreModules(require('../store/util/mutations.js'), 'util/mutations.js')
-  resolveStoreModules(require('../store/util/state.js'), 'util/state.js')
+  resolveStoreModules(require('..\\store\\util\\index.js'), 'util/index.js')
+  resolveStoreModules(require('..\\store\\post\\index.js'), 'post/index.js')
+  resolveStoreModules(require('..\\store\\category\\index.js'), 'category/index.js')
+  resolveStoreModules(require('..\\store\\category\\actions.js'), 'category/actions.js')
+  resolveStoreModules(require('..\\store\\category\\getters.js'), 'category/getters.js')
+  resolveStoreModules(require('..\\store\\category\\mutations.js'), 'category/mutations.js')
+  resolveStoreModules(require('..\\store\\category\\state.js'), 'category/state.js')
+  resolveStoreModules(require('..\\store\\post\\actions.js'), 'post/actions.js')
+  resolveStoreModules(require('..\\store\\post\\getters.js'), 'post/getters.js')
+  resolveStoreModules(require('..\\store\\post\\mutations.js'), 'post/mutations.js')
+  resolveStoreModules(require('..\\store\\post\\state.js'), 'post/state.js')
+  resolveStoreModules(require('..\\store\\util\\actions.js'), 'util/actions.js')
+  resolveStoreModules(require('..\\store\\util\\getters.js'), 'util/getters.js')
+  resolveStoreModules(require('..\\store\\util\\mutations.js'), 'util/mutations.js')
+  resolveStoreModules(require('..\\store\\util\\state.js'), 'util/state.js')
 
   // If the environment supports hot reloading...
 })()
