@@ -6,6 +6,7 @@ export default {
         { slug: 'home', title: 'Ana Sayfa', icon: 'fa-solid fa-house' },
         { slug: 'gazeteler', title: 'Gazeteler', icon: 'fa-solid fa-newspaper' },
         { slug: 'eczaneler', title: 'Eczaneler', icon: 'fa-regular fa-heart-pulse' },
+        { slug: 'hava-durumu', title: 'Hava Durumu', icon: 'fa-solid fa-clouds' },
         { slug: 'bize-ulasin', title: 'Bize Ulaşın', icon: 'fa-solid fa-envelope' }
     ],
     papers: [
