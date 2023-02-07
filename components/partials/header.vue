@@ -31,12 +31,9 @@ export default {
         }
     },
     computed: {
-		...mapGetters('util', ["getPages"]),
-		...mapGetters('util', ["getFixedStatu"])
+		...mapGetters('util', ["getPages"])
 	},
     methods: {
-        ...mapMutations('util', ["setFixedStatu"]),
-
         goBack(){
             window.history.back();
         },
@@ -49,14 +46,11 @@ export default {
     },
     mounted() {
         if (this.$route.fullPath) {
-            this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')));
             this.goBackStatu = this.$route.fullPath.includes('/post/') || this.$route.fullPath.includes('/page/') || this.$route.fullPath.includes('/category/');
         }
-        this.fixClassStatu = this.getFixedStatu();        
     },
     watch:{
         $route (to){
-            this.fixClassStatu = this.getFixedStatu();
             this.goBackStatu = to.fullPath.includes('/post/') || to.fullPath.includes('/page/') || to.fullPath.includes('/category/');
         }
     }

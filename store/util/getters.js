@@ -14,11 +14,6 @@ export default {
       return state.accounts
     }
   },
-  getFixedStatu: state => {
-    return () => {
-      return state.fixedStatu
-    }
-  },
   getBottomMenuActiveTab: state => {
     return () => {
       return state.bottomMenuActiveTab

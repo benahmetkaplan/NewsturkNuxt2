@@ -5,36 +5,27 @@
     <div v-else-if="slug === 'bize-ulasin'">
         <ContactForm />
     </div>
-    <div v-else-if="slug === 'canli-borsa'">
-        <LiveStockMarket />
+    <div v-else-if="slug === 'eczaneler'">
+        <DutyPharmacy />
     </div>
-    <div v-else>
-        <div id="appCapsule" class="web-view">
-            <iframe :src="source" frameborder="0"></iframe>
-        </div>
-    </div>   
 </template>
 
 <script>
 
 import PaperSlider from '~/components/sections/paper-slider.vue';
 import ContactForm from '~/components/views/contact-form.vue';
-import LiveStockMarket from '~/components/views/live-stock-market.vue';
+import DutyPharmacy from '~/components/views/duty-pharmacy.vue';
 
 export default {
     components: {
 		PaperSlider,
         ContactForm,
-        LiveStockMarket
+        DutyPharmacy
 	},
     data() {
         return {
-            source: '',
             slug: this.$route.params.slug
         }
-    },
-    async created() {
-        this.source = `${this.$config.SITE_URL}/${this.slug}/?app=1`;
     }
 }
 </script>

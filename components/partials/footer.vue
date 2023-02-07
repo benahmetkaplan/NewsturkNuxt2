@@ -26,12 +26,9 @@ export default {
     },
     computed: {
 		...mapGetters('util', ["getPages"]),
-		...mapGetters('util', ["getFixedStatu"]),
 		...mapGetters('util', ["getBottomMenuActiveTab"])
 	},
     methods: {
-        ...mapMutations('util', ["setFixedStatu"]),
-
         goToView(slug) {
             if(slug === "home"){
                 return this.$nuxt.$options.router.push(`/`);
@@ -44,17 +41,6 @@ export default {
         },
         activeTab(){
             return this.getBottomMenuActiveTab();
-        }
-    },
-    created() {
-        if (this.$route.fullPath) {
-            this.setFixedStatu((!this.$route.fullPath.includes('/page/skor')));
-        }
-        this.fixClassStatu = this.getFixedStatu();
-    },
-    watch:{
-        $route (){
-            this.fixClassStatu = this.getFixedStatu();
         }
     }
 }

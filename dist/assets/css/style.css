@@ -3170,3 +3170,63 @@ textarea.form-control {
   max-height: 36px;
   display: inline-block;
 }
+
+.eczane_list {
+  width: 100%;
+}
+
+.eczane_list .eczane {
+  background-color: #fff;
+  width: 100%;
+  border: 0.5px solid #ff003a;
+  padding: 15px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.eczane_logo {
+  background-color: #ff003a;
+  color: #fff;
+  width: 35px;
+  height: 35px;
+  font-weight: 700;
+  font-size: 28px;
+  margin-right: 10px;
+  border: 0;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eczane_name {
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+}
+
+.eczane_bio {
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.eczane_list .eczane .eczane_title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.eczane_bio p {
+  margin-bottom: 0;
+  font-weight: 500;
+  color: black;
+}
+
+.eczane_bio p + p {
+  margin-top: 5px;
+}
+
+.eczane_list .eczane + .eczane {
+  margin-top: 20px;
+}
