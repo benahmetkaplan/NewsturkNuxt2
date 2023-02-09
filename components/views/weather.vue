@@ -31,7 +31,7 @@
                     </div>
                     <div class="forecast-content">
                         <div class="degree">{{ Math.ceil(item.day.maxtemp_c) }}<sup>o</sup>C</div>
-                        <small>{{ Math.ceil(item.day.mintemp_c) }}<sup>o</sup></small>
+                        <small>{{ Math.ceil(item.day.mintemp_c) }}<sup>o</sup>C</small>
                         <div class="image"><img :src="item.day.condition.icon"></div>
                     </div>
                 </div>
