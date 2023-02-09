@@ -26,7 +26,7 @@
                 <div v-for="item in apiData.eczaneler" :key="item.name" class="eczane">
                     <div class="eczane_title">
                         <span class="eczane_logo">E</span>
-                        <span class="eczane_name">{{ item.name }} ECZANESİ</span>
+                        <span class="eczane_name" v-html="`${item.name.indexOf('ECZANESİ') > -1 ? item.name : item.name + ' ECZANESİ'}`"></span>
                     </div>
                     <div class="eczane_bio">
                         <p><strong>Adres: </strong>{{ item.address }}</p>
@@ -71,7 +71,7 @@ export default {
             this.$axios.get(`https://api.collectapi.com/health/dutyPharmacy?ilce=${this.formData.ilce}&il=${this.formData.il}`,
             {
                 headers: {
-                    'authorization': 'apikey 0HpUwlR8sEa4ODtfMU1fUx:0t4g6FfmjmJ9i4w9W4l5L8',
+                    'authorization': 'apikey 6oAn6200lc153WmoBlXovS:3sw2h6xSRF9dr3knRa8ids',
                     'content-type': 'application/json'
                 }
             })

@@ -70,7 +70,7 @@ export default {
             this.$axios.get(`https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=${key}`,
             {
                 headers: {
-                    'authorization': 'apikey 0HpUwlR8sEa4ODtfMU1fUx:0t4g6FfmjmJ9i4w9W4l5L8',
+                    'authorization': 'apikey 6oAn6200lc153WmoBlXovS:3sw2h6xSRF9dr3knRa8ids',
                     'content-type': 'application/json'
                 }
             })
