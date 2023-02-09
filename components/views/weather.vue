@@ -19,21 +19,20 @@
                         <div class="date">{{ formData.il }}</div>
                     </div>
                     <div class="forecast-content">
-                        <div class="location">{{ apiData.firstDay.day }}</div>
                         <div class="degree">
-                            <div class="num">{{ Math.ceil(apiData.firstDay.max) }}<sup>o</sup>C</div>
-                            <div class="image"><img :src="apiData.firstDay.icon"></div>
+                            <div class="num">{{ Math.ceil(apiData.firstDay.day.mintemp_c) }}<sup>o</sup>C</div>
+                            <div class="image"><img :src="apiData.firstDay.day.condition.icon"></div>
                         </div>
                     </div>
                 </div>
                 <div v-if="apiData.result !== null" v-for="item in apiData.result" :key="item.day" class="forecast other-day">
                     <div class="forecast-header">
-                        <div class="day">{{ item.day }}</div>
+                        <div class="day">{{ new Date(item.date).toLocaleDateString("tr", { weekday: 'long' }) }}</div>
                     </div>
                     <div class="forecast-content">
-                        <div class="degree">{{ Math.ceil(item.max) }}<sup>o</sup>C</div>
-                        <small>{{ Math.ceil(item.min) }}<sup>o</sup></small>
-                        <div class="image"><img :src="item.icon"></div>
+                        <div class="degree">{{ Math.ceil(item.day.maxtemp_c) }}<sup>o</sup>C</div>
+                        <small>{{ Math.ceil(item.day.mintemp_c) }}<sup>o</sup></small>
+                        <div class="image"><img :src="item.day.condition.icon"></div>
                     </div>
                 </div>
             </div>
@@ -42,6 +41,22 @@
 </template>
 
 <script>
+
+String.prototype.turkishtoEnglish = function () {
+    return this.replaceAll('Ğ','g')
+    .replaceAll('Ü','u')
+    .replaceAll('Ş','s')
+    .replaceAll('I','i')
+    .replaceAll('İ','i')
+    .replaceAll('Ö','o')
+    .replaceAll('Ç','c')
+    .replaceAll('ğ','g')
+    .replaceAll('ü','u')
+    .replaceAll('ş','s')
+    .replaceAll('ı','i')
+    .replaceAll('ö','o')
+    .replaceAll('ç','c').toLowerCase();
+};
 
 import jsonIller from '../../json/iller.json';
 
@@ -67,17 +82,16 @@ export default {
             this.getWeather(this.formData.il);
         },
         getWeather(key){
-            this.$axios.get(`https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=${key}`,
+            this.$axios.get(`https://api.weatherapi.com/v1/forecast.json?key=85e1ee6e88ad45deb10130011230902&q=${key.turkishtoEnglish()}&days=7&aqi=no&alerts=no`,
             {
                 headers: {
-                    'authorization': 'apikey 6oAn6200lc153WmoBlXovS:3sw2h6xSRF9dr3knRa8ids',
                     'content-type': 'application/json'
                 }
             })
             .then((response) => {
-                if (response.data.success) {
+                if (response.data.forecast.forecastday) {
                     this.apiData.result = [];
-                    response.data.result.forEach((item, index) => {
+                    response.data.forecast.forecastday.forEach((item, index) => {
                         if (index === 0) {
                             this.apiData.firstDay = item;
                         }else{
