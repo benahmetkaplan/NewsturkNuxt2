@@ -1,10 +1,7 @@
 <template>
     <VueSlickCarousel v-bind="carouselOption" v-if="getPaperList().length > 0">
         <div class="item" v-for="item in getPaperList()" :key="item.slug">
-            <img v-if="getPaperImage(item.slug)" :src="getPaperImage(item.slug)">
-            <content-placeholders v-if="!getPaperImage(item.slug)" rounded="true">
-                <content-placeholders-img />
-            </content-placeholders>
+            <img :src="`${$config.SITE_URL}/get-paper.php?slug=${item.slug}&size=big`">
         </div>
     </VueSlickCarousel>
 </template>
@@ -36,14 +33,7 @@ export default {
 	methods: {
 		getPaperList() {
 			return this.getPapers();
-		},
-        getPaperImage(slug){
-            let date = new Date().toISOString().split('T')[0].toString().split('-');
-            let year = date[0].substring(2);
-            let month = date[1];
-            let day = date[2];
-            return `https://i2.haber7.net/haber7/gazete/${slug}/big_${day+month+year}_0800.jpg`;
-        }
+		}
 	}
 }
 
