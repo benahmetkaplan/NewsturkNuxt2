@@ -39,7 +39,7 @@
 }
 
 .checkbox-switch input:checked + label {
-    background: #ff003a;
+    background: #fc0033;
 }
 
 .checkbox-switch input:checked + label:after {
