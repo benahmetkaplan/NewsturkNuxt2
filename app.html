@@ -2,8 +2,30 @@
 <html {{ HTML_ATTRS }}>
   <head {{ HEAD_ATTRS }}>
     {{ HEAD }}
-    <link rel="shortcut icon" href="#">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="News Turk">
+    <meta name="msapplication-TileImage" content="https://application.newsturk.com.tr/icons/144.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF">
+    <link rel="manifest" href="https://application.newsturk.com.tr/manifest.json">
+    <link rel="apple-touch-icon" href="https://application.newsturk.com.tr/icons/144.png">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0211958192707263" crossorigin="anonymous"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+       window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service-worker.js').then(function (registration) {
+         console.log('Registered!');
+        }, function (err) {
+         console.log('ServiceWorker registration failed: ', err);
+        }).catch(function (err) {
+         console.log(err);
+        });
+       });
+      } else {
+       console.log('service worker is not supported');
+      }
+    </script>
   </head>
   <body {{ BODY_ATTRS }}>
     {{ APP }}

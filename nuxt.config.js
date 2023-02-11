@@ -20,7 +20,9 @@ module.exports = {
 	},
 	loading: { color: '#ffffff' },
 	modules: [
-		['@nuxtjs/axios']
+		[
+			'@nuxtjs/axios'
+		]
 	],
 	plugins: [
 		{ src: './plugins/vue-sweetalert.js' },
@@ -48,7 +50,8 @@ module.exports = {
 	},
 	buildModules: [
 		[
-			'@nuxtjs/dotenv', { filename: '.env' }, '@nuxt/typescript-build'
+			'@nuxtjs/dotenv', { filename: '.env' },
+			'@nuxt/typescript-build'
 		]
 	],
 	publicRuntimeConfig: {

@@ -6,7 +6,13 @@
 			<nuxt />
 			<Sidebar />
 			<Footer />
-		</client-only>		
+		</client-only>
+		<div v-if="isApple" class="banner pwa-banner">
+			<div class="content">
+				<span>Bu web uygulamasını iPhone'unuza yükleyin:  <img src="/assets/img/apple-tap.png" class="text-icon" /> simgesine dokunun.</span>
+			</div>
+			<div class="arrow"></div>
+		</div>
 	</div>
 </template>
 <script>
@@ -25,6 +31,11 @@ export default {
 		Sidebar,
 		Spinner
 	},
+	data() {
+        return {
+            isApple: false
+        }
+    },
 	computed: {
 		...mapState('util', ["isLoading"]),
 		...mapState('util', ["activeView"]),
@@ -72,6 +83,7 @@ export default {
 		this.checkNetwork();
 		this.setActiveTab(this.$route.fullPath);
 		this.getFcmToken();
+		this.isApple = ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
     },
     watch:{
         $route (to){

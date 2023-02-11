@@ -3247,3 +3247,46 @@ textarea.form-control {
   overflow: hidden;
   box-shadow: 5px 10px 18px rgba(0,0,0,.2);
 }
+
+.pwa-banner {
+  width: 100%;
+  height:auto;
+  background-color: #eaeaea;
+  color: #000000;
+  border-radius:10px;
+  position:fixed;
+  bottom: 100px;
+  left: 50%;
+  padding: 10px;
+  box-shadow: 0 5px #dadada;
+  z-index:999999;
+  transform: translate(-50%, 0);
+  max-width: 320px;
+}
+
+.pwa-banner .arrow{
+  width:50px;
+  height:50px;
+  background-color: #eaeaea;
+  transform: rotate(45deg);
+  position:absolute;
+  bottom: -25px;
+  left: calc(50% - 25px);
+  z-index:-1;
+}
+
+.pwa-banner .content{
+  display: inline-flex;
+  width: 100%;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.pwa-banner .text-icon {
+  width:14px;
+  display: inline-block;
+  border-radius: 0;
+  margin: 0 5px;
+}

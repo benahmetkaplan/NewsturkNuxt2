@@ -57,7 +57,6 @@ export function getChildrenComponentInstancesUsingFetch(vm, instances = []) {
   for (const child of children) {
     if (child.$fetch) {
       instances.push(child)
-      continue; // Don't get the children since it will reload the template
     }
     if (child.$children) {
       getChildrenComponentInstancesUsingFetch(child, instances)
@@ -200,7 +199,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"APP_VERSION":"1.1.7","APP_NAME":"newsturk.com.tr","SITE_URL":"https://www.newsturk.com.tr","API_PATH":"/wp-json/wp/v2","API_URL":"${SITE_URL}${API_PATH}"}
+      env: {"APP_VERSION":"1.1.9","APP_NAME":"newsturk.com.tr","SITE_URL":"https://www.newsturk.com.tr","API_PATH":"/wp-json/wp/v2","API_URL":"${SITE_URL}${API_PATH}"}
     }
     // Only set once
 
@@ -246,8 +245,8 @@ export async function setContext (app, context) {
           })
         }
         if (process.client) {
-          // https://developer.mozilla.org/en-US/docs/Web/API/Location/replace
-          window.location.replace(path)
+          // https://developer.mozilla.org/en-US/docs/Web/API/Location/assign
+          window.location.assign(path)
 
           // Throw a redirect error
           throw new Error('ERR_REDIRECT')
@@ -256,6 +255,7 @@ export async function setContext (app, context) {
     }
     if (process.server) {
       app.context.beforeNuxtRender = fn => context.beforeRenderFns.push(fn)
+      app.context.beforeSerialize = fn => context.beforeSerializeFns.push(fn)
     }
     if (process.client) {
       app.context.nuxtState = window.__NUXT__
