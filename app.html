@@ -15,7 +15,6 @@
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0211958192707263"
       crossorigin="anonymous"
     ></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function () {
@@ -32,33 +31,6 @@
               console.log(err);
             });
         });
-        navigator.serviceWorker.register('firebase-messaging-sw.js')
-          .then((register) => {
-            if (window.matchMedia("(display-mode: standalone)").matches) {
-              const messaging = firebase.messaging();
-              messaging.requestPermission().then(() => {
-                messaging.getToken().then((fcmToken) => {
-                  console.log("TOKEN:" + fcmToken);
-                  const formData = new FormData();
-                  formData.append("token", fcmToken);
-                  (async () => {
-                    const rawResponse = await fetch(
-                      "https://www.newsturk.com.tr/gcm-notification/add-token.php?basic_token=YWhtdGtwbG45NkBnbWFpbC5jb206MjI1NTg4KipLYXBsYW4",
-                      {
-                        method: "POST",
-                        body: formData,
-                      }
-                    );
-                    const content = await rawResponse.json();
-                    console.log("RES: " + content);
-                  })();
-                  messaging.onMessage((payload) => {
-                    console.log("onMessage event fired", payload)
-                  })
-                });
-              });
-            }
-          });      
       } else {
         console.log("service worker is not supported");
       }

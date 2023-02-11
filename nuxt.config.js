@@ -1,4 +1,5 @@
 require('dotenv').config();
+const fs = require('fs');
 import webpack from 'webpack';
 
 module.exports = {
@@ -29,6 +30,7 @@ module.exports = {
 		{ src: './plugins/vee-validate.js' },
 		{ src: './plugins/vue-tel-input.js' },
 		{ src: './plugins/vue-content-placeholders.js' },
+		{ src: './plugins/firebase.js' },
 	],
 	build: {
 		transpile: ["vee-validate/dist/rules"],

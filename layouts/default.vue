@@ -24,6 +24,8 @@ import Footer from '~/components/partials/footer.vue';
 import Sidebar from '~/components/partials/sidebar.vue';
 import Spinner from '~/components/partials/spinner.vue';
 
+import { messaging } from "~/plugins/firebase.js"
+
 export default {
 	components: {
 		Header,
@@ -73,9 +75,27 @@ export default {
             if (getParameterByName("fcm_token") !== null && getParameterByName("fcm_token") !== undefined) {
                 this.setFcmToken(getParameterByName("fcm_token"));
             }
-        }
+        },
+		pwaFcmInit(){
+			messaging.getToken().then((token) => {
+				const formData = new FormData();
+                formData.append("token", token);
+				this.$axios.post(`${this.$config.SITE_URL}/gcm-notification/add-token.php?basic_token=YWhtdGtwbG45NkBnbWFpbC5jb206MjI1NTg4KipLYXBsYW4`, formData,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data"
+					}
+            	})
+                .then((response) => {
+                    console.log(response);
+                });
+                messaging.onMessage((payload) => {
+                    console.log("onMessage event fired", payload)
+                });
+			});
+		}
 	},
-    mounted() {
+    async mounted() {
         this.setIsLoading(true);
         setTimeout(() => {
             this.setIsLoading(false)
@@ -87,6 +107,9 @@ export default {
 		setTimeout(function(){
 			$(".pwa-banner").slideUp();
 		}, 5000);
+		if (window.matchMedia("(display-mode: standalone)").matches) {
+			this.pwaFcmInit();
+		}
     },
     watch:{
         $route (to){
