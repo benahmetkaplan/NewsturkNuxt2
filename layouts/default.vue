@@ -83,7 +83,7 @@ export default {
 		this.checkNetwork();
 		this.setActiveTab(this.$route.fullPath);
 		this.getFcmToken();
-		this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+		this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && !(window.matchMedia("(display-mode: standalone)").matches);
 		setTimeout(function(){
 			$(".pwa-banner").slideUp();
 		}, 5000);
