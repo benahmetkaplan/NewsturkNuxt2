@@ -1,7 +1,7 @@
 {
     "name": "NewsTurk",
     "description": "Dünyaya Türkçe Bakış",
-    "short_name": "NewsTurkPWA",
+    "short_name": "NewsTurkApp",
     "icons": [
        {
           "src": "https://application.newsturk.com.tr/icons/192.png",
