@@ -85,7 +85,7 @@ export default {
 		this.getFcmToken();
 		this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 		setTimeout(function(){
-			this.isSafari = false;
+			$(".pwa-banner").slideUp();
 		}, 5000);
     },
     watch:{
