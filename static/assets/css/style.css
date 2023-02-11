@@ -3228,3 +3228,22 @@ textarea.form-control {
 .eczane_list .eczane + .eczane {
   margin-top: 20px;
 }
+
+.live-stream {
+  display: flex;
+  width: 100%;
+  background: #181818;
+  min-height: 100vh;
+  padding: 20px;
+  padding-top: 80px;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-stream iframe {
+  width: 100%;
+  height: 30vh;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 5px 10px 18px rgba(0,0,0,.2);
+}

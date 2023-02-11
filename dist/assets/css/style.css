@@ -17,12 +17,12 @@ body {
 
 a {
   transition: .2s all;
-  color: #ff003a;
+  color: #fc0033;
   text-decoration: none;
 }
 
 a:hover {
-  color: #ff003a;
+  color: #fc0033;
   text-decoration: none;
 }
 
@@ -46,7 +46,7 @@ a:active, a:focus {
 #loading .spinner-grow {
   width: 100px;
   height: 100px;
-  background: #ff003a;
+  background: #fc0033;
 }
 
 .appHeader {
@@ -289,7 +289,7 @@ a:active, a:focus {
   height: 2px;
   border-radius: 0 0 10px 10px;
   display: block;
-  background: #ff003a;
+  background: #fc0033;
   position: absolute;
   left: 0;
   top: 0;
@@ -297,7 +297,7 @@ a:active, a:focus {
 }
 
 .appBottomMenu .item.active>a {
-  color: #ff003a !important;
+  color: #fc0033 !important;
 }
 
 .appBottomMenu.iconed .item i {
@@ -565,8 +565,8 @@ a.badge {
 
 .badge-outline-primary, a.badge-outline-primary {
   background: transparent !important;
-  border-color: #ff003a !important;
-  color: #ff003a !important;
+  border-color: #fc0033 !important;
+  color: #fc0033 !important;
 }
 
 .badge-outline-secondary, a.badge-outline-secondary {
@@ -612,7 +612,7 @@ a.badge {
 }
 
 .bg-primary {
-  background: #ff003a !important;
+  background: #fc0033 !important;
 }
 
 .bg-secondary {
@@ -670,8 +670,8 @@ a.badge {
 
 .pagination .page-item.active .page-link {
   color: #fff;
-  background: #ff003a;
-  border-color: #ff003a;
+  background: #fc0033;
+  border-color: #fc0033;
   position: relative;
   z-index: 2;
 }
@@ -1011,8 +1011,8 @@ textarea.form-control {
 }
 
 .form-check-input:checked~.form-check-label:after {
-  background-color: #ff003a;
-  border-color: #ff003a !important;
+  background-color: #fc0033;
+  border-color: #fc0033 !important;
 }
 
 .form-check-input:checked~.form-check-label:before {
@@ -1052,7 +1052,7 @@ textarea.form-control {
 
 .form-switch .form-check-input:checked~.form-check-label:before {
   left: 34px;
-  background: #ff003a;
+  background: #fc0033;
 }
 
 .form-switch .form-check-input:checked~.form-check-label:after {
@@ -1146,7 +1146,7 @@ textarea.form-control {
 
 .btn-youtube {
   color: #fff !important;
-  background: #ff003a;
+  background: #fc0033;
 }
 
 .btn-linkedin {
@@ -1169,14 +1169,14 @@ textarea.form-control {
 }
 
 .btn-primary {
-  background: #ff003a !important;
-  border-color: #ff003a;
+  background: #fc0033 !important;
+  border-color: #fc0033;
   color: #FFF !important;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:disabled, .btn-primary:active {
-  background: #ff003a !important;
-  border-color: #ff003a !important;
+  background: #fc0033 !important;
+  border-color: #fc0033 !important;
 }
 
 .btn-secondary {
@@ -1265,7 +1265,7 @@ textarea.form-control {
 }
 
 .btn-link {
-  color: #ff003a !important;
+  color: #fc0033 !important;
 }
 
 .btn-info {
@@ -1291,14 +1291,14 @@ textarea.form-control {
 
 .btn-outline-primary {
   background: transparent;
-  border-color: #ff003a;
-  color: #ff003a;
+  border-color: #fc0033;
+  color: #fc0033;
   transition: 0.2s all;
 }
 
 .btn-outline-primary:hover {
-  background: #ff003a;
-  border-color: #ff003a;
+  background: #fc0033;
+  border-color: #fc0033;
   color: #FFF;
 }
 
@@ -1309,8 +1309,8 @@ textarea.form-control {
 }
 
 .btn-outline-primary.disabled, .btn-outline-primary:disabled {
-  color: #ff003a !important;
-  border-color: #ff003a !important;
+  color: #fc0033 !important;
+  border-color: #fc0033 !important;
   background: transparent !important;
 }
 
@@ -1474,8 +1474,8 @@ textarea.form-control {
 }
 
 .btn-check:checked+.btn-outline-primary {
-  background: #ff003a !important;
-  border-color: #ff003a !important;
+  background: #fc0033 !important;
+  border-color: #fc0033 !important;
 }
 
 .btn-check:checked+.btn-outline-secondary {
@@ -1610,7 +1610,7 @@ textarea.form-control {
   justify-content: center;
   height: 62px;
   margin-right: 20px;
-  background: #ff003a;
+  background: #fc0033;
   border-radius: 6px;
   color: #fff;
   font-size: 32px;
@@ -1706,7 +1706,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #ff003a;
+  color: #fc0033;
   font-weight: 500;
   font-size: 14px;
 }
@@ -1724,7 +1724,7 @@ h6 {
 }
 
 .sectionTitle .title a {
-  color: #ff003a;
+  color: #fc0033;
 }
 
 .sectionTitle .lead {
@@ -1742,7 +1742,7 @@ h6 {
 }
 
 .text-primary {
-  color: #ff003a !important;
+  color: #fc0033 !important;
 }
 
 .text-secondary {
@@ -2004,7 +2004,7 @@ h6 {
 }
 
 .photoPost footer .btn:active i {
-  color: #ff003a;
+  color: #fc0033;
 }
 
 .profileDetail .profileBox {
@@ -2307,7 +2307,7 @@ figure figcaption {
 }
 
 .accordion .accordion-item .accordion-header .accordion-button {
-  color: #ff003a;
+  color: #fc0033;
   font-weight: 500;
   box-shadow: none !important;
   background: transparent !important;
@@ -2351,7 +2351,7 @@ figure figcaption {
 }
 
 .accordion.styled .accordion-item .accordion-header .accordion-button.btn-primary {
-  background: #ff003a !important;
+  background: #fc0033 !important;
 }
 
 .accordion.styled .accordion-item .accordion-header .accordion-button.btn-secondary {
@@ -2590,7 +2590,7 @@ figure figcaption {
 }
 
 .chatItem.user .bubble {
-  background: #ff003a;
+  background: #fc0033;
   color: #fff;
   border-radius: 12px 12px 0px 12px;
 }
@@ -2749,7 +2749,7 @@ figure figcaption {
 }
 
 .carousel-slider .splide__pagination button.is-active {
-  background: #ff003a;
+  background: #fc0033;
   transform: scale(1);
 }
 
@@ -2765,7 +2765,7 @@ figure figcaption {
   font-size: 24px;
   line-height: 1em;
   font-weight: 900;
-  color: #ff003a;
+  color: #fc0033;
   background: #E5E9F2;
   padding: 16px 5px 10px 5px;
   border-radius: 6px;
@@ -2878,7 +2878,7 @@ figure figcaption {
 
 .category-title {
   font-weight: 500;
-  color: #ff003a;
+  color: #fc0033;
 }
 
 .splide__list {
@@ -2984,7 +2984,7 @@ figure figcaption {
 }
 
 span.validation-error-message {
-  color: #eb2f06;
+  color: #fc0033;
   font-size: 12px;
   font-weight: 500;
 }
@@ -3024,7 +3024,7 @@ span.validation-error-message {
   content: "\f06a";
   font-family: "Font Awesome 6 Pro";
   font-size: 50px;
-  color: #eb2f06;
+  color: #fc0033;
   width: 50px;
   height: 50px;
   display: flex;
@@ -3142,7 +3142,7 @@ textarea.form-control {
 }
 
 .table-live-stock-market strong {
-  color: #ff003a;
+  color: #fc0033;
 }
 
 .table-live-stock-market em {
@@ -3161,13 +3161,11 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
   overflow: hidden;
-  box-shadow: 3px 3px 6px rgba(0,0,0,.1);
 }
 
 .appHeader .pageTitle a img {
-  max-height: 36px;
+  max-height: 24px;
   display: inline-block;
 }
 
@@ -3178,14 +3176,14 @@ textarea.form-control {
 .eczane_list .eczane {
   background-color: #fff;
   width: 100%;
-  border: 0.5px solid #ff003a;
+  border: 0.5px solid #fc0033;
   padding: 15px;
   border-radius: 5px;
   display: inline-block;
 }
 
 .eczane_logo {
-  background-color: #ff003a;
+  background-color: #fc0033;
   color: #fff;
   width: 35px;
   height: 35px;
@@ -3229,4 +3227,23 @@ textarea.form-control {
 
 .eczane_list .eczane + .eczane {
   margin-top: 20px;
+}
+
+.live-stream {
+  display: flex;
+  width: 100%;
+  background: #181818;
+  min-height: 100vh;
+  padding: 20px;
+  padding-top: 80px;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-stream iframe {
+  width: 100%;
+  height: 30vh;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 5px 10px 18px rgba(0,0,0,.2);
 }
