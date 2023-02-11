@@ -23,34 +23,6 @@
             .register("/service-worker.js")
             .then(
               function (registration) {
-                if (window.matchMedia("(display-mode: standalone)").matches) {
-                  const firebaseConfig = {
-                    apiKey: "AIzaSyBU-DJ7AXrlISgvVHi3yjaj-utNDI7sROg",
-                    authDomain: "nt-flutter-notification.firebaseapp.com",
-                    projectId: "nt-flutter-notification",
-                    storageBucket: "nt-flutter-notification.appspot.com",
-                    messagingSenderId: "222470304912",
-                    appId: "1:222470304912:web:2802fb8a5ef5b34e8a9415",
-                  };
-                  firebase.initializeApp(firebaseConfig);
-                  var messaging = firebase.messaging();
-                  messaging.getToken().then(function (token) {
-                    console.log("TOKEN:" + token);
-                    const formData = new FormData();
-                    formData.append("token", token);
-                    (async () => {
-                      const rawResponse = await fetch(
-                        "https://www.newsturk.com.tr/gcm-notification/add-token.php?basic_token=YWhtdGtwbG45NkBnbWFpbC5jb206MjI1NTg4KipLYXBsYW4",
-                        {
-                          method: "POST",
-                          body: formData,
-                        }
-                      );
-                      const content = await rawResponse.json();
-                      console.log("RES: " + content);
-                    })();
-                  });
-                }
               },
               function (err) {
                 console.log("ServiceWorker registration failed: ", err);
@@ -60,6 +32,33 @@
               console.log(err);
             });
         });
+        navigator.serviceWorker.register('firebase-messaging-sw.js')
+          .then((register) => {
+            if (window.matchMedia("(display-mode: standalone)").matches) {
+              const messaging = firebase.messaging();
+              messaging.requestPermission().then(() => {
+                messaging.getToken().then((fcmToken) => {
+                  console.log("TOKEN:" + fcmToken);
+                  const formData = new FormData();
+                  formData.append("token", fcmToken);
+                  (async () => {
+                    const rawResponse = await fetch(
+                      "https://www.newsturk.com.tr/gcm-notification/add-token.php?basic_token=YWhtdGtwbG45NkBnbWFpbC5jb206MjI1NTg4KipLYXBsYW4",
+                      {
+                        method: "POST",
+                        body: formData,
+                      }
+                    );
+                    const content = await rawResponse.json();
+                    console.log("RES: " + content);
+                  })();
+                  messaging.onMessage((payload) => {
+                    console.log("onMessage event fired", payload)
+                  })
+                });
+              });
+            }
+          });      
       } else {
         console.log("service worker is not supported");
       }
