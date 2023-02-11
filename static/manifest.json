@@ -1,7 +1,7 @@
 {
-    "name": "NewsTurk",
+    "name": "News Turk",
     "description": "Dünyaya Türkçe Bakış",
-    "short_name": "NewsTurkApp",
+    "short_name": "News Turk",
     "icons": [
        {
           "src": "https://application.newsturk.com.tr/icons/192.png",
