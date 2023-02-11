@@ -7,7 +7,7 @@
 			<Sidebar />
 			<Footer />
 		</client-only>
-		<div v-if="isApple" class="banner pwa-banner">
+		<div v-if="isSafari" class="banner pwa-banner">
 			<div class="content">
 				<span>Bu web uygulamasını iPhone'unuza yükleyin:  <img src="/assets/img/apple-tap.png" class="text-icon" /> simgesine dokunun.</span>
 			</div>
@@ -33,7 +33,7 @@ export default {
 	},
 	data() {
         return {
-            isApple: false
+            isSafari: false
         }
     },
 	computed: {
@@ -83,7 +83,10 @@ export default {
 		this.checkNetwork();
 		this.setActiveTab(this.$route.fullPath);
 		this.getFcmToken();
-		this.isApple = ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+		this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+		setTimeout(function(){
+			this.isSafari = false;
+		}, 5000);
     },
     watch:{
         $route (to){
