@@ -86,7 +86,7 @@ export default {
 		this.isSafari = process.browser && !(window.matchMedia("(display-mode: standalone)").matches) && !!window.navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 		setTimeout(function(){
 			$(".pwa-banner").slideUp();
-		}, 5000);		
+		}, 5000);
     },
     watch:{
         $route (to){

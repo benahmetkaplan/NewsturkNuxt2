@@ -1,5 +1,4 @@
 require('dotenv').config();
-const fs = require('fs');
 import webpack from 'webpack';
 
 module.exports = {
@@ -21,10 +20,16 @@ module.exports = {
 	},
 	loading: { color: '#ffffff' },
 	modules: [
-		[
-			'@nuxtjs/axios'
-		]
+		'@nuxtjs/axios',
+		'@nuxtjs/sitemap'
 	],
+	sitemap: {
+		hostname: 'http://application.newsturk.com.tr/',
+		path: '/sitemap.xml',
+		cacheTime: 1000 * 60 * 60 * 2,
+		trailingSlash: true,
+    	gzip: true
+	},
 	plugins: [
 		{ src: './plugins/vue-sweetalert.js' },
 		{ src: './plugins/vee-validate.js' },
