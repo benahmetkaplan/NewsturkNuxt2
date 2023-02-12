@@ -192,14 +192,14 @@ export async function setContext (app, context) {
   if (!app.context) {
     app.context = {
       isStatic: process.static,
-      isDev: true,
+      isDev: false,
       isHMR: false,
       app,
       store: app.store,
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"APP_VERSION":"1.1.11","APP_NAME":"newsturk.com.tr","SITE_URL":"https://www.newsturk.com.tr","API_PATH":"/wp-json/wp/v2","API_URL":"${SITE_URL}${API_PATH}"}
+      env: {"APP_VERSION":"1.0.20","APP_NAME":"newsturk.com.tr","SITE_URL":"https://www.newsturk.com.tr","API_PATH":"/wp-json/wp/v2","API_URL":"${SITE_URL}${API_PATH}"}
     }
     // Only set once
 
@@ -279,7 +279,7 @@ export async function setContext (app, context) {
   app.context.next = context.next
   app.context._redirected = false
   app.context._errored = false
-  app.context.isHMR = Boolean(context.isHMR)
+  app.context.isHMR = false
   app.context.params = app.context.route.params || {}
   app.context.query = app.context.route.query || {}
 }
@@ -297,9 +297,6 @@ export function middlewareSeries (promises, appContext) {
 export function promisify (fn, context) {
   let promise
   if (fn.length === 2) {
-      console.warn('Callback-based asyncData, fetch or middleware calls are deprecated. ' +
-        'Please switch to promises or async/await syntax')
-
     // fn(context, callback)
     promise = new Promise((resolve) => {
       fn(context, function (err, data) {

@@ -233,7 +233,7 @@ a:active, a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: 20px;
 }
 
 .appBottomMenu.fixed {
@@ -3289,8 +3289,4 @@ textarea.form-control {
   display: inline-block;
   border-radius: 0;
   margin: 0 5px;
-}
-
-.appBottomMenu.fixed.is-pwa {
-  padding-bottom: 20px;
 }

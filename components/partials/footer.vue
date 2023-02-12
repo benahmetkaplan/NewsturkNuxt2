@@ -1,5 +1,5 @@
 <template>
-    <div :class="`appBottomMenu ${ fixClassStatu ? 'fixed' : '' } ${ isPwa ? 'is-pwa' : '' }`">
+    <div :class="`appBottomMenu ${ fixClassStatu ? 'fixed' : '' }`">
 
         <div v-for="item in getPageList()" :key="item.slug" :class="`item ${item.slug === activeTab() ? 'active' : ''}`">
             <a @click="goToView(item.slug)">
@@ -21,8 +21,7 @@ export default {
     name: "Footer",
     data() {
         return {
-            fixClassStatu: true,
-            isPwa: false
+            fixClassStatu: true
         }
     },
     computed: {
@@ -43,9 +42,6 @@ export default {
         activeTab(){
             return this.getBottomMenuActiveTab();
         }
-    },
-    mounted(){
-        this.isPwa = process.browser && (window.matchMedia("(display-mode: standalone)").matches);
     }
 }
 </script>
