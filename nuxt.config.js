@@ -29,8 +29,7 @@ module.exports = {
 		{ src: './plugins/vue-sweetalert.js' },
 		{ src: './plugins/vee-validate.js' },
 		{ src: './plugins/vue-tel-input.js' },
-		{ src: './plugins/vue-content-placeholders.js' },
-		{ src: './plugins/firebase.js' },
+		{ src: './plugins/vue-content-placeholders.js' }
 	],
 	build: {
 		transpile: ["vee-validate/dist/rules"],

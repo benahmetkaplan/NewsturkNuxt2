@@ -24,8 +24,6 @@ import Footer from '~/components/partials/footer.vue';
 import Sidebar from '~/components/partials/sidebar.vue';
 import Spinner from '~/components/partials/spinner.vue';
 
-import { messaging } from "~/plugins/firebase.js"
-
 export default {
 	components: {
 		Header,
@@ -75,25 +73,7 @@ export default {
             if (getParameterByName("fcm_token") !== null && getParameterByName("fcm_token") !== undefined) {
                 this.setFcmToken(getParameterByName("fcm_token"));
             }
-        },
-		pwaFcmInit(){
-			messaging.getToken().then((token) => {
-				const formData = new FormData();
-                formData.append("token", token);
-				this.$axios.post(`${this.$config.SITE_URL}/gcm-notification/add-token.php?basic_token=YWhtdGtwbG45NkBnbWFpbC5jb206MjI1NTg4KipLYXBsYW4`, formData,
-				{
-					headers: {
-						"Content-Type": "multipart/form-data"
-					}
-            	})
-                .then((response) => {
-                    console.log(response);
-                });
-                messaging.onMessage((payload) => {
-                    console.log("onMessage event fired", payload)
-                });
-			});
-		}
+        }
 	},
     async mounted() {
         this.setIsLoading(true);
@@ -103,13 +83,10 @@ export default {
 		this.checkNetwork();
 		this.setActiveTab(this.$route.fullPath);
 		this.getFcmToken();
-		this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (process.browser && !window.matchMedia("(display-mode: standalone)").matches);
+		this.isSafari = process.browser && !(window.matchMedia("(display-mode: standalone)").matches) && !!window.navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 		setTimeout(function(){
 			$(".pwa-banner").slideUp();
-		}, 5000);
-		if (process.browser && window.matchMedia("(display-mode: standalone)").matches) {
-			this.pwaFcmInit();
-		}
+		}, 5000);		
     },
     watch:{
         $route (to){
