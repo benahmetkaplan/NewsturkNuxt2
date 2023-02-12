@@ -3290,3 +3290,7 @@ textarea.form-control {
   border-radius: 0;
   margin: 0 5px;
 }
+
+.appBottomMenu.fixed.is-pwa {
+  padding-bottom: 20px;
+}

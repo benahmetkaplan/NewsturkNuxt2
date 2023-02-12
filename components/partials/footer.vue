@@ -1,5 +1,5 @@
 <template>
-    <div :class="`appBottomMenu ${ fixClassStatu ? 'fixed' : '' }`">
+    <div :class="`appBottomMenu ${ fixClassStatu ? 'fixed' : '' } ${ isPwa ? 'is-pwa' : '' }`">
 
         <div v-for="item in getPageList()" :key="item.slug" :class="`item ${item.slug === activeTab() ? 'active' : ''}`">
             <a @click="goToView(item.slug)">
@@ -15,13 +15,14 @@
 
 <script>
 
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
     name: "Footer",
     data() {
         return {
-            fixClassStatu: true
+            fixClassStatu: true,
+            isPwa: false
         }
     },
     computed: {
@@ -42,6 +43,9 @@ export default {
         activeTab(){
             return this.getBottomMenuActiveTab();
         }
+    },
+    mounted(){
+        this.isPwa = process.browser && (window.matchMedia("(display-mode: standalone)").matches);
     }
 }
 </script>
