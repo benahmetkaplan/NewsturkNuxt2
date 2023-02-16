@@ -199,7 +199,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"APP_VERSION":"1.0.20","APP_NAME":"newsturk.com.tr","SITE_URL":"https://www.newsturk.com.tr","API_PATH":"/wp-json/wp/v2","API_URL":"${SITE_URL}${API_PATH}"}
+      env: {"APP_VERSION":"1.0.21","APP_NAME":"newsturk.com.tr","SITE_URL":"https://www.newsturk.com.tr","API_PATH":"/wp-json/wp/v2","API_URL":"${SITE_URL}${API_PATH}"}
     }
     // Only set once
 

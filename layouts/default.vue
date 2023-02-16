@@ -16,7 +16,6 @@
 	</div>
 </template>
 <script>
-
 import { mapState, mapMutations } from "vuex";
 
 import Header from '~/components/partials/header.vue';

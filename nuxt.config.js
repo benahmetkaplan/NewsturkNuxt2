@@ -11,15 +11,18 @@ export default () => {
 				{ name: 'viewport', content: 'minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no' }
 			],
 			link: [
+				{ rel: 'shortcut icon', href: '#' },
 				{ rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap' },
-				{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/fontawesome/fontawesome.min.css' },
-				{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/bootstrap/bootstrap.min.css' },
-				{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/checkbox-switch/checkbox-switch.css' },
-				{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/inc/weather/weather.css' },
-				{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/inc/splide/splide.min.css?v=${process.env.APP_VERSION}` },
-				{ rel: 'stylesheet', type: 'text/css', href: `/assets/css/style.css?v=${process.env.APP_VERSION}` }
+				{ rel: 'stylesheet', type: 'text/css', href: '/assets/inc/fontawesome/fontawesome.min.css' },
+				{ rel: 'stylesheet', type: 'text/css', href: '/assets/inc/bootstrap/bootstrap.min.css' },
+				{ rel: 'stylesheet', type: 'text/css', href: '/assets/inc/checkbox-switch/checkbox-switch.css' },
+				{ rel: 'stylesheet', type: 'text/css', href: '/assets/inc/weather/weather.css' },
+				{ rel: 'stylesheet', type: 'text/css', href: '/assets/inc/splide/splide.min.css' }
 			]
 		},
+		css: [
+			"~/assets/scss/style.scss"
+		],
 		loading: { color: '#ffffff' },
 		modules: [
 			'@nuxtjs/axios',
@@ -33,7 +36,6 @@ export default () => {
 			trailingSlash: true,
 			gzip: true,
 			routes: async () => {
-
 				const categories = await axios.get(`${process.env.API_URL}/categories`);
 				const categoryItems = categories.data.map((item) => `/category/${item.id}`);
 
@@ -41,10 +43,9 @@ export default () => {
 				const postItems = posts.data.map((item) => `/post/${item.id}`);
 
 				return [
-					...postItems,
-					...categoryItems
-				];
-				
+					...categoryItems,
+					...postItems
+				];				
 			}
 		},
 		plugins: [
@@ -61,6 +62,14 @@ export default () => {
 					$: 'jquery'
 				})
 			],
+			loaders: {
+				sass: {
+					implementation: require('sass')
+				},
+				scss: {
+					implementation: require('sass')
+				}
+			},
 			extend(config, ctx) {
 				config.module.rules.push({
 						test: /\.(ogg|mp3|wav|mpe?g)$/i,
