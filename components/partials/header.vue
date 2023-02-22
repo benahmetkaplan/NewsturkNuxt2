@@ -7,7 +7,7 @@
         </div>
         <div class="pageTitle">
             <a href="javascript:;" @click="goToHome">
-                <img :src="`${this.$config.SITE_URL}/logo.png`" class="image">
+                <img :src="`${this.$config.SITE_URL}/logo-app.png`" class="image">
             </a>
         </div>
         <div class="right">

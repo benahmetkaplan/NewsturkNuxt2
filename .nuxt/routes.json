@@ -2,30 +2,30 @@
   {
     "name": "category-id",
     "path": "/category/:id?",
-    "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\category\\\\_id.vue",
+    "component": "C:\\\\Users\\\\ahmet.kaplan\\\\source\\\\repos\\\\NewsturkNuxt2\\\\pages\\\\category\\\\_id.vue",
     "chunkName": "pages/category/_id",
-    "_name": "_1d56214a"
+    "_name": "_a2bf3342"
   },
   {
     "name": "page-slug",
     "path": "/page/:slug?",
-    "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\page\\\\_slug.vue",
+    "component": "C:\\\\Users\\\\ahmet.kaplan\\\\source\\\\repos\\\\NewsturkNuxt2\\\\pages\\\\page\\\\_slug.vue",
     "chunkName": "pages/page/_slug",
-    "_name": "_094b478c"
+    "_name": "_37407784"
   },
   {
     "name": "post-id",
     "path": "/post/:id?",
-    "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\post\\\\_id.vue",
+    "component": "C:\\\\Users\\\\ahmet.kaplan\\\\source\\\\repos\\\\NewsturkNuxt2\\\\pages\\\\post\\\\_id.vue",
     "chunkName": "pages/post/_id",
-    "_name": "_0b218579"
+    "_name": "_10adc306"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\index.vue",
+    "component": "C:\\\\Users\\\\ahmet.kaplan\\\\source\\\\repos\\\\NewsturkNuxt2\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
     "url": "/",
-    "_name": "_d9fde79e"
+    "_name": "_6625c735"
   }
 ]
