@@ -215,7 +215,7 @@ a:active, a:focus {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-bottom: 20px;
+	padding-bottom: 15px;
 	&.fixed {
 		position: fixed;
 	}
@@ -240,9 +240,8 @@ a:active, a:focus {
 			margin: 0;
 		}
 		i {
-			font-size: 20px;
+			font-size: 25px;
 			line-height: 0;
-			margin-bottom: 17px;
 			display: block;
 		}
 		span {

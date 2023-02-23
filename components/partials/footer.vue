@@ -5,7 +5,7 @@
             <a @click="goToView(item.slug)">
                 <p>
                     <i :class="item.icon"></i>
-                    <span>{{item.title}}</span>
+                    <!-- <span>{{item.title}}</span> -->
                 </p>
             </a>
         </div>

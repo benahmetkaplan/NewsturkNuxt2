@@ -6,7 +6,7 @@
                     <label for="il">Şehir Seçiniz</label>
                     <select @change="selectChange" name="il" id="il" v-model="formData.il" class="form-control">
                         <option :value="null">İl Seçin</option>
-                        <option v-for="item in apiData.iller" :key="item.il" :value="item.il">
+                        <option v-for="item in apiData.iller" :value="item.il">
                             {{ item.il }}
                         </option>
                     </select>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="apiData.result !== null" v-for="item in apiData.result" :key="item.day" class="forecast other-day">
+                <div v-if="apiData.result !== null" v-for="item in apiData.result" class="forecast other-day">
                     <div class="forecast-header">
                         <div class="day">{{ new Date(item.date).toLocaleDateString("tr", { weekday: 'long' }) }}</div>
                     </div>

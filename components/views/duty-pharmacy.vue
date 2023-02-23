@@ -23,10 +23,10 @@
                 </button>
             </form>
             <div class="eczane_list" v-if="apiData.eczaneler !== null">
-                <div v-for="item in apiData.eczaneler" :key="item.name" class="eczane">
+                <div v-for="item in apiData.eczaneler" :key="item.title" class="eczane">
                     <div class="eczane_title">
                         <span class="eczane_logo">E</span>
-                        <span class="eczane_name" v-html="`${item.name.indexOf('ECZANESİ') > -1 ? item.name : item.name + ' ECZANESİ'}`"></span>
+                        <span class="eczane_name" v-html="item.title"></span>
                     </div>
                     <div class="eczane_bio">
                         <p><strong>Adres: </strong>{{ item.address }}</p>
@@ -68,17 +68,9 @@ export default {
             this.apiData.ilceler = jsonIlceler.filter(function(x) { return x.il === key });
         },
         onFormSubmit(){
-            this.$axios.get(`https://api.collectapi.com/health/dutyPharmacy?ilce=${this.formData.ilce}&il=${this.formData.il}`,
-            {
-                headers: {
-                    'authorization': 'apikey 6oAn6200lc153WmoBlXovS:3sw2h6xSRF9dr3knRa8ids',
-                    'content-type': 'application/json'
-                }
-            })
+            this.$axios.get(`${this.$config.SITE_URL}/get-pharmacy.php?province=${this.formData.il}&district=${this.formData.ilce}`)
             .then((response) => {
-                if (response.data.success) {
-                    this.apiData.eczaneler = response.data.result;
-                }
+                this.apiData.eczaneler = response.data;
             });
         }
 	}
