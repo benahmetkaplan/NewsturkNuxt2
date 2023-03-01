@@ -10,6 +10,9 @@
             </div>
             <div class="postBody">
                 <div class="content" v-html="getActive().content"></div>
+                <div class="comments">
+                    <Disqus />
+                </div>
             </div>
         </div>
     </div>

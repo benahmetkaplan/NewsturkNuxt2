@@ -52,6 +52,7 @@ export default () => {
 			{ src: './plugins/vue-sweetalert.js' },
 			{ src: './plugins/vee-validate.js' },
 			{ src: './plugins/vue-tel-input.js' },
+			{ src: './plugins/vue-disqus.js' },
 			{ src: './plugins/vue-content-placeholders.js' }
 		],
 		build: {

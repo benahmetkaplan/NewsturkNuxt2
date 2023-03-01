@@ -19,6 +19,7 @@ import nuxt_plugin_axios_71f82131 from 'nuxt_plugin_axios_71f82131' // Source: .
 import nuxt_plugin_vuesweetalert_31840604 from 'nuxt_plugin_vuesweetalert_31840604' // Source: ..\\plugins\\vue-sweetalert.js (mode: 'all')
 import nuxt_plugin_veevalidate_b83c3a38 from 'nuxt_plugin_veevalidate_b83c3a38' // Source: ..\\plugins\\vee-validate.js (mode: 'all')
 import nuxt_plugin_vuetelinput_a90afbe8 from 'nuxt_plugin_vuetelinput_a90afbe8' // Source: ..\\plugins\\vue-tel-input.js (mode: 'all')
+import nuxt_plugin_vuedisqus_1f84e96e from 'nuxt_plugin_vuedisqus_1f84e96e' // Source: ..\\plugins\\vue-disqus.js (mode: 'all')
 import nuxt_plugin_vuecontentplaceholders_00a13e76 from 'nuxt_plugin_vuecontentplaceholders_00a13e76' // Source: ..\\plugins\\vue-content-placeholders.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -239,6 +240,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_vuetelinput_a90afbe8 === 'function') {
     await nuxt_plugin_vuetelinput_a90afbe8(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_vuedisqus_1f84e96e === 'function') {
+    await nuxt_plugin_vuedisqus_1f84e96e(app.context, inject)
   }
 
   if (typeof nuxt_plugin_vuecontentplaceholders_00a13e76 === 'function') {
