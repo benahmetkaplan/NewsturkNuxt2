@@ -70,6 +70,14 @@ export default {
         onFormSubmit(){
             this.$axios.get(`${this.$config.SITE_URL}/get-pharmacy.php?province=${this.formData.il}&district=${this.formData.ilce}`)
             .then((response) => {
+                if (response.data.length < 1) {
+                    this.$swal({
+                        icon: 'error',
+                        title: 'Dikkat!',
+                        text: 'Herhangi bir kayıt bulunamadı.',
+                        showConfirmButton: false
+                    });
+                }
                 this.apiData.eczaneler = response.data;
             });
         }

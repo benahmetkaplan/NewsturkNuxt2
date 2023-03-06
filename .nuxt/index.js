@@ -13,9 +13,9 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_httpserver_189c2544 from 'nuxt_plugin_httpserver_189c2544' // Source: .\\http.server.js (mode: 'server')
-import nuxt_plugin_http_7b56f202 from 'nuxt_plugin_http_7b56f202' // Source: .\\http.js (mode: 'all')
-import nuxt_plugin_axios_71f82131 from 'nuxt_plugin_axios_71f82131' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_httpserver_705b004e from 'nuxt_plugin_httpserver_705b004e' // Source: .\\http.server.js (mode: 'server')
+import nuxt_plugin_http_5011e20f from 'nuxt_plugin_http_5011e20f' // Source: .\\http.js (mode: 'all')
+import nuxt_plugin_axios_c833afbe from 'nuxt_plugin_axios_c833afbe' // Source: .\\axios.js (mode: 'all')
 import nuxt_plugin_vuesweetalert_31840604 from 'nuxt_plugin_vuesweetalert_31840604' // Source: ..\\plugins\\vue-sweetalert.js (mode: 'all')
 import nuxt_plugin_veevalidate_b83c3a38 from 'nuxt_plugin_veevalidate_b83c3a38' // Source: ..\\plugins\\vee-validate.js (mode: 'all')
 import nuxt_plugin_vuetelinput_a90afbe8 from 'nuxt_plugin_vuetelinput_a90afbe8' // Source: ..\\plugins\\vue-tel-input.js (mode: 'all')
@@ -218,16 +218,16 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (process.server && typeof nuxt_plugin_httpserver_189c2544 === 'function') {
-    await nuxt_plugin_httpserver_189c2544(app.context, inject)
+  if (process.server && typeof nuxt_plugin_httpserver_705b004e === 'function') {
+    await nuxt_plugin_httpserver_705b004e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_http_7b56f202 === 'function') {
-    await nuxt_plugin_http_7b56f202(app.context, inject)
+  if (typeof nuxt_plugin_http_5011e20f === 'function') {
+    await nuxt_plugin_http_5011e20f(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_71f82131 === 'function') {
-    await nuxt_plugin_axios_71f82131(app.context, inject)
+  if (typeof nuxt_plugin_axios_c833afbe === 'function') {
+    await nuxt_plugin_axios_c833afbe(app.context, inject)
   }
 
   if (typeof nuxt_plugin_vuesweetalert_31840604 === 'function') {

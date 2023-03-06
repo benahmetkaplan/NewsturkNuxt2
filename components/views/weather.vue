@@ -42,7 +42,7 @@
 
 <script>
 
-String.prototype.turkishtoEnglish = function () {
+String.prototype.trToEn = function () {
     return this.replaceAll('Ğ','g')
     .replaceAll('Ü','u')
     .replaceAll('Ş','s')
@@ -82,7 +82,7 @@ export default {
             this.getWeather(this.formData.il);
         },
         getWeather(key){
-            this.$axios.get(`https://api.weatherapi.com/v1/forecast.json?key=85e1ee6e88ad45deb10130011230902&q=${key.turkishtoEnglish()}&days=7&aqi=no&alerts=no`,
+            this.$axios.get(`https://api.weatherapi.com/v1/forecast.json?key=85e1ee6e88ad45deb10130011230902&q=${key.trToEn()}&days=7&aqi=no&alerts=no`,
             {
                 headers: {
                     'content-type': 'application/json'
@@ -91,13 +91,22 @@ export default {
             .then((response) => {
                 if (response.data.forecast.forecastday) {
                     this.apiData.result = [];
-                    response.data.forecast.forecastday.forEach((item, index) => {
-                        if (index === 0) {
-                            this.apiData.firstDay = item;
-                        }else{
-                            this.apiData.result.push(item);
-                        }
-                    });
+                    if (response.data !== null) {
+                        response.data.forecast.forecastday.forEach((item, index) => {
+                            if (index === 0) {
+                                this.apiData.firstDay = item;
+                            }else{
+                                this.apiData.result.push(item);
+                            }
+                        });
+                    }else{
+                        this.$swal({
+                            icon: 'error',
+                            title: 'Dikkat!',
+                            text: 'Herhangi bir kayıt bulunamadı.',
+                            showConfirmButton: false
+                        });
+                    }                    
                 }
             });
         }

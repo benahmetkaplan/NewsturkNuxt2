@@ -82,7 +82,12 @@ export default {
 		this.checkNetwork();
 		this.setActiveTab(this.$route.fullPath);
 		this.getFcmToken();
-		this.isSafari = process.browser && !(window.matchMedia("(display-mode: standalone)").matches) && !!window.navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+		
+		let $userAgent = window.navigator.userAgent;
+		let isIOS = $userAgent.match(/iPad/i) || $userAgent.match(/iPhone/i);
+		let isWebkit = $userAgent.match(/WebKit/i);
+		this.isSafari = process.browser && isIOS && isWebkit && !$userAgent.match(/CriOS/i);
+
 		setTimeout(function(){
 			$(".pwa-banner").slideUp();
 		}, 5000);
