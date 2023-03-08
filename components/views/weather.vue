@@ -3,10 +3,10 @@
         <div class="container">
             <div class="search-container">
                 <div class="form-group">
-                    <label for="il">Şehir Seçiniz</label>
-                    <select @change="selectChange" name="il" id="il" v-model="formData.il" class="form-control">
+                    <label for="province">Şehir Seçiniz</label>
+                    <select @change="selectChange" name="province" id="province" v-model="formData.province" class="form-control">
                         <option :value="null">İl Seçin</option>
-                        <option v-for="item in apiData.iller" :value="item.il">
+                        <option v-for="item in apiData.provinces" :value="item.il">
                             {{ item.il }}
                         </option>
                     </select>
@@ -16,7 +16,7 @@
                 <div v-if="apiData.firstDay !== null" class="today forecast">
                     <div class="forecast-header">
                         <div class="day">Bugün</div>
-                        <div class="date">{{ formData.il }}</div>
+                        <div class="date">{{ formData.province }}</div>
                     </div>
                     <div class="forecast-content">
                         <div class="degree">
@@ -58,28 +58,37 @@ String.prototype.trToEn = function () {
     .replaceAll('ç','c').toLowerCase();
 };
 
-import jsonIller from '../../json/iller.json';
-
 export default {
     name: "Weather",
     data() {
         return {
             formData: {
-                il: "İSTANBUL"
+                province: "İSTANBUL"
             },
             apiData: {
-                iller: jsonIller,
+                provinces: null,
                 result: null,
                 firstDay: null
             }
         }
     },
     created(){
-        this.getWeather(this.formData.il);
+        this.getProvinces();
+        this.getWeather(this.formData.province);
     },
 	methods: {
+        getProvinces(){
+            this.$axios({
+                method: "GET",
+                url: `${this.$config.SITE_URL}/json/provinces.php`
+            }).then(response => {
+                if (response.data) {
+                    this.apiData.provinces = response.data;
+                }
+            });
+        },
         selectChange(){
-            this.getWeather(this.formData.il);
+            this.getWeather(this.formData.province);
         },
         getWeather(key){
             this.$axios.get(`https://api.weatherapi.com/v1/forecast.json?key=85e1ee6e88ad45deb10130011230902&q=${key.trToEn()}&days=7&aqi=no&alerts=no`,

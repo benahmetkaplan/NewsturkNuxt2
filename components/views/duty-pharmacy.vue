@@ -1,29 +1,29 @@
 <template>
     <div id="appCapsule">
         <div class="appContent">
-            <form class="mb-3 mt-3" @submit.prevent="onFormSubmit">
+            <form v-if="apiData.provinces !== null" class="mb-3 mt-3" @submit.prevent="onFormSubmit">
                 <div class="form-group">
-                    <select name="il" id="il" v-model="formData.il" @change="selectProvince" class="form-control">
+                    <select name="province" id="province" v-model="formData.province" @change="selectProvince" class="form-control">
                         <option :value="null">İl Seçin</option>
-                        <option v-for="item in apiData.iller" :key="item.il" :value="item.il">
+                        <option v-for="item in apiData.provinces" :key="item.il" :value="item.il">
                             {{ item.il }}
                         </option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <select name="ilce" id="ilce" v-model="formData.ilce" class="form-control">
+                <div v-if="apiData.currentCountries !== null" class="form-group">
+                    <select name="country" id="country" v-model="formData.country" class="form-control">
                         <option :value="null">İlçe Seçin</option>
-                        <option v-for="item in apiData.ilceler" :key="item.ilce" :value="item.ilce">
+                        <option v-for="item in apiData.currentCountries" :key="item.ilce" :value="item.ilce">
                             {{ item.ilce }}
                         </option>
                     </select>
                 </div>
-                <button v-if="formData.il !== null && formData.ilce !== null" type="submit" class="btn btn-primary btn-lg btn-block">
+                <button v-if="formData.province !== null && formData.country !== null" type="submit" class="btn btn-primary btn-lg btn-block">
                     <i class="fa-solid fa-paper-plane-top"></i>&emsp;Listele
                 </button>
             </form>
-            <div class="eczane_list" v-if="apiData.eczaneler !== null">
-                <div v-for="item in apiData.eczaneler" :key="item.title" class="eczane">
+            <div class="eczane_list" v-if="apiData.pharmacies !== null">
+                <div v-for="item in apiData.pharmacies" :key="item.title" class="eczane">
                     <div class="eczane_title">
                         <span class="eczane_logo">E</span>
                         <span class="eczane_name" v-html="item.title"></span>
@@ -39,36 +39,57 @@
 </template>
 
 <script>
-
-import jsonIller from '../../json/iller.json';
-import jsonIlceler from '../../json/ilceler.json';
-
 export default {
     name: "DutyPharmacy",
     data() {
         return {
             formData: {
-                il: null,
-                ilce: null
+                province: null,
+                country: null
             },
             apiData: {
-                iller: jsonIller,
-                ilceler: null,
-                eczaneler: null
+                provinces: null,
+                countries: null,
+                pharmacies: null,
+                currentCountries: null
             }
         }
     },
+    created(){
+        this.getProvinces();
+        this.getCountries();
+    },
 	methods: {
-        selectProvince(){
-            let key = this.formData.il;
-            this.formData.ilce = null;
-            this.getDistrictList(key);
+        getProvinces(){
+            this.$axios({
+                method: "GET",
+                url: `${this.$config.SITE_URL}/json/provinces.php`
+            }).then(response => {
+                if (response.data) {
+                    this.apiData.provinces = response.data;
+                }
+            });
         },
-        getDistrictList(key){
-            this.apiData.ilceler = jsonIlceler.filter(function(x) { return x.il === key });
+        getCountries(){
+            this.$axios({
+                method: "GET",
+                url: `${this.$config.SITE_URL}/json/countries.php`
+            }).then(response => {
+                if (response.data) {
+                    this.apiData.countries = response.data;
+                }
+            });
+        },
+        selectProvince(){
+            let key = this.formData.province;
+            this.formData.country = null;
+            this.getCountryList(key);
+        },
+        getCountryList(key){
+            this.apiData.currentCountries = this.apiData.countries.filter(function(x) { return x.il === key });
         },
         onFormSubmit(){
-            this.$axios.get(`${this.$config.SITE_URL}/get-pharmacy.php?province=${this.formData.il}&district=${this.formData.ilce}`)
+            this.$axios.get(`${this.$config.SITE_URL}/get-pharmacy.php?province=${this.formData.province}&district=${this.formData.country}`)
             .then((response) => {
                 if (response.data.length < 1) {
                     this.$swal({
@@ -78,7 +99,7 @@ export default {
                         showConfirmButton: false
                     });
                 }
-                this.apiData.eczaneler = response.data;
+                this.apiData.pharmacies = response.data;
             });
         }
 	}

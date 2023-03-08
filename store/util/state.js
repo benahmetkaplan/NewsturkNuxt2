@@ -10,20 +10,6 @@ export default {
         { slug: 'canli-yayin', title: 'Canlı Yayın', icon: 'fa-solid fa-signal-stream' },
         { slug: 'bize-ulasin', title: 'Bize Ulaşın', icon: 'fa-solid fa-envelope' }
     ],
-    papers: [
-        { slug: 'turkiye', title: 'Türkiye' },
-        { slug: 'aksam', title: 'Akşam' },
-        { slug: 'milat', title: 'Milat' },
-        { slug: 'sabah', title: 'Sabah' },
-        { slug: 'milliyet', title: 'Milliyet' },
-        { slug: 'hurriyet', title: 'Hürriyet' },
-        { slug: 'turkgun', title: 'Türkgün' },
-        { slug: 'yeni-birlik', title: 'Yeni Birlik' },
-        { slug: 'milli-gazete', title: 'Milli Gazete' },
-        { slug: 'yenicag', title: 'Yeniçağ' },
-        { slug: 'yenisoz', title: 'Yeni Söz' },
-        { slug: 'fotomac', title: 'Fotomaç' }
-    ],
     accounts: [
         { slug: 'twitter', title: 'Twitter', link: 'https://twitter.com/newsturksocial', icon: 'fa-brands fa-twitter' },
         { slug: 'instagram', title: 'Instagram', link: 'https://instagram.com/newsturksocial', icon: 'fa-brands fa-instagram' },

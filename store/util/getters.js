@@ -4,11 +4,6 @@ export default {
       return state.pages
     }
   },
-  getPapers: state => {
-    return () => {
-      return state.papers
-    }
-  },
   getAccounts: state => {
     return () => {
       return state.accounts
