@@ -45,7 +45,7 @@ export default {
 		await this.$store.dispatch("post/getEkonomiPosts");
 	},
 	methods: {
-		...mapActions({getEkonomiPosts: 'post/getDunyaPosts'}),
+		...mapActions({getDunyaPosts: 'post/getDunyaPosts'}),
 		...mapActions({getSporPosts: 'post/getSporPosts'}),
 		...mapActions({getTeknolojiPosts: 'post/getTeknolojiPosts'}),
 		...mapActions({getEkonomiPosts: 'post/getEkonomiPosts'}),
