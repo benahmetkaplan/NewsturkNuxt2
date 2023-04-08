@@ -3,25 +3,29 @@
     "name": "category-id",
     "path": "/category/:id?",
     "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\category\\\\_id.vue",
-    "chunkName": "pages/category/_id"
+    "chunkName": "pages/category/_id",
+    "_name": "_1d56214a"
   },
   {
     "name": "page-slug",
     "path": "/page/:slug?",
     "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\page\\\\_slug.vue",
-    "chunkName": "pages/page/_slug"
+    "chunkName": "pages/page/_slug",
+    "_name": "_094b478c"
   },
   {
     "name": "post-id",
     "path": "/post/:id?",
     "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\post\\\\_id.vue",
-    "chunkName": "pages/post/_id"
+    "chunkName": "pages/post/_id",
+    "_name": "_0b218579"
   },
   {
     "name": "index",
     "path": "/",
     "component": "E:\\\\WORKS\\\\NewsturkNuxt2\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "url": "/"
+    "url": "/",
+    "_name": "_d9fde79e"
   }
 ]
